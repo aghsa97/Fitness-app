@@ -1,11 +1,15 @@
+var path = require('path');
 
 const user_home = function(request, response) { 
+
 	if (request.session.role === "client") {
-		response.render('clientHome') 
+		response.render(path.join(__dirname, "../views/clientViews/clientHome"))
+
 	} else if (request.session.role === "trainer") {
-		response.render('trainerHome') 
+		response.render(path.join(__dirname, "../views/trainerViews/trainerHome"))
+
 	} else{
-		response.send('Please login to view this page!');
+		response.redirect('/')
 	}
 	response.end();
 }
@@ -13,3 +17,4 @@ const user_home = function(request, response) {
 module.exports = {
 	user_home
 }
+

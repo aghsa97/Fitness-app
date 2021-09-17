@@ -24,12 +24,13 @@ app.get('/', function(request, response) {
     if(request.session.loggedin){
         response.redirect('/home'); 
     } else{
-        response.render('login')
+        response.render(path.join(__dirname, "/views/sharedViews/login"))
     }
 });
 
+
 app.use((request, result) => {
-    result.status(404).render('404',  { title: '404' });
+    result.status(404).render(path.join(__dirname, "/views/sharedViews/404"),  { title: '404' });
 });
 
 app.listen(3000);
