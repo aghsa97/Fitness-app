@@ -1,18 +1,11 @@
-var mysql = require('mysql2');
-
-var connection = mysql.createConnection({
-	host     : 'localhost',
-	user     : 'root',
-	password : 'W@J&7VuE9he@aiP3#xg$',
-	database : 'node-test'
-});
+var dbconnection = require('../dbConfig/dbConfig');
 
 const user_login = (request, response) => {
     var username = request.body.username;
 	var password = request.body.password;
 
 	if (username && password) {
-		connection.query('SELECT * FROM accounts WHERE username = ? AND password = ?', [username, password], function(error, results, fields) {
+		dbconnection.query('SELECT * FROM accounts WHERE username = ? AND password = ?', [username, password], function(error, results, fields) {
             
 			if (results.length > 0) {
 				request.session.loggedin = true;
