@@ -3,7 +3,7 @@ var session = require('express-session');
 var bodyParser = require('body-parser');
 var path = require('path');
 
-const userRoutes = require('./routes/routes');
+const routes = require('./routes/routes');
 
 var app = express();
 app.use(session({
@@ -18,13 +18,13 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(bodyParser.json());
 
-app.use('/', userRoutes);
+app.use('/', routes);
 
 app.get('/', function(request, response) {
     if(request.session.loggedin){
         response.redirect('/home'); 
     } else{
-        response.render(path.join(__dirname, "/views/sharedViews/login"))
+        response.render(path.join(__dirname, "/views/sharedViews/startPage"))
     }
 });
 

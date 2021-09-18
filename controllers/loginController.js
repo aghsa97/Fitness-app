@@ -1,26 +1,30 @@
 var dbconnection = require('../dbConfig/dbConfig');
+var path = require('path');
 
 const user_login = (request, response) => {
-    var username = request.body.username;
+    var email = request.body.email;
 	var password = request.body.password;
 
-	if (username && password) {
-		dbconnection.query('SELECT * FROM accounts WHERE username = ? AND password = ?', [username, password], function(error, results, fields) {
+	if (email && password) {
+		dbconnection.query('SELECT * FROM accounts WHERE email = ? AND password = ?', [email, password], function(error, results, fields) {
             
 			if (results.length > 0) {
 				request.session.loggedin = true;
-				request.session.username = username;
+				request.session.email = email;
                 request.session.id = results[0].id;
                 request.session.role = results[0].role;
+				request.session.firstName = results[0].firstName;
+				request.session.lastName = results[0].lastName;
 				response.redirect('/home');
 			} else {
-				response.send('Incorrect Username and/or Password!');
+				message = 'Incorrect Email and/or Password!';
+				response.render(path.join(__dirname, "../views/sharedViews/login"), {message: message});
 			}			
 			response.end();
 		});
 	} else {
 		//Will this ever be reached? The html makes these fields required anyways, so they cant be empty.
-		response.send('Please enter Username and Password!');
+		response.send('Please enter Email and Password!');
 		response.end();
 	}
 };
@@ -30,7 +34,19 @@ const user_logout = function(request, response){
     response.redirect('/');
 }
 
+const isUserLoggedIn = function(request, response){
+
+	if(request.session.email){
+		
+		response.redirect('/');
+		
+	} else{
+		response.render(path.join(__dirname, "../views/sharedViews/login"))
+	} 
+}
+
 module.exports = {
     user_login,
-	user_logout
+	user_logout, 
+	isUserLoggedIn
 }
