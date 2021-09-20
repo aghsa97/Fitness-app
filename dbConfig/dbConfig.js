@@ -10,8 +10,8 @@ var connection = {
 	host     : 'localhost',
 	user     : 'root',
 	password : 'W@J&7VuE9he@aiP3#xg$',
-	database : 'node-test',
-  connectionLimit: 5 //Somebody please google exactly what this does.
+	database : 'workout_db',
+  connectionLimit: 5 
 };
 
 var dbconnection = mysql.createPool(

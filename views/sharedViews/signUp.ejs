@@ -3,9 +3,7 @@
       <h1>Sign Up</h1>
       <p>Please fill in this form to create an account.</p>
       <hr>
-      <input type="text" placeholder="First name"<%if(locals.firstName){%>value=<%=firstName%><%}%> name="firstName" required>
-      <input type="text" placeholder="Surname"<%if(locals.lastName){%>value=<%=lastName%><%}%> name="lastName" required>
-      <input type="text" placeholder="Enter Email" name="email" required>
+      <input type="text" placeholder="Enter Email"<%if(locals.email){%>value=<%=email%><%}%> name="email" required>
       <input type="password" placeholder="Enter Password" name="password" required>
       <div class="clearfix">
       <button type="submit" class="signupbtn">Sign Up</button>  
