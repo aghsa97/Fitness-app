@@ -6,15 +6,18 @@ const user_login = (request, response) => {
 	var password = request.body.password;
 
 	if (email && password) {
-		dbconnection.query('SELECT * FROM accounts WHERE email = ? AND password = ?', [email, password], function(error, results, fields) {
-            
+		dbconnection.query('SELECT * FROM user join user_info ON user.id = user_info.user_id WHERE email = ? AND password = ?', [email, password], function(error, results, fields) {
+
 			if (results.length > 0) {
 				request.session.loggedin = true;
+				request.session.id = results[0].id;
 				request.session.email = email;
-                request.session.id = results[0].id;
+				request.session.firstName = results[0].firstname;
+				request.session.lastName = results[0].lastname;
+				request.session.weight = results[0].weight; 
+				request.session.height = results[0].height; 
+				request.session.gender = results[0].gender; 
                 request.session.role = results[0].role;
-				request.session.firstName = results[0].firstName;
-				request.session.lastName = results[0].lastName;
 				response.redirect('/home');
 			} else {
 				message = 'Incorrect Email and/or Password!';
