@@ -65,6 +65,7 @@ body h1 {
 .login-form p{
 
   color: white;
+  text-transform: none;
 
 }
 .login-form input[type="text"],
