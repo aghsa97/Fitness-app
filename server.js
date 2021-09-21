@@ -14,6 +14,7 @@ app.use(session({
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
+app.use(express.static('public'));
 
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(bodyParser.json());
@@ -27,7 +28,6 @@ app.get('/', function(request, response) {
         response.render(path.join(__dirname, "/views/sharedViews/startPage"))
     }
 });
-
 
 app.use((request, result) => {
     result.status(404).render(path.join(__dirname, "/views/sharedViews/404"),  { title: '404' });
