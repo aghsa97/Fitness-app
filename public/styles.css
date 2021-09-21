@@ -1,9 +1,131 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;1,700&display=swap");
 body {
-    background-color: powderblue;
-  }
-  h1 {
-    color: blue;
-  }
-  p {
-    color: red;
-  }
+  margin: 20px auto;
+  padding: 0 20px;
+  font-family: "Poppins", sans-serif;
+  background: #34495e;
+  background-image: url();
+}
+body h1 {
+  text-transform: uppercase;
+  height: 100px;
+  padding: 20px;
+  color: white;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.btn-primaryS {
+  text-decoration: none;
+  font-size: 24px;
+  color: white;
+  position: absolute;
+  top: 10%;
+  left: 30%;
+  text-transform: uppercase;
+  padding: 10px;
+  transition: 0.25s;
+}
+.btn-primaryS:hover {
+  background-color: black;
+  border-radius: 10px;
+}
+.btn-primaryL {
+  text-decoration: none;
+  font-size: 24px;
+  color: white;
+  position: absolute;
+  top: 10%;
+  left: 40%;
+  text-transform: uppercase;
+  padding: 10px;
+  transition: 0.25s;
+}
+.btn-primaryL:hover {
+  background-color: black;
+  border-radius: 10px;
+}
+.nav_buttons {
+  text-decoration: none;
+  font-size: 24px;
+  color: white;
+  top: 10%;
+  left: 30%;
+  text-transform: uppercase;
+  padding: 10px;
+  transition: 0.25s;
+}
+.nav h1 {
+  text-transform: uppercase;
+  padding: 20px;
+  color: white;
+  position: relative;
+}
+.nav_buttons:hover {
+  background-color: black;
+  border-radius: 10px;
+}
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  flex-flow: wrap;
+  text-transform: uppercase;
+  color: white;
+}
+.login-form {
+  width: 300px;
+  padding: 40px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #00000075;
+  text-align: center;
+  text-transform: uppercase;
+  border-radius: 10px;
+}
+.login-form h1 {
+  color: white;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.login-form input[type="text"],
+.login-form input[type="password"] {
+  width: 55%;
+  border: 0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid#e5ff00;
+  padding: 14px 10px;
+  outline: none;
+  color: white;
+  border-radius: 30px;
+  transition: 0.25s;
+}
+.login-form input[type="text"]:focus,
+.login-form input[type="password"]:focus {
+  width: 75%;
+  border-color: #eaee10;
+}
+.login-form input[type="submit"] {
+  width: 100px;
+  border: 0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid#2ecc71;
+  padding: 14px 10px;
+  outline: none;
+  color: white;
+  border-radius: 30px;
+  transition: 0.25s;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+.login-form input[type="submit"]:hover {
+  background: #2ecc71;
+}
