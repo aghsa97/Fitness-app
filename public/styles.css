@@ -90,6 +90,12 @@ body h1 {
   text-transform: uppercase;
   font-weight: 500;
 }
+
+.login-form p{
+
+  color: white;
+
+}
 .login-form input[type="text"],
 .login-form input[type="password"] {
   width: 55%;

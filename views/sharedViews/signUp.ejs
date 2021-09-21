@@ -1,16 +1,26 @@
-<form action="signup" method="POST" style="border:1px solid #ccc">
-    <div class="container">
-      <h1>Sign Up</h1>
+<!DOCTYPE html>
+<html>
+  <%- include('../partials/header.ejs') %>
+  <body>
+<form action="signup" method="POST">
+    <div class="login-form">
+      <h1>Register</h1>
       <p>Please fill in this form to create an account.</p>
       <hr>
       <input type="text" placeholder="Enter Email"<%if(locals.email){%>value=<%=email%><%}%> name="email" required>
       <input type="password" placeholder="Enter Password" name="password" required>
-      <div class="clearfix">
-      <button type="submit" class="signupbtn">Sign Up</button>  
+      
+      <input type="submit" value = "Sign up"></button>  
         <% if (locals.message) { %>
         <%=message%>
         <% } %>
-      </div>
+    
     </div>
-    <a href="/login" class="btn btn-primary">Log in</a>
+
   </form>
+</body>
+  </html>
+
+  
+
+
