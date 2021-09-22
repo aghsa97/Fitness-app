@@ -1,16 +1,22 @@
 var dbconnection = require('../dbConfig/dbConfig');
 var path = require('path');
+const session = require('express-session');
 
 const user_login = (request, response) => {
     var email = request.body.email;
 	var password = request.body.password;
+	var sql = 
+	`SELECT * 
+	FROM user join user_info 
+	ON user.id = user_info.user_id 
+	WHERE email = ? AND password = ?`
 
 	if (email && password) {
-		dbconnection.query('SELECT * FROM user join user_info ON user.id = user_info.user_id WHERE email = ? AND password = ?', [email, password], function(error, results, fields) {
+		dbconnection.query(sql, [email, password], function(error, results, fields) {
 
 			if (results.length > 0) {
 				request.session.loggedin = true;
-				request.session.id = results[0].id;
+				request.session.dbId = results[0].id;
 				request.session.email = email;
 				request.session.firstName = results[0].firstname;
 				request.session.lastName = results[0].lastname;
@@ -23,12 +29,12 @@ const user_login = (request, response) => {
 				message = 'Incorrect Email and/or Password!';
 				response.render(path.join(__dirname, "../views/sharedViews/login"), {message: message});
 			}			
-			response.end();
+			
 		});
 	} else {
 		//Will this ever be reached? The html makes these fields required anyways, so they cant be empty.
 		response.send('Please enter Email and Password!');
-		response.end();
+		
 	}
 };
 

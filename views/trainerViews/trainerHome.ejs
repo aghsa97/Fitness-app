@@ -3,6 +3,20 @@
 <body>
 
 <h1> <%=firstName%> you are a trainer, rejoice</h1>
+
+<div>
+    <p>Client list</p>
+    <ul>
+        <% if (locals.clients) { %>
+            <% clients.forEach(function(str){ %>
+               <li onclick="location.href = '/client/<%=JSON.parse(JSON.stringify(str)).id%>'">
+                   <%=JSON.parse(JSON.stringify(str)).firstname%> <%=JSON.parse(JSON.stringify(str)).lastname %> <%= JSON.parse(JSON.stringify(str)).email%></li>
+            <% }) %>
+        <% } %>
+    </ul>
+</div>
+
+
 <a href="/logout" class="btn btn-primary">Logout</a>
 
 </body>
