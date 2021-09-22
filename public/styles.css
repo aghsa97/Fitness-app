@@ -1,39 +1,59 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;1,700&display=swap");
+
 body {
-  margin: 20px auto;
-  padding: 0 20px;
+  margin: 0;
   font-family: "Poppins", sans-serif;
   background: #34495e;
   background-image: url();
 }
 body h1 {
+  margin: 0;
   text-transform: uppercase;
   height: 100px;
-  padding: 20px;
+  padding: 15px 25px;
   color: white;
   position: relative;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.35);
+  letter-spacing: 4px;
+}
+body h1 a {
+  margin: 0;
+  text-transform: uppercase;
+  height: 100px;
+  padding: 15px 25px;
+  color: white;
+  position: relative;
+  letter-spacing: 2px;
+}
+body h2 {
+  margin: 0;
+  text-transform: uppercase;
+  padding: 15px 25px;
+  color: white;
+  position: relative;
+  letter-spacing: 2px;
 }
 
 .nav_button {
+  position: relative;
   text-decoration: none;
-  font-size: 24px;
+  font-size: 22px;
   color: white;
-  top: 10%;
-  left: 30%;
+  left: 200px;
   text-transform: uppercase;
   padding: 10px;
-  transition: 0.25s;
+  transition: 0.5s;
+  border-radius: 20px;
 }
+
 .nav h1 {
   text-transform: uppercase;
   padding: 20px;
   color: white;
   position: relative;
 }
-.nav_buttons:hover {
-  background-color: black;
-  border-radius: 10px;
+.nav_button:hover {
+  background-color: rgba(0, 0, 0, 0.55);
 }
 .flex-container {
   display: flex;
@@ -46,8 +66,8 @@ body h1 {
 .login-form {
   width: 300px;
   padding: 40px;
-  position: absolute;
-  top: 50%;
+  position: relative;
+  top: 300px;
   left: 50%;
   transform: translate(-50%, -50%);
   background: #00000075;
@@ -60,13 +80,13 @@ body h1 {
   text-align: center;
   text-transform: uppercase;
   font-weight: 500;
+  font-weight: bold;
 }
 
-.login-form p{
-
+.login-form p {
   color: white;
   text-transform: none;
-
+  font-weight: bold;
 }
 .login-form input[type="text"],
 .login-form input[type="password"] {
