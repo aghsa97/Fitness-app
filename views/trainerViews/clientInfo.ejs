@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Sjukt om det funkar</h1>
+
+<ul>
+    <% if (locals.info) { %>
+        <% info.forEach(function(str){ %>
+           <%=JSON.parse(JSON.stringify(str)).firstname%> <%=JSON.parse(JSON.stringify(str)).lastname %> <%= JSON.parse(JSON.stringify(str)).email%>
+            <%=JSON.parse(JSON.stringify(str)).weight%> kg <%=JSON.parse(JSON.stringify(str)).height %> cm <%= JSON.parse(JSON.stringify(str)).gender%>
+        <% }) %>
+    <% } %>
+</ul>
+
+<a href="/home" class="btn btn-primary">Back</a>
+</body>
+</html>
