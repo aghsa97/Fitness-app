@@ -3,6 +3,18 @@
 <body>
 
 <h1>Congratz <%=firstName%> you are a client</h1>
+
+<div>
+    <p>Friend list</p>
+    <ul>
+        <% if (locals.friends) { %>
+            <% friends.forEach(function(str){ %>
+               <li><%=JSON.parse(JSON.stringify(str)).firstname%> <%=JSON.parse(JSON.stringify(str)).lastname %> <%= JSON.parse(JSON.stringify(str)).email%></li>
+            <% }) %>
+        <% } %>
+    </ul>
+</div>
+
 <a href="/logout" class="btn btn-primary">Logout</a>
 </body>
 </html>

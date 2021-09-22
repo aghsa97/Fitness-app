@@ -6,7 +6,9 @@ const registerUser = function (request, response) {
     var email = request.body.email;
 
     var role = 'client';
-    var sql_insert = `INSERT INTO user(email, password) VALUES (?,?);`;
+    var sql_insert = 
+    `INSERT INTO user(email, password) 
+    VALUES (?,?);`;
 
     dbconnection.query(sql_insert, [email, password], function(error, results){
 
@@ -35,7 +37,7 @@ const registerUser = function (request, response) {
  
 const isUserLoggedIn = function(request, response){
 
-	if(request.session.username){
+	if(request.session.email){
 		
 		response.redirect('/');
 		
