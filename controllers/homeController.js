@@ -6,6 +6,7 @@ const { json } = require('express');
 const user_home = function(request, response) { 
 
 	var firstName = request.session.firstName;
+
 	var db_id = request.session.dbId;
 	
 	if (request.session.role === "client") {
@@ -20,6 +21,7 @@ const user_home = function(request, response) {
 			if(error) throw error;
 			response.render(path.join(__dirname, "../views/clientViews/clientHome"), {firstName: firstName, friends: results})
 		});
+
 
 	} else if (request.session.role === "trainer") {
 		//Here we might also need to check if the client has been verfied by the trainer. This has not been added to the database as of 2021-09-22
@@ -43,4 +45,3 @@ const user_home = function(request, response) {
 module.exports = {
 	user_home
 }
-

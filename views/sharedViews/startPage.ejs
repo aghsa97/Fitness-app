@@ -1,59 +1,7 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;1,700&display=swap");
-      body {
-        margin: 0;
-        padding: 0;
-        font-family: "Poppins", sans-serif;
-        background: #34495e;
-        background-image: url();
-      }
-      body h1 {
-        text-transform: uppercase;
-        height: 100px;
-        padding: 20px;
-        color: white;
-        position: relative;
-        background-color: rgba(0, 0, 0, 0.4);
-      }
-      .btn-primaryS {
-        text-decoration: none;
-        font-size: 24px;
-        color: white;
-        position: absolute;
-        top: 10%;
-        left: 30%;
-        text-transform: uppercase;
-        padding: 10px;
-        transition: 0.25s;
-      }
-      .btn-primaryS:hover {
-        background-color: black;
-        border-radius: 10px;
-      }
-      .btn-primaryL {
-        text-decoration: none;
-        font-size: 24px;
-        color: white;
-        position: absolute;
-        top: 10%;
-        left: 40%;
-        text-transform: uppercase;
-        padding: 10px;
-        transition: 0.25s;
-      }
-      .btn-primaryL:hover {
-        background-color: black;
-        border-radius: 10px;
-      }
-    </style>
-  </head>
+  <%- include('../partials/header.ejs') %>
   <body>
-    <h1>This is the start page</h1>
-    <a href="/signup" class="btn-primaryS">Sign up</a>
-    <a href="/login" class="btn-primaryL">Log in</a>
+    
   </body>
 </html>
