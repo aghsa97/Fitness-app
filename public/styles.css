@@ -107,3 +107,21 @@ body h1 {
 .login-form input[type="submit"]:hover {
   background: #2ecc71;
 }
+
+.signup-form {
+  width: 500px;
+  margin-top: 40px;
+}
+
+.signup-form input[type="text"],
+.signup-form input[type="password"] {
+  display: inline-block;
+  width: 30%;
+  margin: 10px;
+}
+
+.signup-form input[type="text"]:focus,
+.signup-form input[type="password"]:focus {
+  width: 40%;
+  border-color: #eaee10;
+}
