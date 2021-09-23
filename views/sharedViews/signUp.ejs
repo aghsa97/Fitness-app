@@ -1,26 +1,24 @@
 <!DOCTYPE html>
 <html>
-  <%- include('../partials/header.ejs') %>
+  <%- include('../partials/head.ejs') %>
   <body>
-<form action="signup" method="POST">
-    <div class="login-form">
-      <h2>Register</h2>
-      <p>Please fill in this form to create an account.</p>
-      <hr>
-      <input type="text" placeholder="Enter email"<%if(locals.email){%>value=<%=email%><%}%> name="email" required>
-      <input type="password" placeholder="Enter password" name="password" required>
+    <%- include('../partials/nav.ejs') %>
+    <form action="signup" method="POST">
+      <div class="login-form">
+        <h2>Register</h2>
+        <p>Please fill in this form to create an account.</p>
+        <hr>
+        <input type="text" placeholder="Enter email"<%if(locals.email){%>value=<%=email%><%}%> name="email" required>
+        <input type="password" placeholder="Enter password" name="password" required>
+        
+        <input type="submit" value = "Sign up"></button>  
+          <% if (locals.message) { %>
+          <%=message%>
+          <% } %>
       
-      <input type="submit" value = "Sign up"></button>  
-        <% if (locals.message) { %>
-        <%=message%>
-        <% } %>
-    
-    </div>
+      </div>
 
-  </form>
-</body>
-  </html>
-
-  
-
-
+    </form>
+    <%- include('../partials/footer.ejs') %>
+  </body>
+</html>
