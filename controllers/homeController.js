@@ -19,7 +19,7 @@ const user_home = function(request, response) {
 
 		dbconnection.query(sql_friends, [db_id, db_id ], function(error, results){
 			if(error) throw error;
-			response.render(path.join(__dirname, "../views/clientViews/clientHome"), {firstName: firstName, friends: results})
+			response.render(path.join(__dirname, "../views/clientViews/clientHome"), {firstName: firstName, friends: results, role: request.session.role})
 		});
 
 
@@ -32,7 +32,7 @@ const user_home = function(request, response) {
 
 		dbconnection.query(sql_client_list, function(error, results){
 			if(error) throw error;
-			response.render(path.join(__dirname, "../views/trainerViews/trainerHome"), {firstName: firstName, clients:results})
+			response.render(path.join(__dirname, "../views/trainerViews/trainerHome"), {firstName: firstName, clients:results, role: request.session.role})
 		});
 		
 	} else{

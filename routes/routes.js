@@ -22,6 +22,8 @@ router.get('/logout', loginController.user_logout);
 
 router.get('/client/:id', trainerClientController.client_info);
 
+
+
 /*
 router.get('/client/:id', function(request, response){
     console.log(request.params)

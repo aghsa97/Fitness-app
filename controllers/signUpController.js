@@ -16,7 +16,7 @@ const registerUser = function (request, response) {
         if (error) {
             if(error.errno === 1062){
                 message = "This email already exists!";
-                response.render(path.join(__dirname, "../views/sharedViews/signUp"), {message: message, email:email});   
+                response.render(path.join(__dirname, "../views/sharedViews/signUp"), {message: message, email:email, role:request.session.role});   
             }
         } else {
             //This is not very pretty since i do queries inside queries. Maybe there is an easier way to write this?
@@ -30,7 +30,7 @@ const registerUser = function (request, response) {
                     })
                 })
             message = "Your account has been created succesfully.";
-            response.render(path.join(__dirname, "../views/sharedViews/signUp"), {message: message});
+            response.render(path.join(__dirname, "../views/sharedViews/signUp"), {message: message, role: request.session.role});
         }
     });
 };
@@ -42,7 +42,7 @@ const isUserLoggedIn = function(request, response){
 		response.redirect('/');
 		
 	} else{
-		response.render(path.join(__dirname, "../views/sharedViews/signUp"))
+		response.render(path.join(__dirname, "../views/sharedViews/signUp"), {role:request.session.role})
 	} 
 }
 module.exports = {

@@ -2,12 +2,14 @@
 <html>
     <%- include('../partials/head.ejs') %>
 <body>
+    <%- include('../partials/nav.ejs') %>
 
 <h1> <%=firstName%> you are a trainer, rejoice</h1>
 
 <div>
-    <p>Client list</p>
-    <ul>
+    <p class = friend-list>Client list</p>
+    <ul class = "friend-list">
+        
         <% if (locals.clients) { %>
             <% clients.forEach(function(str){ %>
                <li onclick="location.href = '/client/<%=JSON.parse(JSON.stringify(str)).id%>'">
@@ -18,7 +20,7 @@
 </div>
 
 
-<a href="/logout" class="btn btn-primary">Logout</a>
 
+<%- include('../partials/footer.ejs') %>
 </body>
 </html>
