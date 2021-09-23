@@ -37,11 +37,3 @@ body h2 {
 }
 
 
-.flex-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: left;
-  flex-flow: wrap;
-  text-transform: uppercase;
-  color: white;
-}
