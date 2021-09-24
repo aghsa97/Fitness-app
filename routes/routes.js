@@ -3,8 +3,7 @@ const loginController = require('../controllers/loginController');
 const homeController = require('../controllers/homeController');
 const signUpController = require('../controllers/signUpController');
 const trainerClientController = require('../controllers/trainerClientController');
-
-var path = require('path');
+const createWorkoutController = require('../controllers/createWorkoutController');
 
 const router = express.Router();
 
@@ -22,13 +21,8 @@ router.get('/logout', loginController.user_logout);
 
 router.get('/client/:id', trainerClientController.client_info);
 
+router.get('/createworkout', createWorkoutController.create_workout); 
 
-
-/*
-router.get('/client/:id', function(request, response){
-    console.log(request.params)
-    response.render(path.join(__dirname, "../views/trainerViews/clientInfo"))
-});
-*/
-    
+router.post('/createworkout', createWorkoutController.save_workout); 
+ 
 module.exports = router;
