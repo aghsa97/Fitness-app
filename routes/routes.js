@@ -24,5 +24,5 @@ router.get('/client/:id', trainerClientController.client_info);
 router.get('/createworkout', createWorkoutController.create_workout); 
 
 router.post('/createworkout', createWorkoutController.save_workout); 
-    
+ 
 module.exports = router;

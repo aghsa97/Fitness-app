@@ -50,7 +50,7 @@ const isUserLoggedIn = function(request, response){
 		response.redirect('/');
 		
 	} else{
-		response.render(path.join(__dirname, "../views/sharedViews/login"))
+		response.render(path.join(__dirname, "../views/sharedViews/login"),{role : request.session.role})
 	} 
 }
 

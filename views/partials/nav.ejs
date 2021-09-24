@@ -1,0 +1,28 @@
+<nav>
+    <h1 class="nav h1">
+        <% if (role == "client" || role == "trainer") {%> 
+            <%=role%> Homepage
+        <% } else {%>
+            Workout app 
+            <% } %>
+        <div class="flex-container">
+            <% if (role == "client") { %>
+                <div><a href="/" class="nav_button">Home</a></div>
+                <div><a href="/calendar" class="nav_button">Calendar</a></div>
+                <div><a href="/friends" class="nav_button">Friends</a></div>
+                <div><a href="/logout" class="nav_button">Log out</a></div>
+            
+            <% } else if (role == "trainer") { %>
+                <div><a href="/" class="nav_button">Home</a></div>
+                <div><a href="/logout" class="nav_button">Log out</a></div>
+            
+            <% } else {%>
+
+          
+                <div><a href="/signup" class="nav_button">Sign up</a></div>
+                <div><a href="/login" class="nav_button">Log in</a></div>
+            <% } %>
+
+        </div>
+    </h1>
+</nav>

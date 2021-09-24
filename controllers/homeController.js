@@ -11,7 +11,7 @@ const user_home = function(request, response) {
 	
 	if (request.session.role === "client") {
 		var sql_friends = 
-		`SELECT ui.firstname, ui.lastname, user.email
+		`SELECT ui.firstname, ui.lastname, user.email, ui.role
 		FROM user_info AS ui
 		join user on user.id = ui.id
 		WHERE user_id IN (SELECT r_friend_id FROM user_friends WHERE a_friend_id = ? and accepted = 1) 
@@ -19,7 +19,7 @@ const user_home = function(request, response) {
 
 		dbconnection.query(sql_friends, [db_id, db_id ], function(error, results){
 			if(error) throw error;
-			response.render(path.join(__dirname, "../views/clientViews/clientHome"), {firstName: firstName, friends: results})
+			response.render(path.join(__dirname, "../views/clientViews/clientHome"), {firstName: firstName, friends: results, role: request.session.role})
 		});
 
 	} else if (request.session.role === "trainer") {
@@ -38,9 +38,10 @@ const user_home = function(request, response) {
 
 		dbconnection.query(sql_client_list, function(error, client_results){
 			if(error) throw error;
+
 			dbconnection.query(sql_workout_list, [request.session.dbId], function(error, workouts_results){
 				if(error) throw error;
-				response.render(path.join(__dirname, "../views/trainerViews/trainerHome"), {firstName: firstName, clients:client_results, workouts:workouts_results })
+				response.render(path.join(__dirname, "../views/trainerViews/trainerHome"), {firstName: firstName, clients:client_results, workouts:workouts_results, role: request.session.role})
 			})
 		});
 		

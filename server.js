@@ -25,7 +25,7 @@ app.get('/', function(request, response) {
     if(request.session.loggedin){
         response.redirect('/home'); 
     } else{
-        response.render(path.join(__dirname, "/views/sharedViews/startPage"))
+        response.render(path.join(__dirname, "/views/sharedViews/startPage"), {role : request.session.role})
     }
 });
 

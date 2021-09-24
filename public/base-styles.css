@@ -1,0 +1,43 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;1,700&display=swap");
+
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: #34495e;
+  background-image: url();
+  display: flex;
+  flex-direction: column;
+}
+body h1 {
+  margin: 0;
+  text-transform: uppercase;
+  height: 100px;
+  padding: 15px 25px;
+  color: white;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.35);
+  letter-spacing: 4px;
+}
+body h1 a {
+  margin: 0;
+  text-transform: uppercase;
+  height: 100px;
+  padding: 15px 25px;
+  color: white;
+  position: relative;
+  letter-spacing: 2px;
+}
+body h2 {
+  margin: 0;
+  text-transform: uppercase;
+  padding: 15px 25px;
+  color: white;
+  position: relative;
+  letter-spacing: 2px;
+}
+
+
+.friend-list{
+  color:white;
+  
+}
