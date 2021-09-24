@@ -35,8 +35,14 @@ body h2 {
   position: relative;
   letter-spacing: 2px;
 }
-
-
+.wrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.content {
+  flex: 1;
+}
 .friend-list{
   color:white;
   

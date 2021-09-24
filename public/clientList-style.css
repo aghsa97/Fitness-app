@@ -1,0 +1,28 @@
+.container {
+    color: white;
+    background:darkslategray;
+    padding: 10px;
+    display: flex;
+    height: auto;
+    flex: 1;
+}
+.client-list {
+    height: 100%;
+    flex: 0 0 50%;
+    border-style: double;
+    border-width: thin;
+    border-color: lightslategray;
+}
+.client-list p {
+    padding-left: 20px;
+}
+.info-list {
+    height: 100%;
+    flex: 1;
+    border-style: double;
+    border-width: thin;
+    border-color: lightslategray;
+}
+.info-list p {
+    padding-left: 20px;
+}
