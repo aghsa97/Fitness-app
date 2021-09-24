@@ -12,3 +12,23 @@ Express Session handles the session for the logged in user. When logged in, a se
 
 Nodemon updates the server each time a save is made. This means that you dont have to restart the server each time you make a change. Very helpful for testing and UI design. 
 
+-----HTML Structure-----
+Use this shell structure for new HTML files
+/*
+<html>
+    <%- include('../partials/head.ejs'); %>
+    <body>
+        <div class="wrapper">
+            <%- include('../partials/nav.ejs'); %>
+            <div class="content">
+                PUT CONTENT HERE
+                Example: Form, lists, etc.
+                <form>
+                    Your form
+                </form>
+            </div>
+            <%- include('../partials/footer.ejs');
+        </div>
+    </body>
+</html>
+*/
