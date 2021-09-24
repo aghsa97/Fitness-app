@@ -10,7 +10,6 @@ ALTER TABLE `session_note` DROP FOREIGN KEY `session_note_user_id`;
 ALTER TABLE `session_note` DROP FOREIGN KEY `session_note_parent_id`;
 ALTER TABLE `workout_session` DROP FOREIGN KEY `workout_session_workout`;
 
-
 DROP TABLE IF EXISTS `workout_session`;
 DROP TABLE IF EXISTS `exercise`;
 DROP TABLE IF EXISTS `user_friends`;
@@ -20,7 +19,8 @@ DROP TABLE IF EXISTS `workout_exercise`;
 DROP TABLE IF EXISTS `session_note`;
 DROP TABLE IF EXISTS `user`;
 
-
 DROP DATABASE IF EXISTS `workout_db`;
 
 CREATE DATABASE `workout_db`;
+
+USE `workout_db`;

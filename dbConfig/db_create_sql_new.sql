@@ -10,17 +10,17 @@ CREATE TABLE `exercise` (
 CREATE TABLE `user` (
   `id` INT unsigned NOT NULL AUTO_INCREMENT,
   `email` varchar(128) DEFAULT NULL UNIQUE,
-  `password` varchar(45) DEFAULT NULL,
-  `salt` varchar(45) DEFAULT NULL,
+  `hash` varchar(128) DEFAULT NULL,
+  `salt` varchar(64) DEFAULT NULL,
+  `verified` tinyint DEFAULT 0,
   PRIMARY KEY (`id`)
 ) engine=InnoDB default charset=latin1;
 
 CREATE TABLE `user_friends` (
-  `id` INT unsigned NOT NULL AUTO_INCREMENT,
-  `r_friend_id` INT unsigned DEFAULT NULL, 
-  `a_friend_id` INT unsigned DEFAULT NULL,
-  `accepted` BOOL DEFAULT FALSE,
-  PRIMARY KEY (`id`),
+  `r_friend_id` INT unsigned NOT null, 
+  `a_friend_id` INT unsigned NOT null,
+  `accepted` TINYINT DEFAULT FALSE,
+  CONSTRAINT `friendship` PRIMARY KEY (`r_friend_id`, `a_friend_id`),
   CONSTRAINT `user_friends_r_friend_id` FOREIGN KEY (`r_friend_id`) REFERENCES user(`id`),
   CONSTRAINT `user_friends_a_friend_id` FOREIGN KEY (`a_friend_id`) REFERENCES user(`id`)
 ) engine=InnoDB default charset=latin1;

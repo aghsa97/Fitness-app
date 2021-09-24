@@ -1,10 +1,9 @@
 /*Insert statements*/
 
-
-DELETE FROM `workout_db`.`user_friends` WHERE id < 100;
+TRUNCATE `workout_db`.`user_friends`;
 DELETE FROM `workout_db`.`user_info` WHERE id < 100;
 DELETE FROM `workout_db`.`workout_exercise` WHERE id < 100;
-DELETE FROM `workout_db`.`session_note` WHERE id < 100;
+TRUNCATE `workout_db`.`session_note`;
 DELETE FROM `workout_db`.`workout_session` WHERE id < 100;
 DELETE FROM `workout_db`.`workout` WHERE id < 100;
 DELETE FROM `workout_db`.`user` WHERE id < 100;
@@ -22,15 +21,19 @@ ALTER TABLE `workout_db`.`session_note` AUTO_INCREMENT = 1;
 INSERT INTO exercise (name, description) values ("Pushup", "Do it");
 INSERT INTO exercise (name, description) values ("Pullup", "Do it");
 INSERT INTO exercise (name, description) values ("Air Squat", "Do it");
-INSERT INTO exercise (name, description) values ("Launges", "Do it");
-INSERT INTO exercise (name, description) values ("Wallclimp", "Do it");
+INSERT INTO exercise (name, description) values ("Lounges", "Do it");
+INSERT INTO exercise (name, description) values ("Wallclimb", "Do it");
+INSERT INTO exercise (name, description) values ("Deadlift", "Do it");
+INSERT INTO exercise (name, description) values ("Hang Powerclean", "Do it");
+INSERT INTO exercise (name, description) values ("Push Press", "Do it");
+INSERT INTO exercise (name, description) values ("Rounds", "");
 
-INSERT INTO user (email, password) values ("pt_putte@mail.com", "1234");
-INSERT INTO user (email, password) values ("august@mail.com", "1234");
-INSERT INTO user (email, password) values ("berit@mail.com", "1234");
-INSERT INTO user (email, password) values ("calle@mail.com","1234");
-INSERT INTO user (email, password) values ("david@mail.com","1234");
-INSERT INTO user (email, password) values ("erik@mail.com","1234");
+INSERT INTO user (email, hash) values ("pt_putte@mail.com", "1234");
+INSERT INTO user (email, hash) values ("august@mail.com", "1234");
+INSERT INTO user (email, hash) values ("berit@mail.com", "1234");
+INSERT INTO user (email, hash) values ("calle@mail.com","1234");
+INSERT INTO user (email, hash) values ("david@mail.com","1234");
+INSERT INTO user (email, hash) values ("erik@mail.com","1234");
 
 INSERT INTO `workout_db`.`user_friends` (r_friend_id, a_friend_id, accepted) VALUES (1, 3, TRUE);
 INSERT INTO `workout_db`.`user_friends` (r_friend_id, a_friend_id, accepted) VALUES (1, 4, TRUE);
@@ -46,6 +49,7 @@ INSERT INTO `workout_db`.`user_info` (`user_id`, `firstname`, `lastname`, `weigh
 
 INSERT INTO `workout_db`.`workout` (`name`, `creator_id`, `user_id`, `level`) VALUES ("Test Workout 1", 1, 1, 1);
 INSERT INTO `workout_db`.`workout` (`name`, `creator_id`, `user_id`, `level`) VALUES ("Test Workout 2", 1, 2, 1);
+INSERT INTO `workout_db`.`workout` (`name`, `creator_id`, `user_id`, `level`) VALUES ("DT", 1, 2, 10);
 
 INSERT INTO `workout_db`.`workout_exercise` (`workout_id`, `exercise_id`, `load`, `reps`, `order`) VALUES (1, 3, 0, 20, 1);
 INSERT INTO `workout_db`.`workout_exercise` (`workout_id`, `exercise_id`, `load`, `reps`, `order`) VALUES (1, 1, 0, 20, 2);
@@ -55,8 +59,12 @@ INSERT INTO `workout_db`.`workout_exercise` (`workout_id`, `exercise_id`, `load`
 INSERT INTO `workout_db`.`workout_exercise` (`workout_id`, `exercise_id`, `load`, `reps`, `order`) VALUES (1, 1, 0, 10, 2);
 INSERT INTO `workout_db`.`workout_exercise` (`workout_id`, `exercise_id`, `load`, `reps`, `order`) VALUES (1, 3, 0, 5, 3);
 INSERT INTO `workout_db`.`workout_exercise` (`workout_id`, `exercise_id`, `load`, `reps`, `order`) VALUES (1, 1, 0, 5, 4);
-
 INSERT INTO `workout_db`.`workout_exercise` (`workout_id`, `exercise_id`, `load`, `reps`, `order`) VALUES (2, 4, 16, 200, 1);
+
+INSERT INTO `workout_db`.`workout_exercise` (`workout_id`, `exercise_id`, `load`, `reps`, `order`) VALUES (3, 9, 0, 5, 1);
+INSERT INTO `workout_db`.`workout_exercise` (`workout_id`, `exercise_id`, `load`, `reps`, `order`) VALUES (3, 6, 70, 12, 2);
+INSERT INTO `workout_db`.`workout_exercise` (`workout_id`, `exercise_id`, `load`, `reps`, `order`) VALUES (3, 7, 70, 9, 3);
+INSERT INTO `workout_db`.`workout_exercise` (`workout_id`, `exercise_id`, `load`, `reps`, `order`) VALUES (3, 8, 70, 6, 4);
 
 INSERT INTO `workout_db`.`workout_session` (`workout_id`, `when`, `completed`) VALUES (1, '2021-09-25 08:00:00' , 0);
 INSERT INTO `workout_db`.`workout_session` (`workout_id`, `when`, `completed`) VALUES (1, '2021-09-25 16:00:00' , 0);
