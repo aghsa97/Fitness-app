@@ -2,40 +2,38 @@
 <html>
     <%- include('../partials/head.ejs') %>
 <body>
-    
-<div class="wrapper">
-    <%- include('../partials/nav.ejs') %>
-    <section class="container">
-        <div class="client-list">
-            <p>Client list</p>
-            <ul>
-                
-                <% if (locals.clients) { %>
-                    <% clients.forEach(function(str){ %>
-                    <li onclick="location.href = '/client/<%=JSON.parse(JSON.stringify(str)).id%>'">
-                        <%=JSON.parse(JSON.stringify(str)).firstname%> <%=JSON.parse(JSON.stringify(str)).lastname %> <%= JSON.parse(JSON.stringify(str)).email%></li>
-                    <% }) %>
-                <% } %>
-            </ul>
-        </div>
-        <div class="info-list">
-            <p>Second list</p>
-            <ul>
-                
-                <% if (locals.clients) { %>
-                    <% clients.forEach(function(str){ %>
-                    <li onclick="location.href = '/client/<%=JSON.parse(JSON.stringify(str)).id%>'">
-                        <%=JSON.parse(JSON.stringify(str)).firstname%> <%=JSON.parse(JSON.stringify(str)).lastname %> <%= JSON.parse(JSON.stringify(str)).email%></li>
-                    <% }) %>
-                <% } %>
-            </ul>
-        </div>
-    </section>
-    <%- include('../partials/footer.ejs') %>
-</div>
-
-
-
-
+    <div class="wrapper">
+        <%- include('../partials/nav.ejs') %>
+        <section class="container">
+            <div class="client-list">
+                <div class="list-header">
+                    <p><strong>Client list</strong></p>
+                </div>
+                <ul>
+                    <% if (locals.clients) { %>
+                        <% clients.forEach(function(str){ %>
+                        <li onclick="location.href = '/client/<%=JSON.parse(JSON.stringify(str)).id%>'">
+                            <%=JSON.parse(JSON.stringify(str)).firstname%> <%=JSON.parse(JSON.stringify(str)).lastname %> <%= JSON.parse(JSON.stringify(str)).email%></li>
+                        <% }) %>
+                    <% } %>
+                </ul>
+            </div>
+            <div class="separator"></div>
+            <div class="info-list">
+                <div class="list-header">
+                    <p><strong>Second list</strong></p>
+                </div>
+                <ul>
+                    <% if (locals.clients) { %>
+                        <% clients.forEach(function(str){ %>
+                        <li onclick="location.href = '/client/<%=JSON.parse(JSON.stringify(str)).id%>'">
+                            <%=JSON.parse(JSON.stringify(str)).firstname%> <%=JSON.parse(JSON.stringify(str)).lastname %> <%= JSON.parse(JSON.stringify(str)).email%></li>
+                        <% }) %>
+                    <% } %>
+                </ul>
+            </div>
+        </section>
+        <%- include('../partials/footer.ejs') %>
+    </div>
 </body>
 </html>

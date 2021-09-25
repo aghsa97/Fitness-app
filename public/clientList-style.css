@@ -1,3 +1,9 @@
+.list-header {
+    height: fit-content;
+    text-align: center;
+    background-color: darkolivegreen;
+    font-size: x-large;
+}
 .container {
     color: white;
     background:darkslategray;
@@ -8,10 +14,12 @@
 }
 .client-list {
     height: 100%;
-    flex: 0 0 50%;
+    flex: 0 0 49%;
     border-style: double;
     border-width: thin;
     border-color: lightslategray;
+    display: flex;
+    flex-direction: column;
 }
 .client-list p {
     padding-left: 20px;
@@ -22,7 +30,12 @@
     border-style: double;
     border-width: thin;
     border-color: lightslategray;
+    display: flex;
+    flex-direction: column;
 }
 .info-list p {
     padding-left: 20px;
+}
+.separator {
+    flex: 0 0 2%;
 }
