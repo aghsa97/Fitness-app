@@ -5,7 +5,7 @@
     <div class="wrapper">
         <%- include('../partials/nav.ejs') %>
         <section class="trainer-home-container">
-            <div class="client-list">
+            <div class="client-info">
                 <div>
                     <ul>
                     <li><%=info[0].firstname%></li> 
@@ -19,7 +19,7 @@
         
             <h3>Assign workout</h3>
             <div>
-                <form id ="assign-workout-form" `action = client/: + <%=info[0].firstname%>` action method="POST">
+                <form class="client-info" id ="assign-workout-form" `action = client/: + <%=info[0].firstname%>` action method="POST">
                     <label>My workouts</label><br>
                         <select name="workout">
                             <% if (locals.trainer_workouts) { %>
@@ -37,14 +37,13 @@
         
             <h3>Assigned workouts</h3>
             <div>
-                <label>Assigned workouts<br>  
                 <% if (locals.client_workouts) { %>
                     <% client_workouts.forEach(function(str){ %>
                         <option value = <%=JSON.parse(JSON.stringify(str)).id%>><%=JSON.parse(JSON.stringify(str)).name%></option> 
                     <% }) %>
                 <% } %>
             </div>
-            <a href="/home" class="btn btn-primary">Back</a>
+            <a href="/home"><button>Back</button></a>
             </div>
             <div class="separator"></div>
             <div class="info-list">
