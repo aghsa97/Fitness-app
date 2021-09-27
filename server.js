@@ -30,7 +30,7 @@ app.get('/', function(request, response) {
 });
 
 app.use((request, result) => {
-    result.status(404).render(path.join(__dirname, "/views/sharedViews/404"),  { title: '404' });
+    result.status(404).render(path.join(__dirname, "/views/sharedViews/404"),  { title: '404', role: request.session.role });
 });
 
 app.listen(3000);

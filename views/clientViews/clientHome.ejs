@@ -2,24 +2,24 @@
 <html lang="en">
   <%- include('../partials/head.ejs') %>
   <body>
+    <div class="wrapper">
     <%- include('../partials/nav.ejs') %>
-    
-    <div class="container">
-      <div class="social-box">
-        <p class="friend-list">Friendlist</p>
-        <ul class="list">
-          <% if (locals.friends) { %> <% friends.forEach(function(str){ %>
-          <li class="friend-list">
-            
-            <%=JSON.parse(JSON.stringify(str)).firstname%>
-            <%=JSON.parse(JSON.stringify(str)).lastname%>
-            <%=JSON.parse(JSON.stringify(str)).role%>
-          </li>
-          <% }) %> <% } %>
-        </ul>
+      <div class="container">
+        <div class="social-box">
+          <p class="friend-list">Friendlist</p>
+          <ul class="list">
+            <% if (locals.friends) { %> <% friends.forEach(function(str){ %>
+            <li class="friend-list">
+              
+              <%=JSON.parse(JSON.stringify(str)).firstname%>
+              <%=JSON.parse(JSON.stringify(str)).lastname%>
+              <%=JSON.parse(JSON.stringify(str)).role%>
+            </li>
+            <% }) %> <% } %>
+          </ul>
+        </div>
       </div>
-
       <%- include('../partials/footer.ejs') %>
-
+    </div>
   </body>
 </html>
