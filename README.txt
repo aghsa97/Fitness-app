@@ -1,4 +1,4 @@
-Requirments
+Requirements
 1) Download and setup MySQL server
 2) Download and install Node.js
 3) Install Express with the command "npm install express" in the vs code terminal

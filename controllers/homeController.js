@@ -29,16 +29,15 @@ const user_home = function(request, response) {
 		join user_info on user.id = user_info.id
 		where user_info.role = 'client'`;
 
-		var sql_excercise_list = 
-		`select * from exercise`;
-
 		var sql_workout_list = 
-		`select * from workout
-		where creator_id = ?`;
+		`select w.id, w.name, uf.firstname, uf.lastname, u.email
+		from workout as w
+		join user_info as uf on w.user_id = uf.user_id
+		join user as u on u.id = uf.user_id
+		where w.creator_id = '?';`;
 
 		dbconnection.query(sql_client_list, function(error, client_results){
 			if(error) throw error;
-
 			dbconnection.query(sql_workout_list, [request.session.dbId], function(error, workouts_results){
 				if(error) throw error;
 				response.render(path.join(__dirname, "../views/trainerViews/trainerHome"), {firstName: firstName, clients:client_results, workouts:workouts_results, role: request.session.role})

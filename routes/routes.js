@@ -21,6 +21,8 @@ router.get('/logout', loginController.user_logout);
 
 router.get('/client/:id', trainerClientController.client_info);
 
+router.post('/client/:id', trainerClientController.assign_workout);
+
 router.get('/createworkout', createWorkoutController.create_workout); 
 
 router.post('/createworkout', createWorkoutController.save_workout); 

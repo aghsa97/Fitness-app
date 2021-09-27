@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html>
-
     <%- include('../partials/head.ejs') %>
-
 <body>
     <%- include('../partials/nav.ejs') %>
 
@@ -26,7 +24,7 @@
     <ul>
         <% if (locals.workouts) { %>
             <% workouts.forEach(function(str){ %>
-               <li><%=JSON.parse(JSON.stringify(str)).name%></li>
+               <li><%=JSON.parse(JSON.stringify(str)).name%> Assigned to <%=JSON.parse(JSON.stringify(str)).firstname%> <%=JSON.parse(JSON.stringify(str)).email%></li>
             <% }) %>
         <% } %>
     </ul>
