@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <div class="create-workout">
+    <h2>Create workout</h2>
+        <form id ="workout-form" action="createworkout" action method="POST">
+            <div id = "exercise-container">
+
+                <label>Workout name</label><br>
+                <input type="text" name="workoutname" placeholder="Workout name" required/><br>
+
+                <label>Level</label><br>
+                <select name="level">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+                <h3>Exercise 1:</h3>
+                <p> 
+                    <label>Exercise</label><br>
+                        <select name="exercise[1][exercise]" required>
+                            <% if (locals.exercise) { %>
+                                <% exercise.forEach(function(str){ %>
+                                    <option value = <%=JSON.parse(JSON.stringify(str)).id%>><%=JSON.parse(JSON.stringify(str)).name%></option> 
+                                <% }) %>
+                            <% } %>
+                        </select>
+                </p>
+                <p>
+                    <label>Weight</label><br>
+                    <input name="exercise[1][weight]" required>
+                </p>
+                
+                <p>
+                    <label>Reps</label><br>
+                    <input name="exercise[1][reps]" required>
+                </p>
+
+                <p>
+                    <label>Order</label><br>
+                        <select id="original_order" name="exercise[1][order]" class="order">
+                            <option value="1">1</option>
+                        </select>
+                </p>
+                </div>
+            </div>    
+            <a href="javascript:;" id="add-new-exercise">Add new exercise</a>
+            <a href="javascript:;" id="delete" style="display:none">Delete exercise</a>
+            <p>
+                <input type = "submit" value="submit" onclick="return confirm('Are you sure you want to create the workout?')">
+            </p>
+        </form>
+
+        <a href="/home" class="btn btn-primary">Back</a>
+    
+    <script>
+
+    
+        var i = 2;
+        document.getElementById('add-new-exercise').onclick = function() {
+            var new_exercise = `
+            <h3>Exercise ${i}:</h3>
+                <p> 
+                    <label>Exercise</label><br>
+                        <select name="exercise[${i}][exercise]" required>
+                            <% if (locals.exercise) { %>
+                                <% exercise.forEach(function(str){ %>
+                                    <option value = <%=JSON.parse(JSON.stringify(str)).id%>><%=JSON.parse(JSON.stringify(str)).name%></option>  
+                                <% }) %>
+                            <% } %>
+                        </select>
+                </p>
+                <p>
+                    <label>Weight</label><br>
+                    <input name="exercise[${i}][weight]"required>
+                </p>
+                
+                <p>
+                    <label>Reps</label><br>
+                    <input name="exercise[${i}][reps]"required>
+                </p>
+                
+                <p>
+                    <label>Order</label><br>
+                        <select id="order${i}" name="exercise[${i}][order]" class="order">
+                            <option value="1">1</option>
+                        </select>
+                </p>`;
+                
+            var container = document.getElementById('exercise-container');
+            var div = document.createElement('div');
+            div.innerHTML = new_exercise;
+            container.appendChild(div);
+            var delete_button = document.getElementById('delete');
+
+            var select = document.getElementsByClassName("order");
+
+            var og_select = document.getElementById('original_order');
+            var option = document.createElement("option");
+                option.text = i;
+                option.value = i;
+                og_select.appendChild(option)
+                
+
+            var new_select = document.getElementsByClassName('order');
+            for(var x = 0; x < new_select.length; x++){
+                new_select[x].innerHTML = new_select.innerHTML+og_select.innerHTML;
+                new_select[x].selectedIndex = x;
+            }
+
+            i++;
+            if(i > 2){
+                delete_button.style.display = "block";
+            } 
+        }
+
+        document.getElementById('delete').onclick = function() {
+
+           var div_delete = document.getElementById('exercise-container');
+           div_delete.removeChild(div_delete.lastChild);
+           var delete_button = document.getElementById('delete');
+
+           var og_select = document.getElementById('original_order');
+           og_select.removeChild(og_select.lastChild)
+           var new_select = document.getElementsByClassName('order');
+                for(var x = 0; x < new_select.length; x++){
+                    new_select[x].innerHTML = new_select.innerHTML+og_select.innerHTML;
+                    new_select[x].selectedIndex = x;
+                }
+           i--;
+
+           if (i <= 2){
+            delete_button.style.display = "none";
+           } 
+        }
+    </script>
+</body>
+</html>

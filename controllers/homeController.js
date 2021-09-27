@@ -22,17 +22,27 @@ const user_home = function(request, response) {
 			response.render(path.join(__dirname, "../views/clientViews/clientHome"), {firstName: firstName, friends: results, role: request.session.role})
 		});
 
-
 	} else if (request.session.role === "trainer") {
 		//Here we might also need to check if the client has been verfied by the trainer. This has not been added to the database as of 2021-09-22
 		var sql_client_list = 
 		`select * from user
 		join user_info on user.id = user_info.id
-		where user_info.role = 'client'` 
+		where user_info.role = 'client'`;
 
-		dbconnection.query(sql_client_list, function(error, results){
+		var sql_excercise_list = 
+		`select * from exercise`;
+
+		var sql_workout_list = 
+		`select * from workout
+		where creator_id = ?`;
+
+		dbconnection.query(sql_client_list, function(error, client_results){
 			if(error) throw error;
-			response.render(path.join(__dirname, "../views/trainerViews/trainerHome"), {firstName: firstName, clients:results, role: request.session.role})
+
+			dbconnection.query(sql_workout_list, [request.session.dbId], function(error, workouts_results){
+				if(error) throw error;
+				response.render(path.join(__dirname, "../views/trainerViews/trainerHome"), {firstName: firstName, clients:client_results, workouts:workouts_results, role: request.session.role})
+			})
 		});
 		
 	} else{

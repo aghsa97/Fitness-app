@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
+
     <%- include('../partials/head.ejs') %>
+
 <body>
     <%- include('../partials/nav.ejs') %>
 
@@ -17,6 +19,18 @@
             <% }) %>
         <% } %>
     </ul>
+</div>
+
+<div>
+    <p>My workouts </p>
+    <ul>
+        <% if (locals.workouts) { %>
+            <% workouts.forEach(function(str){ %>
+               <li><%=JSON.parse(JSON.stringify(str)).name%></li>
+            <% }) %>
+        <% } %>
+    </ul>
+    <a href="/createworkout" class="btn btn-primary">Create workout</a>
 </div>
 
 
