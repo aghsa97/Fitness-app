@@ -33,7 +33,7 @@ const client_info = function(request, response) {
                     if(error) throw error;
                     var client_workouts = results;
                     response.render(path.join(__dirname, "../views/trainerViews/clientInfo"), 
-                    {info: user_info, trainer_workouts: trainer_workouts, client_workouts: client_workouts, client_id: request.params.id})
+                    {info: user_info, trainer_workouts: trainer_workouts, client_workouts: client_workouts, client_id: request.params.id, role: request.session.role })
                 })
             })
         });
