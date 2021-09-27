@@ -4,6 +4,7 @@ const homeController = require('../controllers/homeController');
 const signUpController = require('../controllers/signUpController');
 const trainerClientController = require('../controllers/trainerClientController');
 const createWorkoutController = require('../controllers/createWorkoutController');
+const createExerciseController = require('../controllers/createExerciseController');
 
 const router = express.Router();
 
@@ -26,5 +27,9 @@ router.post('/client/:id', trainerClientController.assign_workout);
 router.get('/createworkout', createWorkoutController.create_workout); 
 
 router.post('/createworkout', createWorkoutController.save_workout); 
+
+router.get('/createexercise', createExerciseController.create_exercise); 
+
+router.post('/createexercise', createExerciseController.save_exercise); 
  
 module.exports = router;

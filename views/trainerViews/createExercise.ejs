@@ -1,0 +1,50 @@
+<html>
+<body>
+
+    <div class="create-exercise">
+        <h2>Create workout</h2>
+            <form id ="exercise-form" action="createexercise" action method="POST">
+                <div id = "exercise-container">
+    
+                    <label>Exercise name</label><br>
+                    <input type="text" name="exercise_name" placeholder="Exercise name" required/><br>
+    
+                    <label>Target muscle</label><br>
+                        <select name="target_muscle">
+                            <option value="Back">Back</option>
+                            <option value="Quads">Quads</option>
+                            <option value="Biceps">Biceps</option>
+                            <option value="Triceps">Triceps</option>
+                            <option value="Hamstrings">Hamstrings</option>
+                            <option value="Erectors">Erectors</option>
+                            <option value="Chest">Chest</option>
+                            <option value="Shoulder">Shoulder</option>
+                            <option value="Abs">Abs</option>
+                        </select><br>
+
+                    <label>Level</label><br>
+                            <select name="level">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select><br>
+
+                    <label for="description">Description</label><br>
+                    <input type="text" id="description" name="description" placeholder="A description" required><br><br>
+                    <input type = "submit" value="Submit" onclick="return confirm('Are you sure you want to create this exercise?')">
+                </div>
+            </form>
+            <a href="/home" class="btn btn-primary">Back</a>
+    </div>
+
+
+
+</body>
+</html>
