@@ -54,9 +54,9 @@ CREATE TABLE `workout_exercise` (
   `id` INT unsigned NOT NULL AUTO_INCREMENT,
   `workout_id` INT unsigned NOT NULL,
   `exercise_id` INT unsigned NOT NULL,
-  `load` varchar(45) DEFAULT NULL,
-  `reps` INT DEFAULT NULL,
-  `order` INT DEFAULT NULL,
+  `e_load` varchar(45) DEFAULT NULL,
+  `e_reps` INT DEFAULT NULL,
+  `e_order` INT DEFAULT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `workout_exercise_workout_id` FOREIGN KEY (`workout_id`) REFERENCES workout(`id`),
   CONSTRAINT `workout_exercise_exercise_id` FOREIGN KEY (`exercise_id`) REFERENCES exercise(`id`)
