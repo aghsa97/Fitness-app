@@ -10,8 +10,9 @@ CREATE TABLE `exercise` (
 CREATE TABLE `user` (
   `id` INT unsigned NOT NULL AUTO_INCREMENT,
   `email` varchar(128) DEFAULT NULL UNIQUE,
-  `password` varchar(45) DEFAULT NULL,
-  `salt` varchar(45) DEFAULT NULL,
+  `hash` varchar(128) DEFAULT NULL,
+  `salt` varchar(64) DEFAULT NULL,
+  `verified` tinyint DEFAULT 0,
   PRIMARY KEY (`id`)
 ) engine=InnoDB default charset=latin1;
 
