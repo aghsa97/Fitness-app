@@ -43,6 +43,12 @@
     transition: 0.25s;
     cursor: pointer;
     text-transform: uppercase;
+    text-decoration: none;
+}
+
+.client-info button:visited {
+    text-decoration: none;
+    color: white;
 }
 
 .client-info button:hover {
@@ -51,4 +57,10 @@
 
 .client-info a {
     text-decoration: none;
+    color: white;
+}
+
+.client-info a:visited { 
+    text-decoration: none;
+    color: white;
 }
