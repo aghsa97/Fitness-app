@@ -2,17 +2,47 @@
 <html>
 <body>
 
-<h1>Sjukt om det funkar</h1>
+    <div>
+            <ul>
+            <li><%=info[0].firstname%></li> 
+            <li><%=info[0].lastname%></li>
+            <li><%=info[0].email%></li>
+            <li><%=info[0].weight%>kg</li>
+            <li><%=info[0].height%>cm</li>
+            <li><%=info[0].gender%></li>
+            </ul>
+    </div>
 
-<ul>
-    <% if (locals.info) { %>
-        <% info.forEach(function(str){ %>
-           <%=JSON.parse(JSON.stringify(str)).firstname%> <%=JSON.parse(JSON.stringify(str)).lastname %> <%= JSON.parse(JSON.stringify(str)).email%>
-            <%=JSON.parse(JSON.stringify(str)).weight%> kg <%=JSON.parse(JSON.stringify(str)).height %> cm <%= JSON.parse(JSON.stringify(str)).gender%>
-        <% }) %>
-    <% } %>
-</ul>
+    <h3>Assign workout</h3>
+    <div>
+        <form id ="assign-workout-form" `action = client/: + <%=info[0].firstname%>` action method="POST">
+            <label>My workouts</label><br>
+                <select name="workout">
+                    <% if (locals.trainer_workouts) { %>
+                        <% trainer_workouts.forEach(function(str){ %>
+                            <option value = <%=JSON.parse(JSON.stringify(str)).id%>><%=JSON.parse(JSON.stringify(str)).name%></option> 
+                        <% }) %>
+                    <% } %>
+                </select>
 
-<a href="/home" class="btn btn-primary">Back</a>
+            <input name="user_id" type = "hidden" value = <%=info[0].id%>>
+            <input type = "submit" value="submit" onclick="return confirm('Are you sure you want to assign the workout?')">
+
+        </form>
+    </div>
+
+    <h3>Assigned workouts</h3>
+    <div>
+        <label>Assigned workouts<br>  
+        <% if (locals.client_workouts) { %>
+            <% client_workouts.forEach(function(str){ %>
+                <option value = <%=JSON.parse(JSON.stringify(str)).id%>><%=JSON.parse(JSON.stringify(str)).name%></option> 
+            <% }) %>
+        <% } %>
+    </div>
+    <a href="/home" class="btn btn-primary">Back</a>
+
+ 
 </body>
+
 </html>
