@@ -4,7 +4,6 @@ var path = require('path');
 const create_exercise = function(request, response){
 
     if(request.session.role === "trainer"){
-
         response.render(path.join(__dirname, "../views/trainerViews/createExercise"))
     } else{
 
@@ -22,7 +21,15 @@ const save_exercise = function(request, response){
         VALUES(?, ?, ?, ?)` 
 
         dbconnection.query(sql_insert_exercise,[request.body.exercise_name, request.body.target_muscle, request.body.level, request.body.description], function(error, results){
-            response.redirect('/createexercise')
+            if(error) {
+                if(error.errno === 1062){
+                    message = "This exercise already exists!";
+                    response.render(path.join(__dirname, "../views/trainerViews/createExercise"), {message: message});   
+                }
+            } else {
+                message = "Your exercise has been created succesfully.";
+                response.render(path.join(__dirname, "../views/trainerViews/createExercise"), {message: message});   
+            }
         })
     }
 }

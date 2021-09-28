@@ -4,7 +4,8 @@ CREATE TABLE `exercise` (
   `target_muscle` varchar(45) DEFAULT NULL,
   `level` INT DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name_UNIQUE` (`name`)
 ) engine=InnoDB default charset=latin1;
 
 CREATE TABLE `user` (
