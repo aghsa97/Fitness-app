@@ -6,17 +6,17 @@
         <%- include('../partials/nav.ejs') %>
         <section class="trainer-home-container">
             <div class="client-info">
+                <div class="list-header">
+                    <p><strong><%= info[0].firstname %> <%= info[0].lastname %></strong></p>
+                </div>
                 <div>
                     <ul>
-                    <li><%=info[0].firstname%></li> 
-                    <li><%=info[0].lastname%></li>
-                    <li><%=info[0].email%></li>
-                    <li><%=info[0].weight%>kg</li>
-                    <li><%=info[0].height%>cm</li>
-                    <li><%=info[0].gender%></li>
+                    <li>Email: <%=info[0].email%></li>
+                    <li>Weight: <%=info[0].weight%>kg</li>
+                    <li>Height: <%=info[0].height%>cm</li>
+                    <li>Gender: <%=info[0].gender%></li>
                     </ul>
-            </div>
-        
+                </div>
             <h3>Assign workout</h3>
             <div>
                 <form class="client-info" id ="assign-workout-form" `action = client/: + <%=info[0].firstname%>` action method="POST">
@@ -48,15 +48,10 @@
             <div class="separator"></div>
             <div class="info-list">
                 <div class="list-header">
-                    <p><strong>Second list</strong></p>
+                    <p><strong>Planned Workouts</strong></p>
                 </div>
                 <ul>
-                    <% if (locals.clients) { %>
-                        <% clients.forEach(function(str){ %>
-                        <li onclick="location.href = '/client/<%=JSON.parse(JSON.stringify(str)).id%>'">
-                            <%=JSON.parse(JSON.stringify(str)).firstname%> <%=JSON.parse(JSON.stringify(str)).lastname %> <%= JSON.parse(JSON.stringify(str)).email%></li>
-                        <% }) %>
-                    <% } %>
+                    
                 </ul>
             </div>
         </section>
