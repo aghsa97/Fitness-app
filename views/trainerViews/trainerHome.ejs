@@ -13,7 +13,10 @@
                     <% if (locals.clients) { %>
                         <% clients.forEach(function(str){ %>
                         <li onclick="location.href = '/client/<%=JSON.parse(JSON.stringify(str)).id%>'">
-                            <%=JSON.parse(JSON.stringify(str)).firstname%> <%=JSON.parse(JSON.stringify(str)).lastname %> <%= JSON.parse(JSON.stringify(str)).email%></li>
+                            <strong>
+                                <%=JSON.parse(JSON.stringify(str)).firstname%> <%=JSON.parse(JSON.stringify(str)).lastname %> <%= JSON.parse(JSON.stringify(str)).email%>
+                            </strong>
+                        </li>
                         <% }) %>
                     <% } %>
                 </ul>

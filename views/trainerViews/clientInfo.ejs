@@ -11,13 +11,12 @@
                 </div>
                 <div>
                     <ul>
-                    <li><%=info[0].email%></li>
-                    <li><%=info[0].weight%>kg</li>
-                    <li><%=info[0].height%>cm</li>
-                    <li><%=info[0].gender%></li>
+                    <li>Email: <%=info[0].email%></li>
+                    <li>Weight: <%=info[0].weight%>kg</li>
+                    <li>Height: <%=info[0].height%>cm</li>
+                    <li>Gender: <%=info[0].gender%></li>
                     </ul>
-            </div>
-        
+                </div>
             <h3>Assign workout</h3>
             <div>
                 <form class="client-info" id ="assign-workout-form" `action = client/: + <%=info[0].firstname%>` action method="POST">

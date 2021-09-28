@@ -13,7 +13,11 @@
 }
 
 .client-info ul {
-    padding-left: 10px;
+    padding-left: 0%;
+}
+
+.client-info li {
+    border-style: none;
 }
 
 .client-info form {
