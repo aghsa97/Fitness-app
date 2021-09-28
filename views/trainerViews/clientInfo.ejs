@@ -6,10 +6,11 @@
         <%- include('../partials/nav.ejs') %>
         <section class="trainer-home-container">
             <div class="client-info">
+                <div class="list-header">
+                    <p><strong><%= info[0].firstname %> <%= info[0].lastname %></strong></p>
+                </div>
                 <div>
                     <ul>
-                    <li><%=info[0].firstname%></li> 
-                    <li><%=info[0].lastname%></li>
                     <li><%=info[0].email%></li>
                     <li><%=info[0].weight%>kg</li>
                     <li><%=info[0].height%>cm</li>
@@ -48,15 +49,10 @@
             <div class="separator"></div>
             <div class="info-list">
                 <div class="list-header">
-                    <p><strong>Second list</strong></p>
+                    <p><strong>Planned Workouts</strong></p>
                 </div>
                 <ul>
-                    <% if (locals.clients) { %>
-                        <% clients.forEach(function(str){ %>
-                        <li onclick="location.href = '/client/<%=JSON.parse(JSON.stringify(str)).id%>'">
-                            <%=JSON.parse(JSON.stringify(str)).firstname%> <%=JSON.parse(JSON.stringify(str)).lastname %> <%= JSON.parse(JSON.stringify(str)).email%></li>
-                        <% }) %>
-                    <% } %>
+                    
                 </ul>
             </div>
         </section>

@@ -21,15 +21,10 @@
             <div class="separator"></div>
             <div class="info-list">
                 <div class="list-header">
-                    <p><strong>Second list</strong></p>
+                    <p><strong>Pending approval</strong></p>
                 </div>
                 <ul>
-                    <% if (locals.clients) { %>
-                        <% clients.forEach(function(str){ %>
-                        <li onclick="location.href = '/client/<%=JSON.parse(JSON.stringify(str)).id%>'">
-                            <%=JSON.parse(JSON.stringify(str)).firstname%> <%=JSON.parse(JSON.stringify(str)).lastname %> <%= JSON.parse(JSON.stringify(str)).email%></li>
-                        <% }) %>
-                    <% } %>
+                    
                 </ul>
             </div>
         </section>
