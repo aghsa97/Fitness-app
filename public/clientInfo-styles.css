@@ -1,0 +1,79 @@
+.client-info {
+    flex: 0 0 49%;
+    background-color: darkslategray;
+    text-align: left;
+    font-size: large;
+    height: 100%;
+    border-style: double;
+    border-width: thin;
+    border-color: lightslategray;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.client-info ul {
+    padding-left: 0%;
+}
+
+.client-info li {
+    border-style: none;
+}
+
+.client-info form {
+    border-style: none;
+    padding-left: 20px;
+}
+
+.client-info input {
+    width: fit-content;
+}
+
+.client-info select {
+    width: fit-content;
+}
+
+.client-info button {
+    width: 100px;
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid#2ecc71;
+    padding: 14px 10px;
+    outline: none;
+    color: white;
+    border-radius: 30px;
+    transition: 0.25s;
+    cursor: pointer;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.client-info button:visited {
+    text-decoration: none;
+    color: white;
+}
+
+.client-info button:hover {
+    background: #2ecc71;
+}
+
+.client-info a {
+    text-decoration: none;
+    color: white;
+}
+
+.client-info a:visited { 
+    text-decoration: none;
+    color: white;
+}
+
+.client-info h3 {
+    padding-left: 20px;
+}
+
+.client-info option {
+    padding-left: 20px;
+}

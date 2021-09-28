@@ -1,48 +1,61 @@
 <!DOCTYPE html>
 <html>
+    <%- include('../partials/head.ejs') %>
 <body>
-
-    <div>
-            <ul>
-            <li><%=info[0].firstname%></li> 
-            <li><%=info[0].lastname%></li>
-            <li><%=info[0].email%></li>
-            <li><%=info[0].weight%>kg</li>
-            <li><%=info[0].height%>cm</li>
-            <li><%=info[0].gender%></li>
-            </ul>
+    <div class="wrapper">
+        <%- include('../partials/nav.ejs') %>
+        <section class="trainer-home-container">
+            <div class="client-info">
+                <div class="list-header">
+                    <p><strong><%= info[0].firstname %> <%= info[0].lastname %></strong></p>
+                </div>
+                <div>
+                    <ul>
+                    <li>Email: <%=info[0].email%></li>
+                    <li>Weight: <%=info[0].weight%>kg</li>
+                    <li>Height: <%=info[0].height%>cm</li>
+                    <li>Gender: <%=info[0].gender%></li>
+                    </ul>
+                </div>
+            <h3>Assign workout</h3>
+            <div>
+                <form class="client-info" id ="assign-workout-form" `action = client/: + <%=info[0].firstname%>` action method="POST">
+                    <label>My workouts</label><br>
+                        <select name="workout">
+                            <% if (locals.trainer_workouts) { %>
+                                <% trainer_workouts.forEach(function(str){ %>
+                                    <option value = <%=JSON.parse(JSON.stringify(str)).id%>><%=JSON.parse(JSON.stringify(str)).name%></option> 
+                                <% }) %>
+                            <% } %>
+                        </select>
+        
+                    <input name="user_id" type = "hidden" value = <%=info[0].id%>>
+                    <input type = "submit" value="submit" onclick="return confirm('Are you sure you want to assign the workout?')">
+        
+                </form>
+            </div>
+        
+            <h3>Assigned workouts</h3>
+            <div>
+                <% if (locals.client_workouts) { %>
+                    <% client_workouts.forEach(function(str){ %>
+                        <option value = <%=JSON.parse(JSON.stringify(str)).id%>><%=JSON.parse(JSON.stringify(str)).name%></option> 
+                    <% }) %>
+                <% } %>
+            </div>
+            <button><a href="/home">Back</a></button>
+            </div>
+            <div class="separator"></div>
+            <div class="info-list">
+                <div class="list-header">
+                    <p><strong>Planned Workouts</strong></p>
+                </div>
+                <ul>
+                    
+                </ul>
+            </div>
+        </section>
+        <%- include('../partials/footer.ejs') %>
     </div>
-
-    <h3>Assign workout</h3>
-    <div>
-        <form id ="assign-workout-form" `action = client/: + <%=info[0].firstname%>` action method="POST">
-            <label>My workouts</label><br>
-                <select name="workout">
-                    <% if (locals.trainer_workouts) { %>
-                        <% trainer_workouts.forEach(function(str){ %>
-                            <option value = <%=JSON.parse(JSON.stringify(str)).id%>><%=JSON.parse(JSON.stringify(str)).name%></option> 
-                        <% }) %>
-                    <% } %>
-                </select>
-
-            <input name="user_id" type = "hidden" value = <%=info[0].id%>>
-            <input type = "submit" value="submit" onclick="return confirm('Are you sure you want to assign the workout?')">
-
-        </form>
-    </div>
-
-    <h3>Assigned workouts</h3>
-    <div>
-        <label>Assigned workouts<br>  
-        <% if (locals.client_workouts) { %>
-            <% client_workouts.forEach(function(str){ %>
-                <option value = <%=JSON.parse(JSON.stringify(str)).id%>><%=JSON.parse(JSON.stringify(str)).name%></option> 
-            <% }) %>
-        <% } %>
-    </div>
-    <a href="/home" class="btn btn-primary">Back</a>
-
- 
 </body>
-
 </html>
