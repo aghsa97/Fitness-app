@@ -1,24 +1,24 @@
 <nav>
     <h1 class="nav-box">
-        <% if (role == "client" || role == "trainer") {%> 
+        <% if (locals.role) { %>
             <%=role%> Homepage
         <% } else {%>
             Workout app 
-            <% } %>
+        <% } %>
         <div class="flex-container">
-            <% if (role == "client") { %>
-                <div><a href="/" class="nav_button">Home</a></div>
-                <div><a href="/calendar" class="nav_button">Calendar</a></div>
-                <div><a href="/friends" class="nav_button">Friends</a></div>
-                <div><a href="/logout" class="nav_button">Log out</a></div>
+            <% if (locals.role) { %>
+                <% if (role == "client") { %>
+                    <div><a href="/" class="nav_button">Home</a></div>
+                    <div><a href="/calendar" class="nav_button">Calendar</a></div>
+                    <div><a href="/friends" class="nav_button">Friends</a></div>
+                    <div><a href="/logout" class="nav_button">Log out</a></div>
+                
+                <% } else if (role == "trainer") { %>
+                    <div><a href="/" class="nav_button">Home</a></div>
+                    <div><a href="/logout" class="nav_button">Log out</a></div>
+                <% } %>
             
-            <% } else if (role == "trainer") { %>
-                <div><a href="/" class="nav_button">Home</a></div>
-                <div><a href="/logout" class="nav_button">Log out</a></div>
-            
-            <% } else {%>
-
-          
+            <% } else { %>
                 <div><a href="/signup" class="nav_button">Sign up</a></div>
                 <div><a href="/login" class="nav_button">Log in</a></div>
             <% } %>
