@@ -23,6 +23,14 @@ const client_info = function(request, response) {
         FROM workout
         WHERE user_id = ?`
 
+        var sql_client_upcoming_workouts =
+        `SELECT session_time, name, user_info.firstname, user_info.lastname, level
+        FROM WORKOUT_SESSION
+        JOIN WORKOUT ON workout_session.WORKOUT_ID = WORKOUT.ID
+        JOIN USER_INFO ON WORKOUT.CREATOR_ID = USER_INFO.USER_ID
+        WHERE WORKOUT.USER_ID = ?
+        AND SESSION_TIME >= SYSDATE();`
+
         dbconnection.query(sql_user_info, [request.params.id], function(error, results){
             if(error) throw error;
             var user_info = results;
@@ -32,8 +40,11 @@ const client_info = function(request, response) {
                 dbconnection.query(sql_client_workouts, [request.params.id],function(error, results){
                     if(error) throw error;
                     var client_workouts = results;
-                    response.render(path.join(__dirname, "../views/trainerViews/clientInfo"), 
-                    {info: user_info, trainer_workouts: trainer_workouts, client_workouts: client_workouts, client_id: request.params.id, role: request.session.role })
+                    dbconnection.query(sql_client_upcoming_workouts, [request.params.id],function(error, results){
+                        var upcoming_workouts = results;
+                        response.render(path.join(__dirname, "../views/trainerViews/clientInfo"), 
+                        {info: user_info, trainer_workouts: trainer_workouts, client_workouts: client_workouts, client_id: request.params.id, role: request.session.role, upcoming: upcoming_workouts })
+                    })
                 })
             })
         });

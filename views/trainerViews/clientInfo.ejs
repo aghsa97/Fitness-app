@@ -51,7 +51,15 @@
                     <p><strong>Planned Workouts</strong></p>
                 </div>
                 <ul>
-                    
+                    <% if (locals.upcoming) { %>
+                        <%= console.log(locals.upcoming) %>
+                        <% upcoming.forEach(function(str){ %>
+                            <li>
+                                <%=JSON.parse(JSON.stringify(str)).session_time%>
+                                <%=JSON.parse(JSON.stringify(str)).name%>
+                            </li>
+                        <% }) %>
+                    <% } %>
                 </ul>
             </div>
         </section>
