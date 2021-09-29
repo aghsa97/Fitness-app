@@ -1,0 +1,118 @@
+
+
+.workout-form {
+  width: 90%;
+  padding: 10px;
+  position: relative;
+  height: 550px;
+  background: #00000075;
+  text-transform: uppercase;
+  border-radius: 10px;
+  border: 1px solid#e5ff00;
+  overflow-y:scroll;
+  display: flex;
+  flex-wrap: wrap;
+  color: white;
+}
+
+.workout-form input[type="text"] {
+    width: 45%;
+    position:absolute;
+    top: 25px;
+    left: 300px;
+    background: none;
+    text-align: center;
+    border: 2px solid#e5ff00;
+    padding: 14px 10px;
+    outline: none;
+    color: white;
+    border-radius: 30px;
+    transition: 0.25s;
+}
+
+.workout-form label {
+  position: absolute;
+  left: 20px;
+  top: 130px;
+}
+
+.workout-form select {
+  position: absolute;
+  left: 70px;
+  top: 132px;
+}
+
+.workout-form input[type="submit"] {
+  position: absolute;
+  left: 150px;
+}
+
+.workout-form a {
+  position: absolute;
+  right: 215px;
+  top: 150px;
+}
+
+.workout-form p {
+  position: relative;
+}
+
+.input-form {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.9);
+  width: 20%;
+  height: 20%;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.input-form input[type="range"] {
+  position: absolute;
+  top: 40%;
+}
+
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 20%;
+    text-align: center;
+    line-height: 20px;
+    max-height: 180px;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.45);
+    margin: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+
+  .description {
+    display: none;
+  }
+  
+  .card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5);
+  }
+
+  
+  .container {
+    padding: 5px;
+    margin: 5px;
+    font-weight: bold;
+    color: white;
+    position: relative;
+  }
+
+
+  img {
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 10px;
+    width: 30%;
+    border-radius: 5px;
+  }
+
+

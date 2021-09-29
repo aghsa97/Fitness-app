@@ -10,7 +10,7 @@ const create_workout = function(request, response){
         FROM exercise`;
 
         dbconnection.query(sql_get_exercises, function(error, results){
-            response.render(path.join(__dirname, "../views/trainerViews/createWorkout"), {exercise:results})
+            response.render(path.join(__dirname, "../views/trainerViews/createWorkout"), {exercise:results, role: request.session.role })
         })
 
     } else {

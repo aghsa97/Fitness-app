@@ -1,145 +1,177 @@
 <!DOCTYPE html>
 <html>
+    <%- include('../partials/head.ejs') %>
 <body>
-    <div class="create-workout">
-    <h2>Create workout</h2>
-        <form id ="workout-form" action="createworkout" action method="POST">
-            <div id = "exercise-container">
+    <%- include('../partials/nav.ejs') %>
+    <div style="width: 100%;">
+        <div id="left" style="float: left; width: 50%; text-align: center;">
+            <div class="workout-form" style="height: 200px; margin: 20px; overflow: auto;">
+                <h2>Create Workout</h2>
+                <form id ="workout-form" action="createworkout" action method="POST">
+                    <div id="workout-container">
 
-                <label>Workout name</label><br>
-                <input type="text" name="workoutname" placeholder="Workout name" required/><br>
-
-                <label>Level</label><br>
-                <select name="level">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                </select>
-                <h3>Exercise 1:</h3>
-                <p> 
-                    <label>Exercise</label><br>
-                        <select name="exercise[1][exercise]" required>
-                            <% if (locals.exercise) { %>
-                                <% exercise.forEach(function(str){ %>
-                                    <option value = <%=JSON.parse(JSON.stringify(str)).id%>><%=JSON.parse(JSON.stringify(str)).name%></option> 
-                                <% }) %>
-                            <% } %>
-                        </select>
-                </p>
-                <p>
-                    <label>Weight</label><br>
-                    <input name="exercise[1][weight]" required>
-                </p>
-                
-                <p>
-                    <label>Reps</label><br>
-                    <input name="exercise[1][reps]" required>
-                </p>
-
-                <p>
-                    <label>Order</label><br>
-                        <select id="original_order" name="exercise[1][order]" class="order">
+                        <input type="text" name="workoutname" placeholder="Workout name" required/><br>
+        
+                        <label>Level</label><br>
+                        <select name="level">
                             <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
                         </select>
-                </p>
-                </div>
-            </div>    
-            <a href="javascript:;" id="add-new-exercise">Add new exercise</a>
-            <a href="javascript:;" id="delete" style="display:none">Delete exercise</a>
-            <p>
-                <input type = "submit" value="submit" onclick="return confirm('Are you sure you want to create the workout?')">
-            </p>
-        </form>
+                        <br>     
+                        <p>
+                        <input type = "submit" value="submit" onclick="return confirm('Are you sure you want to create the workout?')">
+                        </p>
+                        <a href="/home" class="btn btn-primary">Back</a>
+                    </div>    
+                </form>
+            </div>
+            <div class="workout-form" ondrop="drop(event)" ondragover="allowDrop(event)" style="height: 353px; margin-left: 20px; overflow: auto;">
 
-        <a href="/home" class="btn btn-primary">Back</a>
+            </div>
+        </div>
+        <div id="right" style="float: left; width: 50%; text-align: center;">
+            <h2>Exercises</h2>
+            <div class="workout-form">
+                <% if (locals.exercise) { %>
+                    <% exercise.forEach(function(str) { %>
+                        <% let category=JSON.parse(JSON.stringify(str)).target_muscle %>
+                        <% let name=JSON.parse(JSON.stringify(str)).name %>
+                        <% let instr=JSON.parse(JSON.stringify(str)).description %>
+                        <% let level=JSON.parse(JSON.stringify(str)).level %>
+                        <% let id = JSON.parse(JSON.stringify(str)).id %>
+                                        <div id="<%=id%>" class="card" draggable="true" ondragstart="drag(event)">
+                                            <div class="container">
+                                                <h3>
+                                                    <%= category %>
+                                                </h3>
+                                                <% if (category==="Stretch" ) { %>
+                                                    <img src="/stretch.png">
+            
+                                                <% } else if (category==="Cardio" ) { %>
+                                                    <img src="/cardio.png">
+            
+                                                <% } else { %>
+                                                    <img src="/dumbell.png">
+                                                <% } %>
+                                                    <br>
+                                                    <%= name %>
+            
+            
+                                            </div>
+                                        </div>
+                                        <% }) %>
+                                            <% } %>
+            </div>
+        </div>
+
+        <div class="input-form" id="specifics" style="display: none;">
+            <input type="hidden" id="ex-id">
+            <input type="range" id="ex-sets" placeholder="Enter amount of sets" min="1" max="30" name="sets" required>
+        
+            <br>
+            <input type="range" id="ex-reps" placeholder="Enter amount of reps" min="1" max="30" required>
+            <br>
+            <input type="range" id="ex-weight" placeholder="Enter weight" min="1" max="100" required>
+            <br>
+        
+            <button type="submit" class="btn" onclick="closeForm()">Accept</button>
+        </div>
+        
     
-    <script>
+    </div>
+        <script>
 
-    
-        var i = 2;
-        document.getElementById('add-new-exercise').onclick = function() {
-            var new_exercise = `
-            <h3>Exercise ${i}:</h3>
-                <p> 
-                    <label>Exercise</label><br>
-                        <select name="exercise[${i}][exercise]" required>
-                            <% if (locals.exercise) { %>
-                                <% exercise.forEach(function(str){ %>
-                                    <option value = <%=JSON.parse(JSON.stringify(str)).id%>><%=JSON.parse(JSON.stringify(str)).name%></option>  
-                                <% }) %>
-                            <% } %>
-                        </select>
-                </p>
-                <p>
-                    <label>Weight</label><br>
-                    <input name="exercise[${i}][weight]"required>
-                </p>
-                
-                <p>
-                    <label>Reps</label><br>
-                    <input name="exercise[${i}][reps]"required>
-                </p>
-                
-                <p>
-                    <label>Order</label><br>
-                        <select id="order${i}" name="exercise[${i}][order]" class="order">
-                            <option value="1">1</option>
-                        </select>
-                </p>`;
-                
-            var container = document.getElementById('exercise-container');
-            var div = document.createElement('div');
-            div.innerHTML = new_exercise;
-            container.appendChild(div);
-            var delete_button = document.getElementById('delete');
+            let exerciselist = [];
 
-            var select = document.getElementsByClassName("order");
-
-            var og_select = document.getElementById('original_order');
-            var option = document.createElement("option");
-                option.text = i;
-                option.value = i;
-                og_select.appendChild(option)
-                
-
-            var new_select = document.getElementsByClassName('order');
-            for(var x = 0; x < new_select.length; x++){
-                new_select[x].innerHTML = new_select.innerHTML+og_select.innerHTML;
-                new_select[x].selectedIndex = x;
+            function allowDrop(ev) {
+                ev.preventDefault();
             }
 
-            i++;
-            if(i > 2){
-                delete_button.style.display = "block";
-            } 
-        }
+            function drag(ev) {
+                ev.dataTransfer.setData("text", ev.target.id);
+            }
 
-        document.getElementById('delete').onclick = function() {
+            function drop(ev) {
+                ev.preventDefault();
+                var data = ev.dataTransfer.getData('Text');
+                ev.target.appendChild(document.getElementById(data).cloneNode(true));
+                openForm(data);
+            }
 
-           var div_delete = document.getElementById('exercise-container');
-           div_delete.removeChild(div_delete.lastChild);
-           var delete_button = document.getElementById('delete');
+            function openForm(id) {
+                let element = document.getElementById("specifics");
+                element.style.display = 'block';
+                document.getElementById('ex-id').value = id;
+            }
 
-           var og_select = document.getElementById('original_order');
-           og_select.removeChild(og_select.lastChild)
-           var new_select = document.getElementsByClassName('order');
-                for(var x = 0; x < new_select.length; x++){
-                    new_select[x].innerHTML = new_select.innerHTML+og_select.innerHTML;
-                    new_select[x].selectedIndex = x;
+            function closeForm() {
+                document.getElementById('specifics').style.display = "none";
+                
+                let exercise = {
+                    id: document.getElementById('ex-id').value,
+                    sets: document.getElementById('ex-sets').value,
+                    reps: document.getElementById('ex-reps').value,
+                    weight: document.getElementById('ex-weight').value
                 }
-           i--;
+                 exerciselist.push(exercise);
+                 console.log(exerciselist);
+                
+            }
 
-           if (i <= 2){
-            delete_button.style.display = "none";
-           } 
-        }
-    </script>
+            
+
+            function chooseExercise(id){
+                
+                let element = document.getElementById(id);
+                let container = element.firstElementChild;
+                
+                if(exerciselist.includes(id)){
+                    element.style.border = "none";
+                    exerciselist.splice(exerciselist.indexOf(id), 1);
+                    container.removeChild(container.lastChild);
+                }
+                else {
+                    element.style.border = "1px solid #e5ff00";
+                    exerciselist.push(id);
+
+                    let newdiv = document.createElement('div');
+                        newdiv.className = 'input-div';
+                    let set_input = document.createElement('input');
+                        set_input.type = 'range';
+                        set_input.min = '1';
+                        set_input.max = '10';
+                        set_input.defaultValue = '3';
+                    let reps_input = document.createElement('input');
+                        reps_input.type = 'range';
+                        reps_input.min = '1';
+                        reps_input.max = '30';
+                        reps_input.defaultValue = '12';
+                    let weight_input = document.createElement('input');
+                        weight_input.type = 'range';
+                        weight_input.min = '1';
+                        weight_input.max = '225';
+                    newdiv.appendChild(set_input);
+                    newdiv.appendChild(reps_input);
+                    newdiv.appendChild(weight_input);
+                    container.appendChild(newdiv);
+                }    
+
+            }
+        
+        
+    
+        </script>
+    
+
+
+<%- include('../partials/footer.ejs') %>
 </body>
 </html>
