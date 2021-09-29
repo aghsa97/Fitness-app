@@ -52,7 +52,25 @@
     margin: 10px;
     text-align: left;
     list-style-type: none;
-
+}
+.info-list {
+    height: 100%;
+    flex: 1;
+    border-style: double;
+    border-width: thin;
+    border-color: lightslategray;
+    display: flex;
+    flex-direction: column;
+}
+.info-list li {
+    list-style-type: none;
+    width: 90%;
+    border-style: solid;
+    border-width: thin;
+    border-color: white;
+    margin: 10px;
+    text-align: left;
+    list-style-type: none;
 }
 .separator {
     flex: 0 0 2%;
