@@ -4,7 +4,7 @@
 <body>
     <div class="wrapper">
         <%- include('../partials/nav.ejs') %>
-        <section class="trainer-home-container">
+        <div class="trainer-home-container">
             <div class="client-list">
                 <div class="list-header">
                     <p><strong>Client list</strong></p>
@@ -22,15 +22,28 @@
                 </ul>
             </div>
             <div class="separator"></div>
-            <div class="info-list">
+            <div class="approve-list">
                 <div class="list-header">
                     <p><strong>Pending approval</strong></p>
                 </div>
                 <ul>
-                    
+                    <% if (locals.pending) { %>
+                        <% pending.forEach(function(str) { %>
+                            <li>
+                                <div class="approve-entry">
+                                    <div class="text-box">
+                                        <div class="name-field">Name: <%= JSON.parse(JSON.stringify(str)).firstname %> <%= JSON.parse(JSON.stringify(str)).lastname %> </div>
+                                        <div class="mail-field">Email: <%= JSON.parse(JSON.stringify(str)).email %></div>                            
+                                    </div>
+                                    <div class="approve-btn"><a>Approve</a></div>
+                                    <div class="delete-btn"><a>Delete</a></div>
+                                </div>
+                            </li>
+                        <% }) %>
+                    <% } %>
                 </ul>
             </div>
-        </section>
+        </div>
         <%- include('../partials/footer.ejs') %>
     </div>
 </body>

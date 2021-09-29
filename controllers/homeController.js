@@ -36,11 +36,20 @@ const user_home = function(request, response) {
 		join user as u on u.id = uf.user_id
 		where w.creator_id = '?';`;
 
+		var sql_pending_list =
+		`SELECT u.id, i.firstname, i.lastname, u.email
+		FROM user as u
+		JOIN user_info as i on u.id = i.user_id
+		WHERE u.verified = 0`
+
 		dbconnection.query(sql_client_list, function(error, client_results){
 			if(error) throw error;
 			dbconnection.query(sql_workout_list, [request.session.dbId], function(error, workouts_results){
 				if(error) throw error;
-				response.render(path.join(__dirname, "../views/trainerViews/trainerHome"), {firstName: firstName, clients:client_results, workouts:workouts_results, role: request.session.role})
+				dbconnection.query(sql_pending_list, function(error, pending_results) {
+					if(error) throw error;
+					response.render(path.join(__dirname, "../views/trainerViews/trainerHome"), {firstName: firstName, clients:client_results, workouts:workouts_results, role: request.session.role, pending: pending_results})
+				})
 			})
 		});
 		

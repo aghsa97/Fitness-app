@@ -2,7 +2,9 @@
 <html>
     <%- include('../partials/head.ejs') %>
 <body>
+    <div class="wrapper">
     <%- include('../partials/nav.ejs') %>
+    <div class="content">
     <div style="width: 100%;">
         <div id="left" style="float: left; width: 50%; text-align: center;">
             <div class="workout-form" style="height: 200px; margin: 20px; overflow: auto;">
@@ -171,7 +173,8 @@
         </script>
     
 
-
-<%- include('../partials/footer.ejs') %>
+        </div>
+        <%- include('../partials/footer.ejs') %>
+    </div>
 </body>
 </html>
