@@ -52,7 +52,6 @@
                 </div>
                 <ul>
                     <% if (locals.upcoming) { %>
-                        <%= console.log(locals.upcoming) %>
                         <% upcoming.forEach(function(str){ %>
                             <li>
                                 <%=JSON.parse(JSON.stringify(str)).session_time%>
