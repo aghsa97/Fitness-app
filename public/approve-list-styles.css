@@ -1,0 +1,42 @@
+.approve-entry {
+    display: flex;
+    flex-direction: row;
+    margin: none;
+    padding: 0%;
+    height: 50px;
+    background-color: lightgray;
+    color: black;
+    font-weight: bold;
+}
+
+.text-box {
+    flex: 1;
+    display: flex;
+    float: left;
+    flex-direction: column;
+    padding-left: 10px;
+}
+
+.name-field {
+    flex: 50%;
+}
+
+.mail-field {
+    flex: 1;
+}
+
+.approve-btn {
+    width: 70px;
+    height: 50px;
+    background-color:forestgreen;
+    float: right;
+    text-align: center;
+}
+
+.delete-btn {
+    width: 70px;
+    height: 50px;
+    background-color:firebrick;
+    float: right;
+    text-align: center;
+}
