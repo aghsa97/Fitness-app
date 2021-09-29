@@ -27,21 +27,25 @@
 
 .approve-btn {
     width: 70px;
-    height: 50px;
+    height: 30px;
     background-color:forestgreen;
     float: right;
     text-align: center;
     border-radius: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .delete-btn {
     width: 70px;
-    height: 50px;
+    height: 30px;
     background-color:firebrick;
     float: right;
     text-align: center;
     border-radius: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
-.approve-entry p {
-    padding-top: none;
+.approve-entry a {
+    padding-top: 10px;
 }
