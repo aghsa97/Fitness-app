@@ -1,40 +1,37 @@
 <!DOCTYPE html>
 <html>
-
     <%- include('../partials/head.ejs') %>
-
 <body>
-    <%- include('../partials/nav.ejs') %>
-
-<h1> <%=firstName%> you are a trainer, rejoice</h1>
-
-<div>
-    <p class = friend-list>Client list</p>
-    <ul class = "friend-list">
-        
-        <% if (locals.clients) { %>
-            <% clients.forEach(function(str){ %>
-               <li onclick="location.href = '/client/<%=JSON.parse(JSON.stringify(str)).id%>'">
-                   <%=JSON.parse(JSON.stringify(str)).firstname%> <%=JSON.parse(JSON.stringify(str)).lastname %> <%= JSON.parse(JSON.stringify(str)).email%></li>
-            <% }) %>
-        <% } %>
-    </ul>
-</div>
-
-<div>
-    <p>My workouts </p>
-    <ul>
-        <% if (locals.workouts) { %>
-            <% workouts.forEach(function(str){ %>
-               <li><%=JSON.parse(JSON.stringify(str)).name%></li>
-            <% }) %>
-        <% } %>
-    </ul>
-    <a href="/createworkout" class="btn btn-primary">Create workout</a>
-</div>
-
-
-
-<%- include('../partials/footer.ejs') %>
+    <div class="wrapper">
+        <%- include('../partials/nav.ejs') %>
+        <section class="trainer-home-container">
+            <div class="client-list">
+                <div class="list-header">
+                    <p><strong>Client list</strong></p>
+                </div>
+                <ul>
+                    <% if (locals.clients) { %>
+                        <% clients.forEach(function(str){ %>
+                        <li onclick="location.href = '/client/<%=JSON.parse(JSON.stringify(str)).id%>'">
+                            <strong>
+                                <%=JSON.parse(JSON.stringify(str)).firstname%> <%=JSON.parse(JSON.stringify(str)).lastname %> <%= JSON.parse(JSON.stringify(str)).email%>
+                            </strong>
+                        </li>
+                        <% }) %>
+                    <% } %>
+                </ul>
+            </div>
+            <div class="separator"></div>
+            <div class="info-list">
+                <div class="list-header">
+                    <p><strong>Pending approval</strong></p>
+                </div>
+                <ul>
+                    
+                </ul>
+            </div>
+        </section>
+        <%- include('../partials/footer.ejs') %>
+    </div>
 </body>
 </html>

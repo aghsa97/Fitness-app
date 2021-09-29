@@ -4,6 +4,10 @@ const homeController = require('../controllers/homeController');
 const signUpController = require('../controllers/signUpController');
 const trainerClientController = require('../controllers/trainerClientController');
 const createWorkoutController = require('../controllers/createWorkoutController');
+const createExerciseController = require('../controllers/createExerciseController');
+const clientFriendsController = require('../controllers/clientFriendsController')
+const clientCalendarController = require('../controllers/calendarController')
+
 
 const router = express.Router();
 
@@ -17,12 +21,22 @@ router.post('/signup', signUpController.registerUser);
 
 router.get('/home', homeController.user_home);
 
+router.get('/friends', clientFriendsController.user_friends);
+
+router.get('/calendar', clientCalendarController.get_workout)
+
 router.get('/logout', loginController.user_logout);
 
 router.get('/client/:id', trainerClientController.client_info);
 
+router.post('/client/:id', trainerClientController.assign_workout);
+
 router.get('/createworkout', createWorkoutController.create_workout); 
 
 router.post('/createworkout', createWorkoutController.save_workout); 
+
+router.get('/createexercise', createExerciseController.create_exercise); 
+
+router.post('/createexercise', createExerciseController.save_exercise); 
  
 module.exports = router;
