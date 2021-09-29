@@ -4,7 +4,7 @@ var path = require('path');
 const create_exercise = function(request, response){
 
     if(request.session.role === "trainer"){
-        response.render(path.join(__dirname, "../views/trainerViews/createExercise"))
+        response.render(path.join(__dirname, "../views/trainerViews/createExercise"), {role: request.session.role})
     } else{
 
         response.redirect('/');
@@ -24,11 +24,11 @@ const save_exercise = function(request, response){
             if(error) {
                 if(error.errno === 1062){
                     message = "This exercise already exists!";
-                    response.render(path.join(__dirname, "../views/trainerViews/createExercise"), {message: message});   
+                    response.render(path.join(__dirname, "../views/trainerViews/createExercise"), {message: message, role: request.session.role});   
                 }
             } else {
                 message = "Your exercise has been created succesfully.";
-                response.render(path.join(__dirname, "../views/trainerViews/createExercise"), {message: message});   
+                response.render(path.join(__dirname, "../views/trainerViews/createExercise"), {message: message, role: request.session.role});   
             }
         })
     }
