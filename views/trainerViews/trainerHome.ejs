@@ -35,8 +35,11 @@
                                         <div class="name-field">Name: <%= JSON.parse(JSON.stringify(str)).firstname %> <%= JSON.parse(JSON.stringify(str)).lastname %> </div>
                                         <div class="mail-field">Email: <%= JSON.parse(JSON.stringify(str)).email %></div>                            
                                     </div>
-                                    <div class="approve-btn"><a>Approve</a></div>
-                                    <div class="delete-btn"><a>Delete</a></div>
+                                    <form action = "home" action method= "post">    
+                                        <input type="hidden" name="user_id" value = <%=JSON.parse(JSON.stringify(str)).id%>>
+                                        <input type="submit" name="action" value = "Verify">  
+                                        <input type="submit" name="action" value = "Delete">   
+                                    </form>
                                 </div>
                             </li>
                         <% }) %>

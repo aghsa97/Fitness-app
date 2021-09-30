@@ -41,5 +41,7 @@ router.post('/createworkout', createWorkoutController.save_workout);
 router.get('/createexercise', createExerciseController.create_exercise); 
 
 router.post('/createexercise', createExerciseController.save_exercise); 
+
+router.post('/home', approveController.verify_or_delete_user);
  
 module.exports = router;
