@@ -19,7 +19,7 @@ const user_friends = function(request, response) {
 
 		dbconnection.query(sql_friends, [db_id, db_id ], function(error, results){
 			if(error) throw error;
-			response.render(path.join(__dirname, "../views/clientViews/clientFriends"), {firstName: firstName, friends: results, role: request.session.role})
+			response.render(path.join(__dirname, "../views/clientViews/clientHome"), {firstName: firstName, friends: results, role: request.session.role})
 		});
     }
 }

@@ -9,7 +9,7 @@ const get_workout = function (request, response) {
 
         dbconnection.query(sql_workout_list, [request.session.dbId], function(error, workouts_results){
             if(error) throw error;
-            response.render(path.join(__dirname, "../views/clientViews/clientCalendar"), {workouts:workouts_results, role: request.session.role})
+            response.render(path.join(__dirname, "../views/clientViews/clientHome"), {workouts:workouts_results, role: request.session.role})
         })
 }
 
