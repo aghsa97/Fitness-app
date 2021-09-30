@@ -30,17 +30,17 @@
                   </div>
                   <div class="days"></div>
                 </div>
-                <!--p class="work-out">My workouts </p>
+                <p class="work-out">My workouts </p>
           <ul class="list-work" id="sessions-list">
-              <% if (locals.workouts) { %>
-                  <% workouts.forEach(function(str){ %>
-                     <li><span id="dateMonth"><%=JSON.parse(JSON.stringify(str)).when.slice(5, 10)%></span></li>
+              <% if (locals.workout_list) { %>
+                  <% workout_list.forEach(function(str){ %>
+                     <li><span id="dateMonth"><%=JSON.parse(JSON.stringify(str)).session_time.slice(5, 10)%></span></li>
                      <li><span id="dateTime"><%=" AT: " +
-                      JSON.parse(JSON.stringify(str)).when.slice(11, 13)+ ":" + JSON.parse(JSON.stringify(str)).when.slice(14, 16)%></span></li>
+                      JSON.parse(JSON.stringify(str)).session_time.slice(11, 13)+ ":" + JSON.parse(JSON.stringify(str)).session_time.slice(14, 16)%></span></li>
                       <br>
                   <% }) %>
               <% } %>
-          </ul-->
+          </ul>
             </div>
         </div>
         <div class="separator"></div>
@@ -61,7 +61,7 @@
         <script>
           const date = new Date();
           
-          //const workout_sessions = document.getElementById("sessions-list").getElementsByTagName("SPAN");
+          const workout_sessions = document.getElementById("sessions-list").getElementsByTagName("SPAN");
           
           const renderCalendar = () => {
             date.setDate(1);
@@ -107,7 +107,6 @@
             }
             for (let i = 1 ; i<= lastDay; i++) {
               
-              
               /*for (let z = 0; z < workout_sessions.length; z++){
                 if (date.getMonth() === new Date().getMonth()){
                   if ( i === parseInt(workout_sessions[z].innerHTML.slice(3))){
@@ -122,13 +121,23 @@
                   days += `<div class="today">${i}</div>`;
                 }
               else  {
-                days += `<div>${i}</div>`;
+                for (var z = 0; z < workout_sessions.length; z++){
+                    if (date.getMonth() === new Date().getMonth()){
+                      if ( i === parseInt(workout_sessions[z].innerHTML.slice(3))){
+                        days += `<div class="workout-session">${i}</div>`
+                        i++;
+                        break;
+                      }
+                    }
+                  }
+                if ( days !== `<div class="workout-session">${i}</div>`){
+                  days += `<div>${i}</div>`; 
+                }
               }
             }
             for (let j = 1; j <= nextDays; j++) {
               days += `<div class="next-date">${j}</div>`;
               monthDays.innerHTML = days;
-              
             }
           };
           document.querySelector(".prev").addEventListener("click", () => {
