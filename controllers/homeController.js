@@ -27,7 +27,8 @@ const user_home = function(request, response) {
 		var sql_client_list = 
 		`select * from user
 		join user_info on user.id = user_info.id
-		where user_info.role = 'client'`;
+		where user_info.role = 'client'
+		and user.verified = 1`;
 
 		var sql_workout_list = 
 		`select w.id, w.name, uf.firstname, uf.lastname, u.email
@@ -40,7 +41,8 @@ const user_home = function(request, response) {
 		`SELECT u.id, i.firstname, i.lastname, u.email
 		FROM user as u
 		JOIN user_info as i on u.id = i.user_id
-		WHERE u.verified = 0`
+		WHERE u.verified = 0
+		AND i.role = 'client'`
 
 		dbconnection.query(sql_client_list, function(error, client_results){
 			if(error) throw error;

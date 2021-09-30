@@ -3,49 +3,44 @@ var path = require('path');
 const session = require('express-session');
 
 const verify_or_delete_user = (request, response) => {
-    var user_id = request.id;
-    var action = request.action;
+
+    var user_id = request.body.user_id;
+    var action = request.body.action;
+
 	var sql_update = 
 	`UPDATE user
     SET verified = 1
 	WHERE id = ?`
-    var sql_select =
-    `SELECT verified
-    FROM user
-    WHERE id = ?`
+
     var sql_delete =
     `DELETE
     FROM user
     WHERE id = ?`
 
-    if(action === "verify") {
-        if (id) {
-            dbconnection.query(sql_update, [user_id], function(error, results, fields) {});
+    var sql_delete_user_info =
+    `DELETE
+    FROM user_info
+    WHERE user_id = ?`
 
-            dbconnection.query(sql_select, [user_id], function(error, results, fields) {
-
-                if (results.id != 1) {
-                    alert("Failed to verify user");
-                }			
-                
+    if(action === "Verify") {
+            dbconnection.query(sql_update, [user_id], function(error, results, fields) {
+                if(error) throw error;
+                response.redirect('/home');
             });
-        } else {
-            //Shouldn't end up here, since id should always be included
+
+    } else if (action === "Delete") {
+            dbconnection.query(sql_delete_user_info, [user_id], function(error, results, fields) {
+                if(error) throw error;
+                dbconnection.query(sql_delete, [user_id], function(){
+                    if(error) throw error;
+                    response.redirect('/home'); 
+                })
+            });
             
-        }
-    } else if (action === "delete") {
-        if(id) {
-            dbconnection.query(sql_delete, [user_id], function(error, results, fields) {});
-    
-            dbconnection.query(sql_select, [user_id], function(error, results, fields) {
-                if(results.id) {
-                    alert("Failed to delete user");
-                }
-            })
-        }
     } else {
         alert("Invalid action type");
     }
+
 };
 
 
