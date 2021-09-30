@@ -35,13 +35,16 @@
                     </div>    
                 </form>
             </div>
-            <div class="workout-form" ondrop="drop(event)" ondragover="allowDrop(event)" style="height: 353px; margin-left: 20px; overflow: auto;">
+            <div class="workout-form" style="height: 353px; margin-left: 20px; overflow: auto;">
+                <ul id="workout-list">
 
+                </ul>
             </div>
         </div>
         <div id="right" style="float: left; width: 50%; text-align: center;">
             <h2>Exercises</h2>
             <div class="workout-form">
+                <ul>
                 <% if (locals.exercise) { %>
                     <% exercise.forEach(function(str) { %>
                         <% let category=JSON.parse(JSON.stringify(str)).target_muscle %>
@@ -49,42 +52,14 @@
                         <% let instr=JSON.parse(JSON.stringify(str)).description %>
                         <% let level=JSON.parse(JSON.stringify(str)).level %>
                         <% let id = JSON.parse(JSON.stringify(str)).id %>
-                                        <div id="<%=id%>" class="card" draggable="true" ondragstart="drag(event)">
-                                            <div class="container">
-                                                <h3>
-                                                    <%= category %>
-                                                </h3>
-                                                <% if (category==="Stretch" ) { %>
-                                                    <img src="/stretch.png">
-            
-                                                <% } else if (category==="Cardio" ) { %>
-                                                    <img src="/cardio.png">
-            
-                                                <% } else { %>
-                                                    <img src="/dumbell.png">
-                                                <% } %>
-                                                    <br>
-                                                    <%= name %>
-            
-            
-                                            </div>
-                                        </div>
-                                        <% }) %>
-                                            <% } %>
+                            <li id="<%=id%>" onclick="add2Workout(this.id)">
+                                <%= name %> <%= category %>
+                            </li>
+                            
+                    <% }) %>
+                <% } %>
+                </ul>                            
             </div>
-        </div>
-
-        <div class="input-form" id="specifics" style="display: none;">
-            <input type="hidden" id="ex-id">
-            <input type="range" id="ex-sets" placeholder="Enter amount of sets" min="1" max="30" name="sets" required>
-        
-            <br>
-            <input type="range" id="ex-reps" placeholder="Enter amount of reps" min="1" max="30" required>
-            <br>
-            <input type="range" id="ex-weight" placeholder="Enter weight" min="1" max="100" required>
-            <br>
-        
-            <button type="submit" class="btn" onclick="closeForm()">Accept</button>
         </div>
         
     
@@ -92,6 +67,19 @@
         <script>
 
             let exerciselist = [];
+
+            function add2Workout(id) {
+                let new_ex = document.getElementById(id).cloneNode(true);
+                new_ex.onclick = removefromWorkout(new_ex);
+                let list = document.getElementById('workout-list');
+                list.appendChild(new_ex);
+            }
+
+            function removefromWorkout(id) {
+
+            }
+
+
 
             function allowDrop(ev) {
                 ev.preventDefault();
@@ -104,7 +92,9 @@
             function drop(ev) {
                 ev.preventDefault();
                 var data = ev.dataTransfer.getData('Text');
+                //let newlist = document.createElement('ol');
                 ev.target.appendChild(document.getElementById(data).cloneNode(true));
+                
                 openForm(data);
             }
 
@@ -124,49 +114,10 @@
                     weight: document.getElementById('ex-weight').value
                 }
                  exerciselist.push(exercise);
-                 console.log(exerciselist);
-                
+                 console.log(exerciselist);   
             }
 
             
-
-            function chooseExercise(id){
-                
-                let element = document.getElementById(id);
-                let container = element.firstElementChild;
-                
-                if(exerciselist.includes(id)){
-                    element.style.border = "none";
-                    exerciselist.splice(exerciselist.indexOf(id), 1);
-                    container.removeChild(container.lastChild);
-                }
-                else {
-                    element.style.border = "1px solid #e5ff00";
-                    exerciselist.push(id);
-
-                    let newdiv = document.createElement('div');
-                        newdiv.className = 'input-div';
-                    let set_input = document.createElement('input');
-                        set_input.type = 'range';
-                        set_input.min = '1';
-                        set_input.max = '10';
-                        set_input.defaultValue = '3';
-                    let reps_input = document.createElement('input');
-                        reps_input.type = 'range';
-                        reps_input.min = '1';
-                        reps_input.max = '30';
-                        reps_input.defaultValue = '12';
-                    let weight_input = document.createElement('input');
-                        weight_input.type = 'range';
-                        weight_input.min = '1';
-                        weight_input.max = '225';
-                    newdiv.appendChild(set_input);
-                    newdiv.appendChild(reps_input);
-                    newdiv.appendChild(weight_input);
-                    container.appendChild(newdiv);
-                }    
-
-            }
         
         
     
