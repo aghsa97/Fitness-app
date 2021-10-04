@@ -57,7 +57,7 @@
                 <ul>
                     <% if (locals.upcoming) { %>
                         <% upcoming.forEach(function(str){ %>
-                            <li>
+                            <li onclick="location.href = '/workoutPage/<%=JSON.parse(JSON.stringify(str)).id%>'">
                                 <%=JSON.parse(JSON.stringify(str)).session_time%>
                                 <%=JSON.parse(JSON.stringify(str)).name%>
                             </li>

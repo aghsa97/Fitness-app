@@ -1,0 +1,30 @@
+<html>
+    <%- include('../partials/head.ejs'); %>
+    <body>
+        <div class="wrapper">
+            <%- include('../partials/nav.ejs'); %>
+            <div class="content">
+                <div class="info-list">
+                    <div class="list-header">
+                        <p><strong>Planned Workouts</strong></p>
+                    </div>
+                    <ul>
+                        <% if (locals.workout_info) { %>
+                            <% workout_info.forEach(function(str){ %>
+                                <li>
+                                    Name: <%=JSON.parse(JSON.stringify(str)).name%><br>
+                                    Description: <%=JSON.parse(JSON.stringify(str)).description%><br>
+                                    Load: <%=JSON.parse(JSON.stringify(str)).e_load%><br>
+                                    Reps: <%=JSON.parse(JSON.stringify(str)).e_reps%><br>
+                                    Order: <%=JSON.parse(JSON.stringify(str)).e_order%>
+                                </li>
+                            <% }) %>
+                        <% } %>
+                    </ul>
+                </div>
+            </div>
+            <%- include('../partials/footer.ejs') %>
+        </div>
+    </body>
+
+</html>
