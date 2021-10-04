@@ -11,9 +11,7 @@
                 <h2>Create Workout</h2>
                 <form id ="workout-form" action="createworkout" action method="POST">
                     <div id="workout-container">
-
                         <input type="text" name="workoutname" placeholder="Workout name" required/><br>
-        
                         <label>Level</label><br>
                         <select name="level">
                             <option value="1">1</option>
@@ -29,7 +27,7 @@
                         </select>
                         <br>     
                         <p>
-                        <input type = "submit" value="submit" onclick="return confirm('Are you sure you want to create the workout?')">
+                        <input id = "submit" type = "submit" value="submit" onclick="confirmAction(event);">
                         
                     </p>
                         <a href="/home" class="btn btn-primary">Back</a>
@@ -38,10 +36,9 @@
                 
             </div>
             <div class="workout-form" ondrop="drop(event)" ondragover="allowDrop(event)" style="height: 353px; margin-left: 20px; overflow: auto;">
-                <ul id="workout_exercises">
-                    
+                <ul id="workout_exercises">  
                 </ul>
-                <a onclick="createWorkout()">testa mig</a>
+              
             </div>
         </div>
         <div id="right" style="float: left; width: 50%; text-align: center;">
@@ -66,20 +63,15 @@
         <div class="input-form" id="specifics" style="display: none;">
             <input type="hidden" id="ex-id">
             <input type="range" id="ex-sets" placeholder="Enter amount of sets" min="1" max="30" name="sets" required>
-        
             <br>
             <input type="range" id="ex-reps" placeholder="Enter amount of reps" min="1" max="30" required>
             <br>
             <input type="range" id="ex-weight" placeholder="Enter weight" min="1" max="100" required>
             <br>
-        
             <button type="submit" class="btn" onclick="closeForm()">Accept</button>
         </div>
-        
-    
     </div>
   
-
         </div>
         <%- include('../partials/footer.ejs') %>
     </div>
@@ -125,13 +117,10 @@
                 reps: document.getElementById('ex-reps').value,
                 weight: document.getElementById('ex-weight').value
             }
-             exerciselist.push(exercise);
-             console.log(exerciselist);
-            
+             exerciselist.push(exercise);     
         }
 
-        
-
+    
         function chooseExercise(id){
             
             let element = document.getElementById(id);
@@ -186,7 +175,7 @@
                 }
             }
         }
-        //Banan
+
         var exercise_obj_id = 1;
 
         function add_excersice_to_workout(evt) {
@@ -222,14 +211,14 @@
             for(var i = 0;i < workout_exercises.length;i++) {
                 //var exercise_row_obj_id = workout_exercises[i].id.split("_")[1]
                 var exercise_id = workout_exercises[i].id.split("_")[2];
-                 var exercise_load = document.getElementById(workout_exercises[i].id + "_load").value;
+                var exercise_load = document.getElementById(workout_exercises[i].id + "_load").value;
                 var exercise_reps = document.getElementById(workout_exercises[i].id + "_reps").value;
                 
                 wo_ex[i] = new Array(3);
                 wo_ex[i] = [exercise_id, exercise_load, exercise_reps];
             }
-            console.log(wo_ex);
-            //add aray with values and shit
+            post_workout(wo_ex); // Calls the function which handles the post.
+          
 
         }
 
@@ -247,6 +236,55 @@
             return generated_html;
         }
 
+        //Adds hidden fields to the form, the form is then submitted to server when submitted. 
+        function post_workout(wo_ex){
+            var container = document.getElementById('workout-container');
+
+            for(let i = 0; i < wo_ex.length; i++){
+
+            var exercise_id = document.createElement("input");
+            var exercise_load = document.createElement("input");
+            var exercise_reps = document.createElement("input");
+            var exercise_order = document.createElement("input");
+
+            exercise_id.type = "hidden";
+            exercise_load.type = "hidden";
+            exercise_reps.type = "hidden";
+            exercise_order.type = "hidden";
+
+            exercise_id.setAttribute('name', `exercise[${i}][id]`)
+            exercise_load.setAttribute('name', `exercise[${i}][load]`)
+            exercise_reps.setAttribute('name', `exercise[${i}][reps]`)
+            exercise_order.setAttribute('name', `exercise[${i}][order]`)
+
+            exercise_id.value = wo_ex[i][0]
+            exercise_load.value = wo_ex[i][1]
+            exercise_reps.value = wo_ex[i][2]
+            exercise_order.value = i+1;
+
+            container.appendChild(exercise_id);
+            container.appendChild(exercise_load);
+            container.appendChild(exercise_reps);
+            container.appendChild(exercise_order);
+
+            }
+        }
+
+        //Alert box, workout gets posted to server when user accepts
+        function confirmAction(e)
+        {
+            var confirmation = confirm("Are you sure you want to create this workout?");
+        
+            if (!confirmation)
+            {
+                e.preventDefault() ;
+                returnToPreviousPage();
+            }
+
+            createWorkout();
+            return confirmation;
+        }
+       
     </script>
 </body>
 </html>
