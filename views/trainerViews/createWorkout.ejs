@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <%- include('../partials/head.ejs') %>
-<body>
+<body onload="setup_listeners()">
     <div class="wrapper">
     <%- include('../partials/nav.ejs') %>
     <div class="content">
@@ -30,102 +30,235 @@
                         <br>     
                         <p>
                         <input type = "submit" value="submit" onclick="return confirm('Are you sure you want to create the workout?')">
-                        </p>
+                        
+                    </p>
                         <a href="/home" class="btn btn-primary">Back</a>
                     </div>    
                 </form>
+                
             </div>
-            <div class="workout-form" style="height: 353px; margin-left: 20px; overflow: auto;">
-                <ul id="workout-list">
-
+            <div class="workout-form" ondrop="drop(event)" ondragover="allowDrop(event)" style="height: 353px; margin-left: 20px; overflow: auto;">
+                <ul id="workout_exercises">
+                    
                 </ul>
+                <a onclick="createWorkout()">testa mig</a>
             </div>
         </div>
         <div id="right" style="float: left; width: 50%; text-align: center;">
             <h2>Exercises</h2>
             <div class="workout-form">
-                <ul>
-                <% if (locals.exercise) { %>
-                    <% exercise.forEach(function(str) { %>
-                        <% let category=JSON.parse(JSON.stringify(str)).target_muscle %>
-                        <% let name=JSON.parse(JSON.stringify(str)).name %>
-                        <% let instr=JSON.parse(JSON.stringify(str)).description %>
-                        <% let level=JSON.parse(JSON.stringify(str)).level %>
-                        <% let id = JSON.parse(JSON.stringify(str)).id %>
-                            <li id="<%=id%>" onclick="add2Workout(this.id)">
-                                <%= name %> <%= category %>
-                            </li>
-                            
-                    <% }) %>
-                <% } %>
-                </ul>                            
+                <input type="text" id="filter_input" onkeyup="filter_list()" placeholder="Filter results"><br>
+                <ul id="the_list">
+                    <% if (locals.exercise) { %>
+                        <% exercise.forEach(function(str) { %>
+                            <% let category=JSON.parse(JSON.stringify(str)).target_muscle %>
+                            <% let name=JSON.parse(JSON.stringify(str)).name %>
+                            <% let instr=JSON.parse(JSON.stringify(str)).description %>
+                            <% let level=JSON.parse(JSON.stringify(str)).level %>
+                            <% let id = JSON.parse(JSON.stringify(str)).id %>
+                            <li id="list_exercixe_<%=id%>" style="border:1px solid white;width:80%"><a><%= name %>  <%= category %></a></li>
+                        <% }) %>
+                    <% } %>
+                </ul>
             </div>
+        </div>
+
+        <div class="input-form" id="specifics" style="display: none;">
+            <input type="hidden" id="ex-id">
+            <input type="range" id="ex-sets" placeholder="Enter amount of sets" min="1" max="30" name="sets" required>
+        
+            <br>
+            <input type="range" id="ex-reps" placeholder="Enter amount of reps" min="1" max="30" required>
+            <br>
+            <input type="range" id="ex-weight" placeholder="Enter weight" min="1" max="100" required>
+            <br>
+        
+            <button type="submit" class="btn" onclick="closeForm()">Accept</button>
         </div>
         
     
     </div>
-        <script>
-
-            let exerciselist = [];
-
-            function add2Workout(id) {
-                let new_ex = document.getElementById(id).cloneNode(true);
-                new_ex.onclick = removefromWorkout(new_ex);
-                let list = document.getElementById('workout-list');
-                list.appendChild(new_ex);
-            }
-
-            function removefromWorkout(id) {
-
-            }
-
-
-
-            function allowDrop(ev) {
-                ev.preventDefault();
-            }
-
-            function drag(ev) {
-                ev.dataTransfer.setData("text", ev.target.id);
-            }
-
-            function drop(ev) {
-                ev.preventDefault();
-                var data = ev.dataTransfer.getData('Text');
-                //let newlist = document.createElement('ol');
-                ev.target.appendChild(document.getElementById(data).cloneNode(true));
-                
-                openForm(data);
-            }
-
-            function openForm(id) {
-                let element = document.getElementById("specifics");
-                element.style.display = 'block';
-                document.getElementById('ex-id').value = id;
-            }
-
-            function closeForm() {
-                document.getElementById('specifics').style.display = "none";
-                
-                let exercise = {
-                    id: document.getElementById('ex-id').value,
-                    sets: document.getElementById('ex-sets').value,
-                    reps: document.getElementById('ex-reps').value,
-                    weight: document.getElementById('ex-weight').value
-                }
-                 exerciselist.push(exercise);
-                 console.log(exerciselist);   
-            }
-
-            
-        
-        
-    
-        </script>
-    
+  
 
         </div>
         <%- include('../partials/footer.ejs') %>
     </div>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $( function() {
+          $( "#workout_exercises" ).sortable();
+          $( "#workout_exercises" ).disableSelection();
+        } );
+        </script>
+    <script>
+
+        let exerciselist = [];
+
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function drag(ev) {
+            ev.dataTransfer.setData("text", ev.target.id);
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            var data = ev.dataTransfer.getData('Text');
+            ev.target.appendChild(document.getElementById(data).cloneNode(true));
+            openForm(data);
+        }
+
+        function openForm(id) {
+            let element = document.getElementById("specifics");
+            element.style.display = 'block';
+            document.getElementById('ex-id').value = id;
+        }
+
+        function closeForm() {
+            document.getElementById('specifics').style.display = "none";
+            
+            let exercise = {
+                id: document.getElementById('ex-id').value,
+                sets: document.getElementById('ex-sets').value,
+                reps: document.getElementById('ex-reps').value,
+                weight: document.getElementById('ex-weight').value
+            }
+             exerciselist.push(exercise);
+             console.log(exerciselist);
+            
+        }
+
+        
+
+        function chooseExercise(id){
+            
+            let element = document.getElementById(id);
+            let container = element.firstElementChild;
+            
+            if(exerciselist.includes(id)){
+                element.style.border = "none";
+                exerciselist.splice(exerciselist.indexOf(id), 1);
+                container.removeChild(container.lastChild);
+            }
+            else {
+                element.style.border = "1px solid #e5ff00";
+                exerciselist.push(id);
+
+                let newdiv = document.createElement('div');
+                    newdiv.className = 'input-div';
+                let set_input = document.createElement('input');
+                    set_input.type = 'range';
+                    set_input.min = '1';
+                    set_input.max = '10';
+                    set_input.defaultValue = '3';
+                let reps_input = document.createElement('input');
+                    reps_input.type = 'range';
+                    reps_input.min = '1';
+                    reps_input.max = '30';
+                    reps_input.defaultValue = '12';
+                let weight_input = document.createElement('input');
+                    weight_input.type = 'range';
+                    weight_input.min = '1';
+                    weight_input.max = '225';
+                newdiv.appendChild(set_input);
+                newdiv.appendChild(reps_input);
+                newdiv.appendChild(weight_input);
+                container.appendChild(newdiv);
+            }    
+
+        }
+    
+        function filter_list() {
+            
+            var filter_input = document.getElementById('filter_input').value;
+            var filter = filter_input.toUpperCase();
+            var the_list = document.getElementById('the_list');
+            var list_items = the_list.getElementsByTagName('li');
+            
+            for (i = 0; i < list_items.length; i++) {
+                a = list_items[i].getElementsByTagName("a")[0];
+                txtValue = a.textContent || a.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    list_items[i].style.display = "";
+                } else {
+                    list_items[i].style.display = "none";
+                }
+            }
+        }
+        
+        var exercise_obj_id = 1;
+
+        function add_excersice_to_workout(evt) {
+            var id = evt.currentTarget.id;
+            let new_exercise = document.getElementById(id).cloneNode(false)
+            let tmp_text = document.getElementById(id);
+            let exercise_name = tmp_text.textContent || tmp_text.innerText;
+           
+            
+            new_exercise.id = "workoutexercise_" + exercise_obj_id++ + "_"+id.replace('list_exercixe_','');
+
+            new_exercise.innerHTML = generate_workout_exercise_li(new_exercise.id, exercise_name);
+
+            document.getElementById('workout_exercises').appendChild(new_exercise);
+
+            document.getElementById(new_exercise.id+"_delete").addEventListener("click", delete_workout_exercice, false);
+            
+        }
+        
+        function setup_listeners() {
+            var list_exercises = document.getElementById("the_list").getElementsByTagName("li");
+            for(var i = 0;i < list_exercises.length;i++) {
+                list_exercises[i].addEventListener("click", add_excersice_to_workout, false); 
+            }
+           
+        }
+
+        function delete_workout_exercice(evt) {
+            document.getElementById(evt.currentTarget.id.replace("_delete", "")).remove();
+        }
+
+        /**
+         * 
+         */
+        function createWorkout() {
+           
+            var workout_object;
+            var workout_exercises = document.getElementById("workout_exercises").getElementsByTagName("li");
+            var wo_ex = [];
+            for(var i = 0;i < workout_exercises.length;i++) {
+                //var exercise_row_obj_id = workout_exercises[i].id.split("_")[1]
+               
+                var exercise_id = workout_exercises[i].id.split("_")[2];
+
+                var exercise_load = document.getElementById(workout_exercises[i].id + "_load").value;
+                var exercise_reps = document.getElementById(workout_exercises[i].id + "_reps").value;
+                
+                wo_ex[i] = new Array(3);
+                wo_ex[i] = [exercise_id, exercise_load, exercise_reps];
+               
+                
+            }
+            console.log(wo_ex);
+            //add aray with values and shit
+
+        }
+
+        //Should be replaced with an actual DOM-create implementation
+        function generate_workout_exercise_li(exercice_id, exercise_name) {
+            generated_html = "<table class=\"workout_list_table\">";
+            generated_html += "<tr><td rowspan=\"2\" class=\"icon_container\"><img src=\"icon_drag.png\" class=\"icon\"></td>";
+            generated_html += "<td rowspan=\"2\" class=\"normal_text\">"+exercise_name+"</td>";
+            generated_html += "<td class=\"small_input_header\">load</td>";
+            generated_html += "<td class=\"small_input_header\">reps</td>";
+            generated_html += "<td rowspan=\"2\" class=\"icon_container\"><img src=\"icon_trash.png\" class=\"icon\" id=\"" + exercice_id + "_delete\" ></td></tr>";
+            generated_html += "<tr><td><input type=\"number\" id=\""+exercice_id+"_load\" class=\"small_input\" placeholder=\"0\"></td>";
+            generated_html += "<td><input type=\"number\" id=\""+exercice_id+"_reps\" class=\"small_input\" placeholder=\"0\"></td></tr></table>";
+
+            return generated_html;
+        }
+
+    </script>
 </body>
 </html>
