@@ -171,8 +171,7 @@
         }
     
         function filter_list() {
-            
-            var filter_input = document.getElementById('filter_input').value;
+           var filter_input = document.getElementById('filter_input').value;
             var filter = filter_input.toUpperCase();
             var the_list = document.getElementById('the_list');
             var list_items = the_list.getElementsByTagName('li');
@@ -187,7 +186,7 @@
                 }
             }
         }
-        
+        //Banan
         var exercise_obj_id = 1;
 
         function add_excersice_to_workout(evt) {
@@ -196,15 +195,11 @@
             let tmp_text = document.getElementById(id);
             let exercise_name = tmp_text.textContent || tmp_text.innerText;
            
-            
             new_exercise.id = "workoutexercise_" + exercise_obj_id++ + "_"+id.replace('list_exercixe_','');
-
             new_exercise.innerHTML = generate_workout_exercise_li(new_exercise.id, exercise_name);
 
             document.getElementById('workout_exercises').appendChild(new_exercise);
-
             document.getElementById(new_exercise.id+"_delete").addEventListener("click", delete_workout_exercice, false);
-            
         }
         
         function setup_listeners() {
@@ -219,9 +214,6 @@
             document.getElementById(evt.currentTarget.id.replace("_delete", "")).remove();
         }
 
-        /**
-         * 
-         */
         function createWorkout() {
            
             var workout_object;
@@ -229,16 +221,12 @@
             var wo_ex = [];
             for(var i = 0;i < workout_exercises.length;i++) {
                 //var exercise_row_obj_id = workout_exercises[i].id.split("_")[1]
-               
                 var exercise_id = workout_exercises[i].id.split("_")[2];
-
-                var exercise_load = document.getElementById(workout_exercises[i].id + "_load").value;
+                 var exercise_load = document.getElementById(workout_exercises[i].id + "_load").value;
                 var exercise_reps = document.getElementById(workout_exercises[i].id + "_reps").value;
                 
                 wo_ex[i] = new Array(3);
                 wo_ex[i] = [exercise_id, exercise_load, exercise_reps];
-               
-                
             }
             console.log(wo_ex);
             //add aray with values and shit
