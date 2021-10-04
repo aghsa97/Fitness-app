@@ -20,7 +20,7 @@ const create_workout = function(request, response){
 };
 
 const save_workout = function(request, response){
-    
+
     var sql_create_workout = 
     `INSERT 
     INTO workout(name, creator_id, level) 
@@ -32,7 +32,7 @@ const save_workout = function(request, response){
 
     var sql_add_workout_exercise = `
     INSERT 
-    INTO workout_exercise (workout_id, exercise_id, workout_exercise.load, reps, workout_exercise.order) 
+    INTO workout_exercise (workout_id, exercise_id, e_load, e_reps, e_order) 
     VALUES (?, ?, ?, ?, ?);` 
 
     if(request.session.role === "trainer"){
@@ -43,7 +43,7 @@ const save_workout = function(request, response){
                 var created_workout_id = results[0].id;
                 request.body.exercise.forEach(function(Object) {
                     console.log(Object)
-                    dbconnection.query(sql_add_workout_exercise, [created_workout_id, Object.exercise, Object.weight, Object.reps, Object.order], function(error, results){
+                    dbconnection.query(sql_add_workout_exercise, [created_workout_id, Object.id, Object.load, Object.reps, Object.order], function(error, results){
                         if(error) throw error;  
                     })
                 });    
@@ -51,6 +51,7 @@ const save_workout = function(request, response){
         });
         response.redirect('/createworkout')
     };
+    
 }
 
 
