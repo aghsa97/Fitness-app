@@ -31,7 +31,6 @@ const user_home = function(request, response) {
 	});	
 
 	} else if (request.session.role === "trainer") {
-		//Here we might also need to check if the client has been verfied by the trainer. This has not been added to the database as of 2021-09-22
 		var sql_client_list = 
 		`select * from user
 		join user_info on user.id = user_info.user_id

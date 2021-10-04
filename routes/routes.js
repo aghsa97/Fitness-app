@@ -5,9 +5,10 @@ const signUpController = require('../controllers/signUpController');
 const trainerClientController = require('../controllers/trainerClientController');
 const createWorkoutController = require('../controllers/createWorkoutController');
 const createExerciseController = require('../controllers/createExerciseController');
-const clientFriendsController = require('../controllers/clientFriendsController')
-const approveController = require('../controllers/approveController')
-const calendarController = require('../controllers/calendarController')
+const clientFriendsController = require('../controllers/clientFriendsController');
+const approveController = require('../controllers/approveController');
+const calendarController = require('../controllers/calendarController');
+const userInfoController = require('../controllers/userInfoController');
 
 
 const router = express.Router();
@@ -43,5 +44,9 @@ router.get('/createexercise', createExerciseController.create_exercise);
 router.post('/createexercise', createExerciseController.save_exercise); 
 
 router.post('/home', approveController.verify_or_delete_user);
+
+router.get('/userinfo', userInfoController.get_user_info);
+
+router.post('/userinfo', userInfoController.save_user_info);
  
 module.exports = router;
