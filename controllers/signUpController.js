@@ -23,7 +23,6 @@ const registerUser = function (request, response) {
             dbconnection.query('SELECT id from user WHERE email = ?', [email], function(error, results){
                 if(error) throw error;
                 var user_id = results[0].id;
-                console.log(user_id);
                 dbconnection.query('INSERT INTO user_info(user_id, role) VALUES (?, ?)', [user_id, role], function(error, results){
                     if(error) throw error;
                     })

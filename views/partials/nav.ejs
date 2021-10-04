@@ -5,6 +5,7 @@
     <div class="flex-container">
       <% if (locals.role) { %> <% if (role == "client") { %>
       <div><a href="/" class="nav_button">Home</a></div>
+      <div><a href="/userinfo" class="nav_button">User info</a></div>
       <div><a href="/logout" class="nav_button">Log out</a></div>
 
       <% } else if (role == "trainer") { %>
@@ -13,6 +14,7 @@
         <a href="/createexercise" class="nav_button">Create exercise</a>
       </div>
       <div><a href="/createworkout" class="nav_button">Create workout</a></div>
+      <div><a href="/userinfo" class="nav_button">User info</a></div>
       <div><a href="/logout" class="nav_button">Log out</a></div>
       <% } %> <% } else { %>
       <div><a href="/signup" class="nav_button">Sign up</a></div>

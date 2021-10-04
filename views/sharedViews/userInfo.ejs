@@ -1,0 +1,37 @@
+<html>
+    <%- include('../partials/head.ejs'); %>
+    <body>
+        <div class="wrapper">
+            <%- include('../partials/nav.ejs'); %>
+            <div class="content">
+
+                <form id ="user_info-form" action="userinfo" action method="POST">
+
+                    <% if (locals.info) { %> <% info.forEach(function(str){ %>
+                    
+                        <label for="First name">First name:</label><br>
+                        <input type="text" name="firstname"value=<%=JSON.parse(JSON.stringify(str)).firstname%> required><br>
+
+                        <label for="Last name">Last name:</label><br>
+                        <input type="text" name="lastname"value=<%=JSON.parse(JSON.stringify(str)).lastname%> required><br>
+
+                        <label for="Weight">Weight:</label><br>
+                        <input type="number" name="weight"value=<%=JSON.parse(JSON.stringify(str)).weight%> required><br>
+
+                        <label for="Height">Height:</label><br>
+                        <input type="number" name="height"value=<%=JSON.parse(JSON.stringify(str)).height%> required><br>
+
+                        <label for="Gender">Gender:</label><br>
+                        <input type="text" name="gender"value=<%=JSON.parse(JSON.stringify(str)).gender%> required><br>
+
+                        <% }) %> 
+                    <% } %>
+                    <br>   
+                    <input type = "submit" value="Submit" onclick="return confirm('Are you sure you want to update the user info?')">
+               
+                </form>
+            </div>
+            <%- include('../partials/footer.ejs'); %>
+        </div>
+    </body>
+</html>
