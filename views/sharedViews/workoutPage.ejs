@@ -6,7 +6,12 @@
             <div class="content">
                 <div class="info-list">
                     <div class="list-header">
-                        <p><strong>Planned Workouts</strong></p>
+                        <p><strong>
+                            <% console.log(workout_name) %>
+                            <% workout_name.forEach(function(str){ %>
+                                <%= JSON.parse(JSON.stringify(str)).name %>
+                            <% }) %>
+                        </strong></p>
                     </div>
                     <ul>
                         <% if (locals.workout_info) { %>
