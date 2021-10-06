@@ -7,9 +7,7 @@
                 <div class="info-list">
                     <div class="list-header">
                         <p><strong>
-                            <% workout_name.forEach(function(str){ %>
-                                <%= JSON.parse(JSON.stringify(str)).name %>
-                            <% }) %>
+                            <%= JSON.parse(JSON.stringify(locals.workout_info[0])).wname %>
                         </strong></p>
                     </div>
                     <ul>

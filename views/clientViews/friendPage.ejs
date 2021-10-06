@@ -143,7 +143,7 @@
             <div class="social-box">
               <ul class="list">
                 <% if (locals.friends) { %> <% friends.forEach(function(str){ %>
-                <li onclick="location.href = '/friendPage/<%=JSON.parse(JSON.stringify(str)).id%>'" class="friend-list">
+                <li class="friend-list">
                   <%=JSON.parse(JSON.stringify(str)).firstname%>
                   <%=JSON.parse(JSON.stringify(str)).lastname%>
                   <%=JSON.parse(JSON.stringify(str)).role%>
