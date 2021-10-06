@@ -9,6 +9,14 @@
         <div id="left" style="float: left; width: 50%; text-align: center;">
             <div class="workout-form" style="height: 200px; margin: 20px; overflow: auto;">
                 <h2>Create Workout</h2>
+
+
+            
+
+            
+          
+
+
                 <form id ="workout-form" action="createworkout" action method="POST">
                     <div id="workout-container">
                         <input type="text" name="workoutname" placeholder="Workout name" required/><br>
@@ -196,7 +204,7 @@
             for(var i = 0;i < list_exercises.length;i++) {
                 list_exercises[i].addEventListener("click", add_excersice_to_workout, false); 
             }
-           
+
         }
 
         function delete_workout_exercice(evt) {
@@ -218,8 +226,6 @@
                 wo_ex[i] = [exercise_id, exercise_load, exercise_reps];
             }
             post_workout(wo_ex); // Calls the function which handles the post.
-          
-
         }
 
         //Should be replaced with an actual DOM-create implementation
@@ -284,7 +290,68 @@
             createWorkout();
             return confirmation;
         }
+
+        // This function checks if the server has sent a workout object
+        // If the object exists, we can then edit the workout.
+        document.addEventListener('DOMContentLoaded', function(){
+            parseWorkout();
+        })
+
+        function parseWorkout(){
+            if ('<%=locals.workout%>') {
+
+               var test = '<%-JSON.stringify(locals.workout)%>'
+
+               var parsed_workout = {
+                   workout: JSON.parse(test)
+               }
+
+               console.log(parsed_workout)
+
+               document.getElementsByName('workoutname')[0].value = parsed_workout.workout[0].workout_name;
+               document.getElementsByName('level')[0].value = parsed_workout.workout[0].workout_level;
+
+               for(var i = 0; i < parsed_workout.workout.length; i++){
+
+                var new_exercise = document.createElement('li');
+                new_exercise.style = "border:1px solid white;width:80%"
+
+                new_exercise.id = "workoutexercise_" + exercise_obj_id++ + "_" + parsed_workout.workout[i].exercise_id;
+                new_exercise.innerHTML = generate_workout_exercise_li(new_exercise.id, parsed_workout.workout[i].exercise_name + " " + parsed_workout.workout[i].exercise_muscle );
+
+                var new_exercise_load = new_exercise.id+"_load"
+                var new_exercise_reps = new_exercise.id+"_reps"
+
+                console.log(new_exercise_load)
+
+                document.getElementById('workout_exercises').appendChild(new_exercise);
+                document.getElementById(new_exercise.id+"_delete").addEventListener("click", delete_workout_exercice, false);
+
+                document.getElementById(new_exercise_load).value = parseInt(parsed_workout.workout[i].e_load)
+                document.getElementById(new_exercise_reps).value = parseInt(parsed_workout.workout[i].e_reps)
+
+               }
+
+                var container = document.getElementById('workout-container');
+                var workout_user = document.createElement('input');
+                workout_user.type = "hidden";
+                workout_user.setAttribute('name', 'user_id')
+                workout_user.value = parsed_workout.workout[0].workout_user_id;
+                container.appendChild(workout_user);
+
+        }
+    }
+
+
+
+        
+
+                    
+                
+                
+
        
+
     </script>
 </body>
 </html>

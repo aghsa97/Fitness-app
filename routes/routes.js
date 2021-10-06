@@ -39,6 +39,8 @@ router.get('/createworkout', createWorkoutController.create_workout);
 
 router.post('/createworkout', createWorkoutController.save_workout); 
 
+router.get('/createworkout/:id', createWorkoutController.edit_workout);
+
 router.get('/createexercise', createExerciseController.create_exercise); 
 
 router.post('/createexercise', createExerciseController.save_exercise); 

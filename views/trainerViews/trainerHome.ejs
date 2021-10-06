@@ -22,6 +22,25 @@
                 </ul>
             </div>
             <div class="separator"></div>
+
+            <div class="workout-list">
+                <div class="list-header">
+                    <p><strong>Workout list</strong></p>
+                </div>
+                <ul>
+                    <% if (locals.workouts) { %>
+                        <% workouts.forEach(function(str){ %>
+                        <li onclick="location.href = '/createworkout/<%=JSON.parse(JSON.stringify(str)).id%>'">
+                            <strong>
+                                <%=JSON.parse(JSON.stringify(str)).name%>
+                            </strong>
+                        </li>
+                        <% }) %>
+                    <% } %>
+                </ul>
+            </div>
+            <div class="separator"></div>
+
             <div class="approve-list">
                 <div class="list-header">
                     <p><strong>Pending approval</strong></p>

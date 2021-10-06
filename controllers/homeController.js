@@ -38,11 +38,8 @@ const user_home = function(request, response) {
 		and user.verified = 1`;
 
 		var sql_workout_list = 
-		`select w.id, w.name, uf.firstname, uf.lastname, u.email
-		from workout as w
-		join user_info as uf on w.user_id = uf.user_id
-		join user as u on u.id = uf.user_id
-		where w.creator_id = '?';`;
+		`select * from workout
+		where creator_id = ?` 
 
 		var sql_pending_list =
 		`SELECT u.id, i.firstname, i.lastname, u.email
