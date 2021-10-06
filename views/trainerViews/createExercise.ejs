@@ -5,16 +5,24 @@
         <%- include('../partials/nav.ejs') %>
         <div class="content">
             <div class="create-exercise">
-                <h2>Create exercise</h2>
-                    <form id ="exercise-form" action="createexercise" action method="POST">
+
+                <% if (locals.create_title) { %>
+                    <h2>CREATE EXERCISE</h2>
+                    <% } %>
+
+                <% if (locals.edit_title) { %>
+                    <h2>EDIT EXERCISE</h2>
+                    <% } %>
+
+                    <form id ="exercise-form" onSubmit="return updateAction()" action method="POST">
                         <div id = "exercise-container">
             
                             <!--Satte labels som röda temportärt så det är lite enklare att dema.-->
                             <label style="color:red">Exercise name</label><br>
-                            <input type="text" name="exercise_name" placeholder="Exercise name" required/><br>
+                            <input type="text" id = "exercise_name" name="exercise_name" placeholder="Exercise name" required/><br>
             
                             <label style="color:red" >Target muscle</label><br>
-                                <select name="target_muscle">
+                                <select id = "target-muscle" name="target_muscle">
                                     <option value="Back">Back</option>
                                     <option value="Quads">Quads</option>
                                     <option value="Biceps">Biceps</option>
@@ -27,7 +35,7 @@
                                 </select><br>
 
                             <label style="color:red">Level</label><br>
-                                    <select name="level">
+                                    <select id="level" name="level">
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -42,14 +50,80 @@
 
                             <label style="color:red" for="description">Description</label><br>
                             <input type="text" id="description" name="description" placeholder="A description" required><br><br>
-                            <input type = "submit" value="Submit" onclick="return confirm('Are you sure you want to create this exercise?')">
+
+                            <% if (locals.create_title) { %>
+                                <input type = "submit" value="Create" onclick="return confirm('Are you sure you want to create this exercise?')">
+                                <% } %>
+
+                            <% if (locals.edit_title) { %>
+                                <input type = "submit" value="Edit" onclick="return confirm('Are you sure you want to edit this exercise?');">
+                                <% } %>
+ 
                         </div>
                     </form>
-                    <a style="color:red" href="/home" class="btn btn-primary">Back</a>
+
+                    <% if (locals.create_title) { %>
+                        <a style="color:red" href="/home" class="btn btn-primary">Back</a>
+                        <% } %>
+
+                    <% if (locals.edit_title) { %>
+                        <a style="color:red" href="/createexercise" class="btn btn-primary">Back</a>
+                        <% } %>
+                    
                     <% if (locals.message) { %><%=message%> <% } %>
             </div>
+
+            <% if (locals.exercise) { %>
+                <% exercise.forEach(function(str){ %>
+                <li onclick="location.href = '/createexercise/<%=JSON.parse(JSON.stringify(str)).id%>'">
+                    <strong>
+                        <%=JSON.parse(JSON.stringify(str)).name%>
+                    </strong>
+                </li>
+                <% }) %>
+            <% } %>
+
     </div>
         <%- include('../partials/footer.ejs') %>
     </div>
+
+<script>
+
+    document.addEventListener('DOMContentLoaded', function(){
+            parseExercise();
+        })
+
+        function parseExercise(){
+            if ('<%=locals.requested_exercise%>') {
+
+               var test = '<%-JSON.stringify(locals.requested_exercise)%>'
+
+               var parsed_exercise = {
+                   exercise: JSON.parse(test)
+               }
+
+               console.log(parsed_exercise)
+
+               document.getElementById('exercise_name').value = parsed_exercise.exercise[0].name
+               document.getElementById('target-muscle').value = parsed_exercise.exercise[0].target_muscle
+               document.getElementById('level').value = parsed_exercise.exercise[0].level
+               document.getElementById('description').value = parsed_exercise.exercise[0].description
+
+            }
+        }
+
+        function updateAction(){
+
+            if ('<%=locals.requested_exercise%>') {
+                document.form.action = "createexercise/"+parsed_exercise.exercise[0].id
+            } else{
+                document.form.action = "createexercise"
+            }
+    
+        }
+
+
+</script>
+
 </body>
 </html>
