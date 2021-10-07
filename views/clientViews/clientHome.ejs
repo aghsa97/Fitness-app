@@ -38,8 +38,8 @@
             </div>
             <p class="work-out">My workouts</p>
             <ul class="list-work" id="sessions-list">
-              <% if (locals.workout_list) { %> <%
-              workout_list.forEach(function(str){ %>
+              <% if (locals.workout_session_list) { %> <%
+              workout_session_list.forEach(function(str){ %>
               <li>
                 <span id="dateMonth"
                   ><%=JSON.parse(JSON.stringify(str)).session_time.slice(5,
@@ -176,32 +176,50 @@
           </div>
           <div class="social-box">
             <ul class="list">
-              <% if (locals.friends) { %> <% friends.forEach(function(str){ %>
-              <li
-                onclick="location.href = '/friendPage/<%=JSON.parse(JSON.stringify(str)).id%>'"
-                class="friend-list"
-              >
-                <%=JSON.parse(JSON.stringify(str)).firstname%>
-                <%=JSON.parse(JSON.stringify(str)).lastname%>
-                <%=JSON.parse(JSON.stringify(str)).role%>
-              </li>
-              <% }) %> <% } %>
+              <% if (locals.friends) { %>
+                        <% friends.forEach(function(str){ %>
+                        <li onclick="location.href = '/createworkout/<%=JSON.parse(JSON.stringify(str)).id%>'">
+                            <strong>
+                                <%=JSON.parse(JSON.stringify(str)).firstname%>
+                                <%=JSON.parse(JSON.stringify(str)).lastname%>
+                                <%=JSON.parse(JSON.stringify(str)).email%>
+                            </strong>
+                        </li>
+                        <% }) %>
+                    <% } %>
             </ul>
           </div>
         </div>
         <div class="info-list">
           <div class="list-header">
-            <p><strong>Workouts</strong></p>
+            <p><strong>Up coming workouts</strong></p>
           </div>
           <ul class="list">
             <% if (locals.upcoming) { %> <% upcoming.forEach(function(str){ %>
             <li
-              onclick="location.href = '/workoutPage/<%=JSON.parse(JSON.stringify(str)).id%>'"
-            >
+              onclick="location.href = '/workoutPage/<%=JSON.parse(JSON.stringify(str)).id%>'">
               <%=JSON.parse(JSON.stringify(str)).session_time%>
               <%=JSON.parse(JSON.stringify(str)).name%>
             </li>
             <% }) %> <% } %>
+          </ul>
+        </div>
+        <div class="separator"></div>
+
+        <div class="info-list">
+          <div class="list-header">
+            <p><strong>Workout list</strong></p>
+          </div>
+          <ul class="list">
+            <% if (locals.workout_list) { %>
+                        <% workout_list.forEach(function(str){ %>
+                        <li onclick="location.href = '/createworkout/<%=JSON.parse(JSON.stringify(str)).id%>'">
+                            <strong>
+                                <%=JSON.parse(JSON.stringify(str)).name%>
+                            </strong>
+                        </li>
+                        <% }) %>
+                    <% } %>
           </ul>
         </div>
       </section>

@@ -3,7 +3,7 @@ var path = require('path');
 
 const create_workout = function(request, response){
 
-    if (request.session.role === "trainer") {
+    if (request.session.role === "trainer" | request.session.role === "client") {
 
         var sql_get_exercises = 
         `SELECT * 
@@ -42,7 +42,7 @@ const save_workout = function(request, response){
     SET user_id = ?
     WHERE workout.id = ?` 
 
-    if(request.session.role === "trainer"){
+    if(request.session.role === "trainer" | request.session.role === "client"){
         dbconnection.query(sql_create_workout, [request.body.workoutname, request.session.dbId, request.body.level], function(error, results){
             if(error) throw error;
             dbconnection.query(sql_get_created_workout, function(error, results){
@@ -54,13 +54,18 @@ const save_workout = function(request, response){
                     })
                 });    
 
-                if(request.body.user_id !== ""){
-
+                if(request.body.user_id !== "" && request.session.role === "trainer"){
                     dbconnection.query(sql_assign_workout_user, [request.body.user_id, created_workout_id], function(error, results){
                         if(error) throw error;
-                    })
-                }
-            
+                    }) 
+
+                } else if (request.session.role === "client"){
+                    console.log('test')
+                    dbconnection.query(sql_assign_workout_user, [request.session.dbId, created_workout_id], function(error, results){
+                        if(error) throw error;
+
+                })
+            }  
             });
         });
         response.redirect('/createworkout')
