@@ -9,6 +9,8 @@ const clientFriendsController = require('../controllers/clientFriendsController'
 const approveController = require('../controllers/approveController');
 const calendarController = require('../controllers/calendarController');
 const userInfoController = require('../controllers/userInfoController');
+const workoutPageController = require('../controllers/workoutPageController');
+const friendPageController = require('../controllers/friendPageController');
 
 
 const router = express.Router();
@@ -54,5 +56,9 @@ router.post('/home', approveController.verify_or_delete_user);
 router.get('/userinfo', userInfoController.get_user_info);
 
 router.post('/userinfo', userInfoController.save_user_info);
+
+router.get('/workoutpage/:id', workoutPageController.show_workout);
+
+router.get('/friendPage/:id', friendPageController.friend_home);
  
 module.exports = router;

@@ -24,7 +24,7 @@ const client_info = function(request, response) {
         WHERE user_id = ?`
 
         var sql_client_upcoming_workouts =
-        `SELECT session_time, name, user_info.firstname, user_info.lastname, level
+        `SELECT session_time, name, user_info.firstname, user_info.lastname, level, workout_session.id
         FROM WORKOUT_SESSION
         JOIN WORKOUT ON workout_session.WORKOUT_ID = WORKOUT.ID
         JOIN USER_INFO ON WORKOUT.CREATOR_ID = USER_INFO.USER_ID
