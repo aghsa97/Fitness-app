@@ -1,93 +1,112 @@
 <html>
-    <%- include('../partials/head.ejs') %>
+    <head>
+        <meta charset="utf-8" />
+        <base href="/">
+        <link rel="stylesheet" href="base-styles.css">
+        <link rel="stylesheet" href="createExercise.css">
+        <link rel="stylesheet" href="nav-styles.css">
+        <link rel="stylesheet" href="footer-style.css">
+    </head>
 <body>
     <div class="wrapper">
         <%- include('../partials/nav.ejs') %>
         <div class="content">
-            <div class="create-exercise">
-
-                <% if (locals.create_title) { %>
-                    <h2>CREATE EXERCISE</h2>
-                    <% } %>
-
-                <% if (locals.edit_title) { %>
-                    <h2>EDIT EXERCISE</h2>
-                    <% } %>
-
-                    <form id ="exercise-form" onSubmit="return updateAction()" action method="POST">
-                        <div id = "exercise-container">
-            
-                            <!--Satte labels som röda temportärt så det är lite enklare att dema.-->
-                            <label style="color:red">Exercise name</label><br>
-                            <input type="text" id = "exercise_name" name="exercise_name" placeholder="Exercise name" required/><br>
-            
-                            <label style="color:red" >Target muscle</label><br>
-                                <select id = "target-muscle" name="target_muscle">
-                                    <option value="Back">Back</option>
-                                    <option value="Quads">Quads</option>
-                                    <option value="Biceps">Biceps</option>
-                                    <option value="Triceps">Triceps</option>
-                                    <option value="Hamstrings">Hamstrings</option>
-                                    <option value="Erectors">Erectors</option>
-                                    <option value="Chest">Chest</option>
-                                    <option value="Shoulder">Shoulder</option>
-                                    <option value="Abs">Abs</option>
-                                </select><br>
-
-                            <label style="color:red">Level</label><br>
-                                    <select id="level" name="level">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="9">9</option>
-                                    <option value="10">10</option>
-                                </select><br>
-
-                            <label style="color:red" for="description">Description</label><br>
-                            <input type="text" id="description" name="description" placeholder="A description" required><br><br>
-
-                            <% if (locals.create_title) { %>
-                                <input type = "submit" value="Create" onclick="return confirm('Are you sure you want to create this exercise?')">
-                                <% } %>
-
-                            <% if (locals.edit_title) { %>
-                                <input type = "submit" value="Edit" onclick="return confirm('Are you sure you want to edit this exercise?');">
-                                <% } %>
- 
-                        </div>
-                    </form>
+            <div id="left">
+                <div class="sub_container">
 
                     <% if (locals.create_title) { %>
-                        <a style="color:red" href="/home" class="btn btn-primary">Back</a>
+                        <h2>CREATE EXERCISE</h2>
                         <% } %>
 
                     <% if (locals.edit_title) { %>
-                        <a style="color:red" href="/createexercise" class="btn btn-primary">Back</a>
+                        <h2>EDIT EXERCISE</h2>
                         <% } %>
-                    
-                    <% if (locals.message) { %><%=message%> <% } %>
+
+                        <form id ="exercise-form" onSubmit="return updateAction()" action method="POST">
+                            <div id = "exercise-container">
+                                
+                                <!--Satte labels som röda temportärt så det är lite enklare att dema.-->
+                                <label class="exercise_form_label" for="exercise_name">Exercise name</label><br>
+                                <input type="text" id="exercise_name" name="exercise_name" placeholder="Exercise name" required/><br>
+                
+                                    <label class="exercise_form_label" for="target_muscle">Target muscle</label><br>
+                                    <select id = "target-muscle" name="target_muscle">
+                                        <option value="Back">Back</option>
+                                        <option value="Quads">Quads</option>
+                                        <option value="Biceps">Biceps</option>
+                                        <option value="Triceps">Triceps</option>
+                                        <option value="Hamstrings">Hamstrings</option>
+                                        <option value="Erectors">Erectors</option>
+                                        <option value="Chest">Chest</option>
+                                        <option value="Shoulder">Shoulder</option>
+                                        <option value="Abs">Abs</option>
+                                    </select><br>
+
+                                <label class="exercise_form_label" for="level">Level</label><br>
+                                        <select id="level" name="level">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                    </select><br>
+
+                                <label class="exercise_form_label" for="description">Description</label><br>
+                                <textarea id="description" name="description" placeholder="A description" required></textarea><br>
+
+                                <% if (locals.create_title) { %>
+                                    <input type = "submit" value="Create" onclick="return confirm('Are you sure you want to create this exercise?')">
+                                    <% } %>
+
+                                <% if (locals.edit_title) { %>
+                                    <input type = "submit" value="Edit" onclick="return confirm('Are you sure you want to edit this exercise?');">
+                                    <% } %>
+    
+                            </div>
+                        </form>
+                  <% if (locals.message) { %><%=message%> <% } %>
+                </div>
             </div>
-
-            <% if (locals.exercise) { %>
-                <% exercise.forEach(function(str){ %>
-                <li onclick="location.href = '/createexercise/<%=JSON.parse(JSON.stringify(str)).id%>'">
-                    <strong>
-                        <%=JSON.parse(JSON.stringify(str)).name%>
-                    </strong>
-                </li>
-                <% }) %>
-            <% } %>
-
-    </div>
+            <div id="right">
+                <div class="sub_container">
+                    <input class="normal" type="text" id="filter_input" onkeyup="filter_list()" placeholder="Filter results">
+                    <ul id="exercise_list" class="exercise_list">
+                    <% if (locals.exercise) { %>
+                    <% exercise.forEach(function(str){ %>
+                    <li class="exercise_list_item normal_text" onclick="location.href = '/createexercise/<%=JSON.parse(JSON.stringify(str)).id%>'">
+                        <a><%=JSON.parse(JSON.stringify(str)).name%></a>
+                    </li>
+                    <% }) %>
+                    <% } %>
+                    </ul>
+                </div>
+            </div>
+        </div>
         <%- include('../partials/footer.ejs') %>
     </div>
-
 <script>
+
+function filter_list() {
+           var filter_input = document.getElementById('filter_input').value;
+            var filter = filter_input.toUpperCase();
+            var the_list = document.getElementById('exercise_list');
+            var list_items = the_list.getElementsByTagName('li');
+            
+            for (i = 0; i < list_items.length; i++) {
+                a = list_items[i].getElementsByTagName("a")[0];
+                txtValue = a.textContent || a.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    list_items[i].style.display = "";
+                } else {
+                    list_items[i].style.display = "none";
+                }
+            }
+        }
 
     document.addEventListener('DOMContentLoaded', function(){
             parseExercise();

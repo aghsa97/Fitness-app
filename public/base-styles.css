@@ -7,6 +7,7 @@ body {
   background-image: url();
   display: flex;
   flex-direction: column;
+  color:white;
 }
 body h1 {
   margin: 0;
@@ -35,6 +36,12 @@ body h2 {
   position: relative;
   letter-spacing: 2px;
 }
+
+.normal_text {
+  text-align: left;
+  color: white;
+}
+
 .wrapper {
   height: 100vh;
   display: flex;
@@ -47,3 +54,44 @@ body h2 {
   color:white;
   
 }
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  flex-flow: wrap;
+  text-transform: uppercase;
+  color: white;
+  padding-top: 20px;
+} 
+
+nav {
+  height: fit-content;
+}
+.nav_button {
+    text-decoration: none;
+    font-size: 22px;
+    color: white;
+    text-transform: uppercase;
+    padding: 10px;
+    border-radius: 20px;
+  }
+  
+  .nav-box {
+    text-transform: uppercase;
+    padding: 20px;
+    color: white;
+    position: relative;
+  }
+  .nav_button:hover {
+    background-color: rgba(0, 0, 0, 0.55);
+  }
+
+  input {
+    font-family:"Poppins", sans-serif;
+    font-weight: bold;
+  }
+
+  input.normal {
+    height:20px;
+  }

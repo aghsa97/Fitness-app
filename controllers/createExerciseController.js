@@ -21,6 +21,8 @@ const create_exercise = function(request, response){
     }
 }
 
+
+
 const save_exercise = function(request, response){
 
     if(request.session.role === "trainer"){
@@ -45,10 +47,18 @@ const edit_exercise = function(request, response) {
 
     var page_title = "EDIT EXERCISE"
 
+    var sql_exercise_list = `
+    SELECT * FROM exercise;`
+
     dbconnection.query(sql_get_exercise,[request.params.id], function(error, results){
-        if(error) throw error;
+        if(error) throw error; 
         var requested_exercise = results;
-        response.render(path.join(__dirname, "../views/trainerViews/createExercise"), {role: request.session.role, edit_title: page_title, requested_exercise: requested_exercise});  
+        dbconnection.query(sql_exercise_list, function(error, results){
+            if(error) throw error;
+            response.render(path.join(__dirname, "../views/trainerViews/createExercise"), 
+            {role: request.session.role, edit_title: page_title, requested_exercise: requested_exercise, exercise: results});  
+        })
+        
     })
 }
 

@@ -1,77 +1,76 @@
 <!DOCTYPE html>
 <html>
-    <%- include('../partials/head.ejs') %>
+<head>
+    <meta charset="utf-8" />
+    <base href="/">
+    <link rel="stylesheet" href="base-styles.css">
+    <link rel="stylesheet" href="createWorkout.css">
+    <link rel="stylesheet" href="nav-styles.css">
+    <link rel="stylesheet" href="footer-style.css">
+</head>
 <body onload="setup_listeners()">
     <div class="wrapper">
     <%- include('../partials/nav.ejs') %>
-    <div class="content">
-    <div style="width: 100%;">
-        <div id="left" style="float: left; width: 50%; text-align: center;">
-            <div class="workout-form" style="height: 200px; margin: 20px; overflow: auto;">
-                <h2>Create Workout</h2>
+        <div class="content">
+            <div id="left">
+                <div class="workout-form">
+                    <h2>Create Workout</h2>
+                    <form id ="workout-form" action="createworkout" action method="POST">
+                        <div id="workout-container">
+                            <input type="text" name="workoutname" placeholder="Workout name" required/>
+                            <label>Level</label>
+                            <select name="level">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
+                            <input id = "submit" type = "submit" value="submit" onclick="confirmAction(event);">
+                            
+                        </div>    
+                    </form>
+                    <div ondrop="drop(event)" ondragover="allowDrop(event)">
+                       <ul id="workout_exercises" class="workout_exercise_list">  
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="right">
+                <div class="workout-form" >
+                    <h2>Exercises</h2>
+                    <input class="normal" type="text" id="filter_input" onkeyup="filter_list()" placeholder="Filter results">
+                    <ul id="the_list" class="workout_exercise_list">
+                        <% if (locals.exercise) { %>
+                            <% exercise.forEach(function(str) { %>
+                                <% let category=JSON.parse(JSON.stringify(str)).target_muscle %>
+                                <% let name=JSON.parse(JSON.stringify(str)).name %>
+                                <% let instr=JSON.parse(JSON.stringify(str)).description %>
+                                <% let level=JSON.parse(JSON.stringify(str)).level %>
+                                <% let id = JSON.parse(JSON.stringify(str)).id %>
+                                <li id="list_exercixe_<%=id%>"><div class="exercise normal_text"><a><%= name %>  <%= category %></a></div></li>
+                            <% }) %>
+                        <% } %>
+                    </ul>
+                </div>
+            </div>
 
-                <form id ="workout-form" action="createworkout" action method="POST">
-                    <div id="workout-container">
-                        <input type="text" name="workoutname" placeholder="Workout name" required/><br>
-                        <label>Level</label><br>
-                        <select name="level">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                        </select>
-                        <br>     
-                        <p>
-                        <input id = "submit" type = "submit" value="submit" onclick="confirmAction(event);">
-                        
-                    </p>
-                        <a href="/home" class="btn btn-primary">Back</a>
-                    </div>    
-                </form>
-                
+            <div class="input-form" id="specifics" style="display: none;">
+                <input type="hidden" id="ex-id">
+                <input type="range" id="ex-sets" placeholder="Enter amount of sets" min="1" max="30" name="sets" required>
+                <br>
+                <input type="range" id="ex-reps" placeholder="Enter amount of reps" min="1" max="30" required>
+                <br>
+                <input type="range" id="ex-weight" placeholder="Enter weight" min="1" max="100" required>
+                <br>
+                <button type="submit" class="btn" onclick="closeForm()">Accept</button>
             </div>
-            <div class="workout-form" ondrop="drop(event)" ondragover="allowDrop(event)" style="height: 353px; margin-left: 20px; overflow: auto;">
-                <ul id="workout_exercises">  
-                </ul>
-              
-            </div>
-        </div>
-        <div id="right" style="float: left; width: 50%; text-align: center;">
-            <h2>Exercises</h2>
-            <div class="workout-form">
-                <input type="text" id="filter_input" onkeyup="filter_list()" placeholder="Filter results"><br>
-                <ul id="the_list">
-                    <% if (locals.exercise) { %>
-                        <% exercise.forEach(function(str) { %>
-                            <% let category=JSON.parse(JSON.stringify(str)).target_muscle %>
-                            <% let name=JSON.parse(JSON.stringify(str)).name %>
-                            <% let instr=JSON.parse(JSON.stringify(str)).description %>
-                            <% let level=JSON.parse(JSON.stringify(str)).level %>
-                            <% let id = JSON.parse(JSON.stringify(str)).id %>
-                            <li id="list_exercixe_<%=id%>" style="border:1px solid white;width:80%"><a><%= name %>  <%= category %></a></li>
-                        <% }) %>
-                    <% } %>
-                </ul>
-            </div>
-        </div>
-
-        <div class="input-form" id="specifics" style="display: none;">
-            <input type="hidden" id="ex-id">
-            <input type="range" id="ex-sets" placeholder="Enter amount of sets" min="1" max="30" name="sets" required>
-            <br>
-            <input type="range" id="ex-reps" placeholder="Enter amount of reps" min="1" max="30" required>
-            <br>
-            <input type="range" id="ex-weight" placeholder="Enter weight" min="1" max="100" required>
-            <br>
-            <button type="submit" class="btn" onclick="closeForm()">Accept</button>
-        </div>
-    </div>
+        
   
         </div>
         <%- include('../partials/footer.ejs') %>
@@ -80,86 +79,17 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
         $( function() {
-          $( "#workout_exercises" ).sortable();
+          $( "#workout_exercises" ).sortable({
+              axis: "y"
+          });
           $( "#workout_exercises" ).disableSelection();
         } );
         </script>
     <script>
 
         let exerciselist = [];
-
-        function allowDrop(ev) {
-            ev.preventDefault();
-        }
-
-        function drag(ev) {
-            ev.dataTransfer.setData("text", ev.target.id);
-        }
-
-        function drop(ev) {
-            ev.preventDefault();
-            var data = ev.dataTransfer.getData('Text');
-            ev.target.appendChild(document.getElementById(data).cloneNode(true));
-            openForm(data);
-        }
-
-        function openForm(id) {
-            let element = document.getElementById("specifics");
-            element.style.display = 'block';
-            document.getElementById('ex-id').value = id;
-        }
-
-        function closeForm() {
-            document.getElementById('specifics').style.display = "none";
-            
-            let exercise = {
-                id: document.getElementById('ex-id').value,
-                sets: document.getElementById('ex-sets').value,
-                reps: document.getElementById('ex-reps').value,
-                weight: document.getElementById('ex-weight').value
-            }
-             exerciselist.push(exercise);     
-        }
-
     
-        function chooseExercise(id){
-            
-            let element = document.getElementById(id);
-            let container = element.firstElementChild;
-            
-            if(exerciselist.includes(id)){
-                element.style.border = "none";
-                exerciselist.splice(exerciselist.indexOf(id), 1);
-                container.removeChild(container.lastChild);
-            }
-            else {
-                element.style.border = "1px solid #e5ff00";
-                exerciselist.push(id);
-
-                let newdiv = document.createElement('div');
-                    newdiv.className = 'input-div';
-                let set_input = document.createElement('input');
-                    set_input.type = 'range';
-                    set_input.min = '1';
-                    set_input.max = '10';
-                    set_input.defaultValue = '3';
-                let reps_input = document.createElement('input');
-                    reps_input.type = 'range';
-                    reps_input.min = '1';
-                    reps_input.max = '30';
-                    reps_input.defaultValue = '12';
-                let weight_input = document.createElement('input');
-                    weight_input.type = 'range';
-                    weight_input.min = '1';
-                    weight_input.max = '225';
-                newdiv.appendChild(set_input);
-                newdiv.appendChild(reps_input);
-                newdiv.appendChild(weight_input);
-                container.appendChild(newdiv);
-            }    
-
-        }
-    
+           
         function filter_list() {
            var filter_input = document.getElementById('filter_input').value;
             var filter = filter_input.toUpperCase();
@@ -182,6 +112,7 @@
         function add_excersice_to_workout(evt) {
             var id = evt.currentTarget.id;
             let new_exercise = document.getElementById(id).cloneNode(false)
+            
             let tmp_text = document.getElementById(id);
             let exercise_name = tmp_text.textContent || tmp_text.innerText;
            
@@ -223,15 +154,13 @@
 
         //Should be replaced with an actual DOM-create implementation
         function generate_workout_exercise_li(exercice_id, exercise_name) {
-            generated_html = "<table class=\"workout_list_table\">";
-            generated_html += "<tr><td rowspan=\"2\" class=\"icon_container\"><img src=\"icon_drag.png\" class=\"icon\"></td>";
-            generated_html += "<td rowspan=\"2\" class=\"normal_text\">"+exercise_name+"</td>";
-            generated_html += "<td class=\"small_input_header\">load</td>";
-            generated_html += "<td class=\"small_input_header\">reps</td>";
-            generated_html += "<td rowspan=\"2\" class=\"icon_container\"><img src=\"icon_trash.png\" class=\"icon\" id=\"" + exercice_id + "_delete\" ></td></tr>";
-            generated_html += "<tr><td><input type=\"number\" id=\""+exercice_id+"_load\" class=\"small_input\" placeholder=\"0\"></td>";
-            generated_html += "<td><input type=\"number\" id=\""+exercice_id+"_reps\" class=\"small_input\" placeholder=\"0\"></td></tr></table>";
 
+            generated_html =  "<div class=\"exercise\"><div class=\"exercise_name normal_text\">"+exercise_name+"</div>";
+            generated_html += "<div class=\"small_input_header\">load</div>";
+            generated_html += "<div class=\"input_container\"><input type=\"number\" min=\"0\" id=\""+exercice_id+"_load\" class=\"small_input\" placeholder=\"0\"></div>";
+            generated_html += "<div class=\"small_input_header\">reps</div>";
+            generated_html += "<div class=\"input_container\"><input type=\"number\" min=\"0\" id=\""+exercice_id+"_reps\" class=\"small_input\" placeholder=\"0\"></div>";
+            generated_html += "<div class=\"icon_container\"><img src=\"icon_trash.png\" class=\"icon\" id=\"" + exercice_id + "_delete\" ></div></div>";
             return generated_html;
         }
 
@@ -265,7 +194,6 @@
             container.appendChild(exercise_load);
             container.appendChild(exercise_reps);
             container.appendChild(exercise_order);
-
             }
         }
 
@@ -307,8 +235,7 @@
                for(var i = 0; i < parsed_workout.workout.length; i++){
 
                 var new_exercise = document.createElement('li');
-                new_exercise.style = "border:1px solid white;width:80%"
-
+                
                 new_exercise.id = "workoutexercise_" + exercise_obj_id++ + "_" + parsed_workout.workout[i].exercise_id;
                 new_exercise.innerHTML = generate_workout_exercise_li(new_exercise.id, parsed_workout.workout[i].exercise_name + " " + parsed_workout.workout[i].exercise_muscle );
 
