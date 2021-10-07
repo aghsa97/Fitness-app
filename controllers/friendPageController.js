@@ -3,11 +3,24 @@ var path = require('path');
 const { json } = require('express');
 
 const friend_home = function(request, response) { 
-    if(!request.session.loggedin) {
-        response.redirect('../views/sharedViews/404');
-    }
-	var firstName = request.session.firstName;
+	var sql_friend_check =
+	`SELECT user.id
+	FROM user_info AS ui
+	JOIN user on user.id = ui.id
+	WHERE user_id IN (SELECT r_friend_id FROM user_friends WHERE a_friend_id = ? and accepted = 1) 
+	OR user_id IN (SELECT a_friend_id FROM user_friends WHERE r_friend_id = ? and accepted = 1)`
 
+	dbconnection.query(sql_friend_check, [request.session.dbId, request.session.dbId], function(error, friends) {
+		if(error) throw error;
+		const friend_list = [];
+		friends.forEach(function(str){
+			friend_list.push(JSON.parse(JSON.stringify(str)).id)
+		})
+		if(!request.session.loggedin || !friend_list.includes(parseInt(request.params.id))) {
+			response.redirect('../views/sharedViews/404');
+		}
+		
+	})
 	
 	if (request.session.role === "client") {
 		var sql_friends = 
@@ -29,14 +42,22 @@ const friend_home = function(request, response) {
         WHERE WORKOUT.USER_ID = ?
         AND SESSION_TIME >= SYSDATE();`
 
-		dbconnection.query(sql_client_upcoming_workouts, [request.params.id], function(error, upcoming_results){
-            if(error) throw error;
-			dbconnection.query(sql_workout_list, [request.params.id], function(error, workouts_results){
+		var sql_friend_personal_info =
+		`SELECT user_id, firstname, lastname, weight, height, gender, role
+		FROM user_info
+		WHERE user_id = ?`
+
+		dbconnection.query(sql_friend_personal_info, [request.params.id], function(error, personal_info) {
+			if(error) throw error;
+			dbconnection.query(sql_client_upcoming_workouts, [request.params.id], function(error, upcoming_results){
 				if(error) throw error;
-				var workout_list = workouts_results;
-				dbconnection.query(sql_friends, [request.params.id, request.params.id ], function(error, results){
+				dbconnection.query(sql_workout_list, [request.params.id], function(error, workouts_results){
 					if(error) throw error;
-					response.render(path.join(__dirname, "../views/clientViews/friendPage"), {firstName: firstName, upcoming: upcoming_results, friends: results, workout_list: workout_list, role: request.session.role})
+					var workout_list = workouts_results;
+					dbconnection.query(sql_friends, [request.params.id, request.params.id ], function(error, results){
+						if(error) throw error;
+						response.render(path.join(__dirname, "../views/clientViews/friendPage"), { personal_info: personal_info, upcoming: upcoming_results, friends: results, workout_list: workout_list, role: request.session.role})
+					})
 				})
 			})
 		});	

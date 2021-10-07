@@ -5,7 +5,7 @@ const { json } = require('express');
 const get_workout = function (request, response) {
     var sql_workout_list = 
 		`select * from workout_session
-		where workout_id = 1`;
+		where workout_id = ?`;
 
         dbconnection.query(sql_workout_list, [request.session.dbId], function(error, workouts_results){
             if(error) throw error;

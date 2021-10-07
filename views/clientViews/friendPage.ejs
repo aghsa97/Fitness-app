@@ -135,6 +135,23 @@
               renderCalendar();
             </script>
         </div>
+        
+        <div class="separator"></div>
+        <div class="info-list">
+          <div class="list-header">
+            <p><strong>Workouts</strong></p>
+          </div>
+          <ul class="list">
+            <% if (locals.upcoming) { %>
+              <% upcoming.forEach(function(str){ %>
+                  <li onclick="location.href = '/workoutPage/<%=JSON.parse(JSON.stringify(str)).id%>'">
+                      <%=JSON.parse(JSON.stringify(str)).session_time%>
+                      <%=JSON.parse(JSON.stringify(str)).name%>
+                  </li>
+              <% }) %>
+            <% } %>
+          </ul>
+        </div>
         <div class="separator"></div>
         <div class="info-list">
             <div class="list-header">
@@ -152,23 +169,25 @@
               </ul>
         
             </div>
-          </div>
-          <div class="separator"></div>
-          <div class="info-list">
+        </div>
+        <div class="separator"></div>
+        <div class="info-list">
             <div class="list-header">
-              <p><strong>Workouts</strong></p>
+                <p><strong>Personal information</strong></p>
             </div>
-            <ul class="list">
-              <% if (locals.upcoming) { %>
-                <% upcoming.forEach(function(str){ %>
-                    <li onclick="location.href = '/workoutPage/<%=JSON.parse(JSON.stringify(str)).id%>'">
-                        <%=JSON.parse(JSON.stringify(str)).session_time%>
-                        <%=JSON.parse(JSON.stringify(str)).name%>
-                    </li>
-                <% }) %>
-              <% } %>
-            </ul>
-          </div>
+            <div class="social-box">
+              <ul class="list">
+                <% if (locals.personal_info) { %>
+                  <%=JSON.parse(JSON.stringify(locals.personal_info[0])).firstname%>
+                  <%=JSON.parse(JSON.stringify(locals.personal_info[0])).lastname%><br>
+                  <%=JSON.parse(JSON.stringify(locals.personal_info[0])).weight%><br>
+                  <%=JSON.parse(JSON.stringify(locals.personal_info[0])).height%><br>
+                  <%=JSON.parse(JSON.stringify(locals.personal_info[0])).gender%><br>
+                  <%=JSON.parse(JSON.stringify(locals.personal_info[0])).role%>
+                <% } %>
+              </ul>
+            </div>
+        </div>
       </section>
       <%- include('../partials/footer.ejs') %>
     </div>

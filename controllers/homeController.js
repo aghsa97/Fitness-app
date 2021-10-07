@@ -33,9 +33,9 @@ const user_home = function(request, response) {
         WHERE WORKOUT.USER_ID = ?
         AND SESSION_TIME >= SYSDATE();`
 
-		dbconnection.query(sql_client_upcoming_workouts, [request.session.dbId], function(error, upcoming_results){
+		dbconnection.query(sql_client_upcoming_workouts, [db_id], function(error, upcoming_results){
             if(error) throw error;
-			dbconnection.query(sql_workout_session_list, [request.session.dbId], function(error, workouts_session_results){
+			dbconnection.query(sql_workout_session_list, [db_id], function(error, workouts_session_results){
 				if(error) throw error;
 				var workout_session_list = workouts_session_results;
 				dbconnection.query(sql_friends, [db_id, db_id ], function(error, results){

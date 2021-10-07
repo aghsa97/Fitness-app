@@ -178,7 +178,7 @@
             <ul class="list">
               <% if (locals.friends) { %>
                         <% friends.forEach(function(str){ %>
-                        <li onclick="location.href = '/createworkout/<%=JSON.parse(JSON.stringify(str)).id%>'">
+                        <li onclick="location.href = '/friendPage/<%=JSON.parse(JSON.stringify(str)).id%>'">
                             <strong>
                                 <%=JSON.parse(JSON.stringify(str)).firstname%>
                                 <%=JSON.parse(JSON.stringify(str)).lastname%>
@@ -192,7 +192,7 @@
         </div>
         <div class="info-list">
           <div class="list-header">
-            <p><strong>Up coming workouts</strong></p>
+            <p><strong>Upcoming workouts</strong></p>
           </div>
           <ul class="list">
             <% if (locals.upcoming) { %> <% upcoming.forEach(function(str){ %>

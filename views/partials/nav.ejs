@@ -1,12 +1,15 @@
 <nav>
   <h1 class="nav-box">
-    <% if (locals.role) { %> <%=role%> Homepage <% } else {%> Workout app <% }
-    %>
+    <% if (locals.personal_info) { %>
+      <%=JSON.parse(JSON.stringify(locals.personal_info[0])).firstname%> <%=JSON.parse(JSON.stringify(locals.personal_info[0])).lastname%>
+    <% } else if (locals.role) { %> <%=role%> Homepage <% } else { %> Workout app <% } %>
     <div class="flex-container">
       <% if (locals.role) { %> <% if (role == "client") { %>
       <div><a href="/" class="nav_button">Home</a></div>
-      <div><a href="/userinfo" class="nav_button">User info</a></div>
-      <div><a href="/createworkout" class="nav_button">Create workout</a></div>
+      <% if(!locals.personal_info) { %>
+        <div><a href="/userinfo" class="nav_button">User info</a></div>
+        <div><a href="/createworkout" class="nav_button">Create workout</a></div>
+      <% } %>
       <div><a href="/logout" class="nav_button">Log out</a></div>
 
       <% } else if (role == "trainer") { %>
