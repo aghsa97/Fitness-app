@@ -1,35 +1,45 @@
 <html>
-    <%- include('../partials/head.ejs'); %>
+    <head>
+        <meta charset="utf-8" />
+        <base href="/">
+        <link rel="stylesheet" href="base-styles.css">
+        <link rel="stylesheet" href="userInfo.css">
+        <link rel="stylesheet" href="nav-styles.css">
+        <link rel="stylesheet" href="footer-style.css">
+    </head>
     <body>
         <div class="wrapper">
             <%- include('../partials/nav.ejs'); %>
             <div class="content">
+                <div id="left">
+                    <div class="sub_content">
+                        <form id ="user_info-form" action="userinfo" action method="POST">
 
-                <form id ="user_info-form" action="userinfo" action method="POST">
+                            <% if (locals.info) { %> <% info.forEach(function(str){ %>
+                            
+                                <label for="First name">First name:</label><br>
+                                <input required type="text" name="firstname"value=<%=JSON.parse(JSON.stringify(str)).firstname%>><br>
 
-                    <% if (locals.info) { %> <% info.forEach(function(str){ %>
+                                <label for="Last name">Last name:</label><br>
+                                <input required type="text" name="lastname"value=<%=JSON.parse(JSON.stringify(str)).lastname%>><br>
+
+                                <label for="Weight">Weight:</label><br>
+                                <input required type="number" name="weight"value=<%=JSON.parse(JSON.stringify(str)).weight%>><br>
+
+                                <label for="Height">Height:</label><br>
+                                <input required type="number" name="height"value=<%=JSON.parse(JSON.stringify(str)).height%>><br>
+
+                                <label for="Gender">Gender:</label><br>
+                                <input required type="text" name="gender"value=<%=JSON.parse(JSON.stringify(str)).gender%>><br>
+
+                                <% }) %> 
+                            <% } %>
+                            <br>   
+                            <input type = "submit" value="Submit" onclick="return confirm('Are you sure you want to update the user info?')">
                     
-                        <label for="First name">First name:</label><br>
-                        <input required type="text" name="firstname"value=<%=JSON.parse(JSON.stringify(str)).firstname%>><br>
-
-                        <label for="Last name">Last name:</label><br>
-                        <input required type="text" name="lastname"value=<%=JSON.parse(JSON.stringify(str)).lastname%>><br>
-
-                        <label for="Weight">Weight:</label><br>
-                        <input required type="number" name="weight"value=<%=JSON.parse(JSON.stringify(str)).weight%>><br>
-
-                        <label for="Height">Height:</label><br>
-                        <input required type="number" name="height"value=<%=JSON.parse(JSON.stringify(str)).height%>><br>
-
-                        <label for="Gender">Gender:</label><br>
-                        <input required type="text" name="gender"value=<%=JSON.parse(JSON.stringify(str)).gender%>><br>
-
-                        <% }) %> 
-                    <% } %>
-                    <br>   
-                    <input type = "submit" value="Submit" onclick="return confirm('Are you sure you want to update the user info?')">
-               
-                </form>
+                        </form>
+                    </div>
+                </div>
             </div>
             <%- include('../partials/footer.ejs'); %>
         </div>

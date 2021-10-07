@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html>
-    <%- include('../partials/head.ejs') %>
+    <head>
+        <meta charset="utf-8" />
+        <base href="/">
+        <link rel="stylesheet" href="base-styles.css">
+        <link rel="stylesheet" href="clientInfo.css">
+        <link rel="stylesheet" href="nav-styles.css">
+        <link rel="stylesheet" href="footer-style.css">
+    </head>
 <body>
     <div class="wrapper">
         <%- include('../partials/nav.ejs') %>
-        <section class="trainer-home-container">
-            <div class="client-info">
+        <div id="left">
+            <div class="sub_content">
                 <div class="list-header">
                     <% if (locals.info) { %>
                         <% info.forEach(function(str){ %>
@@ -65,7 +72,7 @@
                     <% } %>
                 </ul>
             </div>
-        </section>
+        </div>
         <%- include('../partials/footer.ejs') %>
     </div>
 </body>

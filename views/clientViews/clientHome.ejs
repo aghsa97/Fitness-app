@@ -1,18 +1,24 @@
 <html>
-  <%- include('../partials/head.ejs'); %>
+  <head>
+    <meta charset="utf-8" />
+    <base href="/">
+    <link rel="stylesheet" href="base-styles.css">
+    <link rel="stylesheet" href="clientHome.css">
+    <link rel="stylesheet" href="nav-styles.css">
+    <link rel="stylesheet" href="footer-style.css">
+  </head>
   <link rel="stylesheet" href="calendar-styles.css" />
   <body>
-    <div class="wrapper">
+      <div class="wrapper">
       <%- include('../partials/nav.ejs') %>
-      <section class="trainer-home-container">
         <div class="client-list">
-          <div class="list-header">
-            <p><strong>Calendar</strong></p>
-          </div>
-          <div class="content">
-            <div class="calendar">
-              <div class="month">
-                <i class="fas fa-angel-left prev"><</i>
+            <div class="list-header">
+              <h2>Calendar</h2>
+            </div>
+            <div class="content">
+                <div class="calendar">
+                  <div class="month">
+                  <i class="fas fa-angel-left prev"><</i>
                 <div class="date">
                   <h2></h2>
                   <p></p>
@@ -164,7 +170,6 @@
             renderCalendar();
           </script>
         </div>
-        <div class="separator"></div>
         <div class="info-list">
           <div class="list-header">
             <p><strong>Friends</strong></p>
@@ -184,7 +189,6 @@
             </ul>
           </div>
         </div>
-        <div class="separator"></div>
         <div class="info-list">
           <div class="list-header">
             <p><strong>Workouts</strong></p>
