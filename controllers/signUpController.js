@@ -7,7 +7,7 @@ const registerUser = function (request, response) {
 
     var role = 'client';
     var sql_insert = 
-    `INSERT INTO user(email, password) 
+    `INSERT INTO user(email, hash) 
     VALUES (?,?);`;
 
     dbconnection.query(sql_insert, [email, password], function(error, results){
@@ -23,10 +23,8 @@ const registerUser = function (request, response) {
             dbconnection.query('SELECT id from user WHERE email = ?', [email], function(error, results){
                 if(error) throw error;
                 var user_id = results[0].id;
-                console.log(user_id);
                 dbconnection.query('INSERT INTO user_info(user_id, role) VALUES (?, ?)', [user_id, role], function(error, results){
                     if(error) throw error;
-                    console.log(results);
                     })
                 })
             message = "Your account has been created succesfully.";

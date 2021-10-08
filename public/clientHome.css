@@ -30,11 +30,13 @@
 #right {width: 25%; border:0px solid green;}
 
 .list_item {
+
     border:1px solid white;
     margin: 2px;
     width:95%;
     display:flex;
     padding:5px;
+
 }
 
 p {

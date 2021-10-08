@@ -4,15 +4,15 @@ const session = require('express-session');
 
 const user_login = (request, response) => {
     var email = request.body.email;
-	var password = request.body.password;
+	var hash = request.body.password;
 	var sql = 
 	`SELECT * 
 	FROM user join user_info 
 	ON user.id = user_info.user_id 
-	WHERE email = ? AND password = ?`
+	WHERE email = ? AND hash = ?`
 
-	if (email && password) {
-		dbconnection.query(sql, [email, password], function(error, results, fields) {
+	if (email && hash) {
+		dbconnection.query(sql, [email, hash], function(error, results, fields) {
 
 			if (results.length > 0) {
 				request.session.loggedin = true;

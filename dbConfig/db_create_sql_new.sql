@@ -4,7 +4,8 @@ CREATE TABLE `exercise` (
   `target_muscle` varchar(45) DEFAULT NULL,
   `level` INT DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name_UNIQUE` (`name`)
 ) engine=InnoDB default charset=latin1;
 
 CREATE TABLE `user` (
@@ -65,7 +66,7 @@ CREATE TABLE `workout_exercise` (
 CREATE TABLE `workout_session` (
   `id` INT unsigned NOT NULL AUTO_INCREMENT,
   `workout_id` INT unsigned DEFAULT NULL,
-  `when` datetime NOT NULL,
+  `session_time` datetime NOT NULL,
   `completed` tinyint DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `workout_session_workout_idx` (`workout_id`),

@@ -1,40 +1,79 @@
 <!DOCTYPE html>
 <html>
-
-    <%- include('../partials/head.ejs') %>
-
+    <head>
+        <meta charset="utf-8" />
+        <base href="/">
+        <link rel="stylesheet" href="base-styles.css">
+        <link rel="stylesheet" href="trainerHome.css">
+        <link rel="stylesheet" href="nav-styles.css">
+        <link rel="stylesheet" href="footer-style.css">
+    </head>
 <body>
-    <%- include('../partials/nav.ejs') %>
-
-<h1> <%=firstName%> you are a trainer, rejoice</h1>
-
-<div>
-    <p class = friend-list>Client list</p>
-    <ul class = "friend-list">
-        
-        <% if (locals.clients) { %>
-            <% clients.forEach(function(str){ %>
-               <li onclick="location.href = '/client/<%=JSON.parse(JSON.stringify(str)).id%>'">
-                   <%=JSON.parse(JSON.stringify(str)).firstname%> <%=JSON.parse(JSON.stringify(str)).lastname %> <%= JSON.parse(JSON.stringify(str)).email%></li>
-            <% }) %>
-        <% } %>
-    </ul>
-</div>
-
-<div>
-    <p>My workouts </p>
-    <ul>
-        <% if (locals.workouts) { %>
-            <% workouts.forEach(function(str){ %>
-               <li><%=JSON.parse(JSON.stringify(str)).name%></li>
-            <% }) %>
-        <% } %>
-    </ul>
-    <a href="/createworkout" class="btn btn-primary">Create workout</a>
-</div>
-
-
-
-<%- include('../partials/footer.ejs') %>
+    <div class="wrapper">
+        <%- include('../partials/nav.ejs') %>
+        <div class="container">
+            <div id="left">
+                <div class="sub_content">
+                    <div class="list-header">
+                        <h2>Client list</h2>
+                    </div>
+                    <ul class="trainer_homepage_list">
+                        <% if (locals.clients) { %>
+                        <% clients.forEach(function(str){ %>
+                        <li class="list_item" onclick="location.href = '/client/<%=JSON.parse(JSON.stringify(str)).id%>'">
+                            <%=JSON.parse(JSON.stringify(str)).firstname%> <%=JSON.parse(JSON.stringify(str)).lastname %> <%= JSON.parse(JSON.stringify(str)).email%>
+                        </li>
+                        <% }) %>
+                        <% } %>
+                    </ul>
+                </div>
+            </div>
+            <div id="middle">
+                <div class="sub_content">
+                    <div class="list-header">
+                        <h2>Workout list</h2>
+                    </div>
+                    <ul class="trainer_homepage_list">
+                        <% if (locals.workouts) { %>
+                            <% workouts.forEach(function(str){ %>
+                            <li class="list_item" onclick="location.href = '/createworkout/<%=JSON.parse(JSON.stringify(str)).id%>'">
+                                <%=JSON.parse(JSON.stringify(str)).name%>
+                            </li>
+                            <% }) %>
+                        <% } %>
+                    </ul>
+                </div>
+            </div>
+            <div id="right">
+                <div class="sub_content">
+                    <div class="list-header">
+                        <h2>Pending approval</h2>
+                    </div>
+                    <ul class="trainer_homepage_list">
+                        <% if (locals.pending) { %>
+                            <% pending.forEach(function(str) { %>
+                                <li class="list_item">
+                                    <div class="approve-entry">
+                                        <div class="text-box">
+                                            <div class="normal_text">Name: <%= JSON.parse(JSON.stringify(str)).firstname %> <%= JSON.parse(JSON.stringify(str)).lastname %> </div>
+                                            <div class="normal_text">Email: <%= JSON.parse(JSON.stringify(str)).email %></div>                            
+                                        </div>
+                                        <div class="text-box">
+                                            <form action = "home" action method= "post">    
+                                                <input type="submit" name="action" value = "Verify">  
+                                                <input type="submit" name="action" value = "Delete">   
+                                                <input type="hidden" name="user_id" value = <%=JSON.parse(JSON.stringify(str)).id%>>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </li>
+                            <% }) %>
+                        <% } %>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <%- include('../partials/footer.ejs') %>
+    </div>
 </body>
 </html>

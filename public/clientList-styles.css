@@ -1,0 +1,98 @@
+.list-header {
+    height: fit-content;
+    text-align: center;
+    background-color: darkolivegreen;
+    font-size: x-large;
+}
+.list-header li {
+    background-color: none;
+}
+.trainer-home-container {
+    color: white;
+    background-color:darkslategray;
+    padding: 10px;
+    display: flex;
+    height: auto;
+    flex: 1;
+}
+.client-list {
+    height: 100%;
+    flex: 0 0 49%;
+    border-style: double;
+    border-width: thin;
+    border-color: lightslategray;
+    display: flex;
+    flex-direction: column;
+}
+.client-list li {
+    width: 90%;
+    border-style: solid;
+    border-width: thin;
+    border-color: white;
+    margin: 10px;
+    text-align: left;
+    padding-left: 10px;
+    list-style-type: none;
+}
+.approve-list {
+    height: 100%;
+    flex: 1;
+    border-style: double;
+    border-width: thin;
+    border-color: lightslategray;
+    display: flex;
+    flex-direction: column;
+}
+.approve-list li {
+    list-style-type: none;
+    width: 90%;
+    border-style: solid;
+    border-width: thin;
+    border-color: white;
+    margin: 10px;
+    text-align: left;
+    
+    list-style-type: none;
+}
+.info-list {
+    height: 100%;
+    flex: 1;
+    border-style: double;
+    border-width: thin;
+    border-color: lightslategray;
+    display: flex;
+    flex-direction: column;
+}
+.info-list li {
+    list-style-type: none;
+    width: 90%;
+    border-style: solid;
+    border-width: thin;
+    border-color: white;
+    margin: 10px;
+    text-align: left;
+    list-style-type: none;
+}
+.separator {
+    flex: 0 0 2%;
+}
+
+.workout-list {
+    height: 100%;
+    flex: 1;
+    border-style: double;
+    border-width: thin;
+    border-color: lightslategray;
+    display: flex;
+    flex-direction: column;
+}
+.workout-list li {
+    list-style-type: none;
+    width: 90%;
+    border-style: solid;
+    border-width: thin;
+    border-color: white;
+    margin: 10px;
+    text-align: left;
+    list-style-type: none;
+}

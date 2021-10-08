@@ -10,6 +10,8 @@ BEGIN
         
         DELETE FROM workout WHERE user_id = delete_user_id;
         
+        DELETE FROM user_info WHERE user_id = delete_user_id;
+
         DELETE FROM user WHERE id = delete_user_id;
         SET foreign_key_checks = 1; 
 END $$
