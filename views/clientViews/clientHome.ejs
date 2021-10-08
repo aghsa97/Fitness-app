@@ -1,27 +1,73 @@
-<!DOCTYPE html>
-<html lang="en">
-  <%- include('../partials/head.ejs') %>
-  <body>
-    <%- include('../partials/nav.ejs') %>
-    
-    <div class="container">
-      <div class="social-box">
-        <p class="friend-list">Friendlist</p>
-        <ul class="list">
-          <% if (locals.friends) { %> <% friends.forEach(function(str){ %>
-          <li class="friend-list">
-            
-            <%=JSON.parse(JSON.stringify(str)).firstname%>
-            <%=JSON.parse(JSON.stringify(str)).lastname%>
-            <%=JSON.parse(JSON.stringify(str)).role%>
-          </li>
-          <% }) %> <% } %>
-        </ul>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <base href="/">
+    <link rel="stylesheet" href="base-styles.css">
+    <link rel="stylesheet" href="clientHome.css">
+    <link rel="stylesheet" href="nav-styles.css">
+    <link rel="stylesheet" href="footer-style.css">
+    <script src="calender.js" type="text/javascript"></script>
+  </head>
+  <body onload="render_calender('calender-box', 0)">
+      <div class="wrapper">
+      <%- include('../partials/nav.ejs') %>
+      <div class="content">
+          <div id="left">
+            <div id="calender-box" class="sub_content"></div>
+            <div id="workout-box" class="workout-container" style="display: none;" onclick="this.style.display = 'none'"></div>
+          </div>
+          <div id="middle">
+            <div class="sub_content">
+              <div class="list-header">
+                <h2>Friends</h2>
+              </div>
+              <div class="social-box">
+                <ul class="list">
+                  <% if (locals.friends) { %>
+                  <% friends.forEach(function(str){ %>
+                  <li onclick="location.href = '/createworkout/<%=JSON.parse(JSON.stringify(str)).id%>'">
+                    <%=JSON.parse(JSON.stringify(str)).firstname%>
+                    <%=JSON.parse(JSON.stringify(str)).lastname%>
+                    <%=JSON.parse(JSON.stringify(str)).email%>
+                  </li>
+                  <% }) %>
+                  <% } %>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div id="right">
+            <div class="sub_content">
+              <div class="list-header">
+                <h2>Up coming workouts</h2>
+              </div>
+              <div>
+                <ul class="list">
+                  <% if (locals.upcoming) { %> <% upcoming.forEach(function(str){ %>
+                  <li onclick="location.href = '/workoutPage/<%=JSON.parse(JSON.stringify(str)).id%>'">
+                  <%=JSON.parse(JSON.stringify(str)).session_time%>
+                  <%=JSON.parse(JSON.stringify(str)).name%>
+                  </li>
+                  <% }) %> <% } %>
+                </ul>
+              </div>
+              <div class="list-header">
+                <p><strong>Workout list</strong></p>
+              </div>
+              <ul class="list">
+                <% if (locals.workout_list) { %>
+                <% workout_list.forEach(function(str){ %>
+                <li onclick="location.href = '/createworkout/<%=JSON.parse(JSON.stringify(str)).id%>'">
+                  <%=JSON.parse(JSON.stringify(str)).name%>
+                </li>
+                <% }) %>
+                <% } %>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <%- include('../partials/footer.ejs') %>
       </div>
-      
-    </div>
-
-    <%- include('../partials/footer.ejs') %>
-
+>>>>>>> Stashed changes
   </body>
 </html>
