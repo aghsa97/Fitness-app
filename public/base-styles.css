@@ -95,3 +95,25 @@ nav {
   input.normal {
     height:20px;
   }
+
+  .sub_content {
+    color:white;
+    vertical-align: top;
+    width: 90%;
+    padding: 10px;
+    height: 550px;
+    background: #00000075;
+    text-transform: uppercase;
+    border-radius: 10px;
+    border: 1px solid #e5ff00;
+    overflow-y:auto;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    float:left;
+}
+
+.no_scroll {
+  overflow: hidden;
+}

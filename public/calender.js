@@ -16,19 +16,16 @@ function render_calender(target_div_name, set_date) {
 
     var generated_html = generate_cal_month_header(date);
     var day_counter = 0;
-    var debug = new Array();
-    console.log(firstDay);
+    
+    
 
     var break_counter = 0;
     
     for(let fill_day = 0; fill_day < firstDay.getDay()-1; fill_day++) {
         generated_html += "<div class='filler day "+(fill_day == 0 ? "new_line" : "")+"'>&nbsp;</div>";
-        debug.push(fill_day);
         break_counter++;
     }
 
-    console.log(debug);
-    debug.length = 0;
     
     for(let weekday = firstDay.getDay(); weekday <= 7; weekday++) {
         current_day.setDate(current_day.getDate() + 1);
@@ -48,7 +45,7 @@ function render_calender(target_div_name, set_date) {
     }
     if(break_counter % 7 != 0) {
         for(let fill_day = break_counter % 7; fill_day < 7; fill_day++) {
-            generated_html += "<div class='filler day'>"+break_counter+"</div>";
+            generated_html += "<div class='filler day'></div>";
         }
     }
     

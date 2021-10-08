@@ -2,23 +2,7 @@
     width:100%;
 }
 
-.sub_content {
-    color:white;
-    vertical-align: top;
-    width: 90%;
-    padding: 10px;
-    height: 550px;
-    background: #00000075;
-    text-transform: uppercase;
-    border-radius: 10px;
-    border: 1px solid #e5ff00;
-    overflow-y:auto;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    float:left;
-}
+
 
 #left, #middle, #right {
     float: left; 
@@ -70,12 +54,13 @@ p {
 
 .filler {
     border: 1px solid gray;
-    background-color: rgb(214, 214, 214);
+    background-color: #1c283336;
 }
 
 .normal-day {
-    border: 1px solid rgb(255, 154, 2);
-    background-color: rgb(255, 242, 125);
+    color:#e5ff00;
+    border: 1px solid #e5ff00;
+    background-color: #1c2833;
 }
 
 .normal-day:hover {
@@ -102,6 +87,7 @@ p {
 }
 
 .cal_header {
+    color:#e5ff00;
     border-radius: 3px;
     margin: 2px;
     height: 40px;
@@ -110,8 +96,8 @@ p {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
     float:left;
-    border: 1px solid rgb(19, 2, 255);
-    background-color: rgb(0, 233, 241);
+    border: 1px solid #e5ff00;
+    background-color: #1c2833;
 }
 
 .cal_header.arrow {
@@ -125,13 +111,14 @@ p {
 
 .day-header {
     font-size: small;
-    border: 1px solid rgb(19, 2, 255);
-    background-color: rgb(0, 233, 241);
+    color:#e5ff00;
+    border: 1px solid #e5ff00;
+    background-color: #1c2833;
 }
 
 .calendar-container {
-    width: 400px;
-    height: 400px;
+    width: 380px;
+    height: 380px;
     border: 2px solid rgb(243, 97, 0);
     background-color: rgb(49, 49, 49);
     padding: 2px;
