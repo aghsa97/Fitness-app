@@ -6,7 +6,7 @@ const user_home = function(request, response) {
 
 	var firstName = request.session.firstName;
 
-	var db_id = request.session.dbId;
+	var db_id = request.session.dbId; //this is the logged in users user id
 	
 	if (request.session.role === "client") {
 

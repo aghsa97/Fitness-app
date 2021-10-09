@@ -30,7 +30,8 @@ router.post('/home', approveController.verify_or_delete_user);
 
 router.get('/home', clientFriendsController.user_friends);
 
-router.get('/home', calendarController.get_workout)
+router.get('/calendar/:year_month', calendarController.get_month_workout_sessions);
+router.get('/calendar/session/:session_id', calendarController.get_workout_session);
 
 router.get('/logout', loginController.user_logout);
 
@@ -51,6 +52,8 @@ router.post('/createexercise', createExerciseController.save_exercise);
 router.get('/createexercise/:id', createExerciseController.edit_exercise);
 
 router.post('/createexercise/:id', createExerciseController.save_edited_exercise);
+
+router.post('/deleteexercise/:id', createExerciseController.delete_exercise);
 
 router.post('/home', approveController.verify_or_delete_user);
 
