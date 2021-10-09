@@ -139,3 +139,15 @@ img {
     border-radius: 5px;
     width: 5%;
   }
+
+  .workout_session_popup {
+    border: 1px solid white;
+    background-image: url(ass.png);
+    width:400px;
+    height:285px;
+    position: absolute;
+    top:100px;
+    left:300px;
+    display: inline-block;
+    cursor: pointer;
+  }

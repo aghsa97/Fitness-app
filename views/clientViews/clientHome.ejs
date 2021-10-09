@@ -6,7 +6,8 @@
     <link rel="stylesheet" href="clientHome.css">
     <link rel="stylesheet" href="nav-styles.css">
     <link rel="stylesheet" href="footer-style.css">
-
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	
     <script src="calender.js" type="text/javascript"></script>
   </head>
   <body onload="render_calender('calender-box', 0)">
@@ -40,19 +41,6 @@
           <div id="right">
             <div class="sub_content">
               <div class="list-header">
-                <h2>Up coming workouts</h2>
-              </div>
-              <div>
-                <ul class="list">
-                  <% if (locals.upcoming) { %> <% upcoming.forEach(function(str){ %>
-                  <li onclick="location.href = '/workoutPage/<%=JSON.parse(JSON.stringify(str)).id%>'">
-                  <%=JSON.parse(JSON.stringify(str)).session_time%>
-                  <%=JSON.parse(JSON.stringify(str)).name%>
-                  </li>
-                  <% }) %> <% } %>
-                </ul>
-              </div>
-              <div class="list-header">
                 <p><strong>Workout list</strong></p>
               </div>
               <ul class="list">
@@ -69,5 +57,8 @@
         </div>
         <%- include('../partials/footer.ejs') %>
       </div>
+      <div class="workout_session_popup" id="workout_session_popup">
+        Poppa mig!
+      </div> 
   </body>
 </html>

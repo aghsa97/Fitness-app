@@ -29,7 +29,8 @@ router.post('/home', approveController.verify_or_delete_user);
 
 router.get('/home', clientFriendsController.user_friends);
 
-router.get('/home', calendarController.get_workout)
+router.get('/calendar/:year_month', calendarController.get_month_workout_sessions);
+router.get('/calendar/session/:session_id', calendarController.get_workout_session);
 
 router.get('/logout', loginController.user_logout);
 

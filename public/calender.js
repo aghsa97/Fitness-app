@@ -7,8 +7,6 @@ function render_calender(target_div_name, set_date) {
         date = set_date;
         
     }
-    let session_dict = {"2021-10-02" : 2,"2021-09-05" : 3,"2021-09-07" : 4,"2021-09-09" : 5,"2021-09-12" : 6,"2021-09-14" : 7,"2021-09-16" : 8,"2021-09-19" : 9,"2021-09-21" : 10,"2021-09-23" : 11,"2021-09-26" : 12,"2021-09-28" : 13 }
-    
     var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
     var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
 
@@ -17,8 +15,6 @@ function render_calender(target_div_name, set_date) {
     var generated_html = generate_cal_month_header(date);
     var day_counter = 0;
     
-    
-
     var break_counter = 0;
     
     for(let fill_day = 0; fill_day < firstDay.getDay()-1; fill_day++) {
@@ -30,7 +26,7 @@ function render_calender(target_div_name, set_date) {
     for(let weekday = firstDay.getDay(); weekday <= 7; weekday++) {
         current_day.setDate(current_day.getDate() + 1);
         let this_date = current_day.toISOString().split('T')[0];
-        generated_html += "<div class='" + (session_dict[this_date]  !== undefined ? "session-day" : "normal-day") + " day" + (break_counter % 7 == 0 ? " new_line" : "") + "' id='cal_" + current_day.toISOString().split('T')[0] + "' onclick='show_workout(this.id)'>" + ++day_counter + "</div>";
+        generated_html += "<div class='normal-day day" + (break_counter % 7 == 0 ? " new_line" : "") + "' id='cal_" + current_day.toISOString().split('T')[0] + "' onclick='show_workout(this.id)'>" + ++day_counter + "</div>";
 
         break_counter++;
     }
@@ -39,7 +35,7 @@ function render_calender(target_div_name, set_date) {
     for(let i = day_counter+1; i <= lastDay.getDate();i++) {
         current_day.setDate(current_day.getDate() + 1);
         let this_date = current_day.toISOString().split('T')[0];
-        generated_html += "<div class='" + (session_dict[this_date]  !== undefined ? "session-day" : "normal-day") + " day " + (break_counter % 7 == 0 ? " new_line" : "") + "' id='cal_" + this_date + "' onclick='show_workout(this.id)'>" + i + "</div>";
+        generated_html += "<div class='normal-day day " + (break_counter % 7 == 0 ? " new_line" : "") + "' id='cal_" + this_date + "' onclick='show_workout(this.id)'>" + i + "</div>";
         
         break_counter++;
     }
@@ -50,6 +46,7 @@ function render_calender(target_div_name, set_date) {
     }
     
     document.getElementById(target_div_name).innerHTML = generated_html;
+    get_month_workout_sessions(date.getFullYear()+"-"+("0" + (date.getMonth() + 1)).slice(-2));
     setup_calender_listeners(target_div_name, date);
 }
 
@@ -65,11 +62,22 @@ function generate_cal_month_header(show_date) {
     return header_html;
 }
 
-function show_workout(workout_date) {
-    sess_dict = [];
-    date_string = workout_date.replace("cal_", "");
-        document.getElementById('workout-box').style.display = "block";
-        document.getElementById('workout-box').innerHTML = date_string + " --- " +sess_dict[date_string];
+function show_workout(session_id) {
+    $('workout_session_popup').toggle();
+    $(document).ready(function () {
+        $.ajax('/calendar/session/'+session_id,   // request url
+			{            
+				success: function (data, status, xhr) {    // success callback function
+                    alert(JSON.stringify(data));
+                    data.forEach(current_row => {
+                        
+                    });
+				},
+                error: function() {
+                    alert('fel');
+                }
+			});
+   });
 }
 
 function setup_calender_listeners(target_div_name, current_date) {
@@ -79,4 +87,33 @@ function setup_calender_listeners(target_div_name, current_date) {
     document.getElementById("next_month_arrow").addEventListener("click", () => {
         render_calender(target_div_name, new Date(current_date.setMonth(current_date.getMonth()+1)));
     });
+}
+
+function get_month_workout_sessions(year_month) {
+     $(document).ready(function () {
+        $.ajax('/calendar/'+year_month,   // request url
+			{            
+				success: function (data, status, xhr) {    // success callback function
+                    alert(JSON.stringify(data));
+                    data.forEach(current_row => {
+                        var current_date = JSON.parse(JSON.stringify(current_row)).session_date;
+                        var current_date_obj = document.getElementById("cal_"+ current_date);
+                        if(current_date_obj) {
+                            current_date_obj.className = "session-day day";
+                            var current_workout_id = JSON.stringify(current_row.id);
+                            current_date_obj.addEventListener("click", () => {
+                                show_workout(current_workout_id);
+                            });
+                        }
+                    });
+				},
+                error: function() {
+                    alert('fel');
+                }
+			});
+   });
+}
+
+function update_calendar(data) {
+    
 }
