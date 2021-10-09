@@ -52,6 +52,8 @@ router.get('/createexercise/:id', createExerciseController.edit_exercise);
 
 router.post('/createexercise/:id', createExerciseController.save_edited_exercise);
 
+router.post('/deleteexercise/:id', createExerciseController.delete_exercise);
+
 router.post('/home', approveController.verify_or_delete_user);
 
 router.get('/userinfo', userInfoController.get_user_info);

@@ -40,6 +40,7 @@
                                         <option value="Chest">Chest</option>
                                         <option value="Shoulder">Shoulder</option>
                                         <option value="Abs">Abs</option>
+                                        <option value="Stretch">Stretch</option>
                                     </select><br>
 
                                 <label class="exercise_form_label" for="level">Level</label><br>
@@ -64,7 +65,9 @@
                                     <% } %>
 
                                 <% if (locals.edit_title) { %>
+                                    <% locals.req %>
                                     <input type = "submit" value="Edit" onclick="return confirm('Are you sure you want to edit this exercise?');">
+                                    <input type = "submit" value="Delete" onclick="return confirm('Are you sure you want to delete this exercise?');" formaction="deleteexercise/<%=parseInt(JSON.stringify(locals.requested_exercise).slice(7,9))%>" formmethod="post">
                                     <% } %>
     
                             </div>
@@ -116,7 +119,7 @@ function filter_list() {
             if ('<%=locals.requested_exercise%>') {
 
                var test = '<%-JSON.stringify(locals.requested_exercise)%>'
-
+                
                var parsed_exercise = {
                    exercise: JSON.parse(test)
                }
@@ -134,7 +137,11 @@ function filter_list() {
         function updateAction(){
 
             if ('<%=locals.requested_exercise%>') {
+                
+    
                 document.form.action = "createexercise/"+parsed_exercise.exercise[0].id
+   
+                
             } else{
                 document.form.action = "createexercise"
             }
