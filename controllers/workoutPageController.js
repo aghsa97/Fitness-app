@@ -7,8 +7,6 @@ const show_workout = function (request, response) {
         response.redirect('../views/sharedViews/404');
     }
 
-
-
     var sql_workout_content =
     `SELECT w.name as wname, e.name, e.description, we.e_load, we.e_reps, we.e_order
     FROM workout_session as ws
