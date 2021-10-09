@@ -2,103 +2,140 @@
     width:100%;
 }
 
-.sub_content {
-    color:white;
-    vertical-align: top;
-    width: 90%;
-    padding: 10px;
-    height: 550px;
-    background: #00000075;
-    text-transform: uppercase;
-    border-radius: 10px;
-    border: 1px solid #e5ff00;
-    overflow-y:auto;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    float:left;
-  }
 
-  .trainer_homepage_list {
-    width:100%;
-    list-style-type: none;
-    padding:0px;
-    margin-top: 20px;
-    border: 0px solid white;
-  }
 
-  .workout_exercise {
-    border: 1px solid white;
-    width:100%;
-    padding:2px;
-    margin: 2px;
-  }
-
-  .exercise_name {
-    width: 300px;
-    margin-left: 20px;
-    float:left;
-    vertical-align: middle;
-    height: 100%;
-  }
-
-  .small_input {
-    width:50px;
-    float:left;
-  }
-
-  .small_input_header {
-    width:70px;
-    height:100%;
-    text-align: right;
-    font-size: small;
-    vertical-align: bottom;
-    border: 0px solid white;
-    float:left;
-    margin-right: 3px;
-  }
-
-  .icon {
-    width:25px;
-    height:25px;
-    border: 0px solid red;
-    padding:0px;
-    margin:0px;
-  }
-
-  .icon_container {
-    vertical-align: bottom;
-    border:0px solid blue;
-    height:100%;
-  }
-
-  
-  #left, #middle, #right {
+#left, #middle, #right {
     float: left; 
     text-align: center;
-    vertical-align: top;
-  }
+}
 
-  #left {width: 45%; border:0px solid green;}
-  #middle {width: 25%; border:0px solid green;}
-  #right {width: 25%; border:0px solid green;}
+#left {width: 45%; border:0px solid green;}
+#middle {width: 25%; border:0px solid green;}
+#right {width: 25%; border:0px solid green;}
 
-  
+.list_item {
 
-  .list_item {
     border:1px solid white;
     margin: 2px;
     width:95%;
     display:flex;
     padding:5px;
-  }
 
-  p {
+}
+
+p {
     padding:5px;
     margin:0px;
-  }
+}
 
 .text-box {
     text-align: left;      
 }
+
+.content {
+    width: 90%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+
+.day {
+    position: relative;
+    width: 12%;
+    height: 0;
+    padding-bottom: 12%;
+    border-radius: 3px;
+    margin: 2px;
+    float: left;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+.filler {
+    border: 1px solid gray;
+    background-color: #1c283336;
+}
+
+.normal-day {
+    color:#e5ff00;
+    border: 1px solid #e5ff00;
+    background-color: #1c2833;
+}
+
+.normal-day:hover {
+    border: 1px solid rgb(2, 120, 255);
+    background-color: rgb(144, 255, 125);
+}
+
+
+.session-day {
+    border: 1px solid rgb(255, 154, 2);
+    background-color: rgb(147, 255, 125);
+}
+
+.session-day:hover {
+    border: 1px solid rgb(2, 120, 255);
+    background-color: rgb(160, 125, 255);
+}
+
+.new_line {
+    clear: both; 
+    float: left; 
+    display: block; 
+    position: relative;
+}
+
+.cal_header {
+    color:#e5ff00;
+    border-radius: 3px;
+    margin: 2px;
+    height: 40px;
+    text-align: center;
+    vertical-align: text-bottom;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    float:left;
+    border: 1px solid #e5ff00;
+    background-color: #1c2833;
+}
+
+.cal_header.arrow {
+    width: 12%;
+}
+
+.cal_header.month {
+    width: 64.5%;
+}
+
+
+.day-header {
+    font-size: small;
+    color:#e5ff00;
+    border: 1px solid #e5ff00;
+    background-color: #1c2833;
+}
+
+.calendar-container {
+    width: 380px;
+    height: 380px;
+    border: 2px solid rgb(243, 97, 0);
+    background-color: rgb(49, 49, 49);
+    padding: 2px;
+}
+
+.workout-container {
+    width: 240px;
+    height: 240px;
+    border: 2px solid rgb(243, 97, 0);
+    background-color: rgb(187, 171, 171);
+    padding: 2px;
+}
+
+img {
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 10px;
+    border-radius: 5px;
+    width: 5%;
+  }

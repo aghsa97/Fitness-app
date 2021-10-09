@@ -6,224 +6,68 @@
     <link rel="stylesheet" href="clientHome.css">
     <link rel="stylesheet" href="nav-styles.css">
     <link rel="stylesheet" href="footer-style.css">
+
+    <script src="calender.js" type="text/javascript"></script>
   </head>
-  <link rel="stylesheet" href="calendar-styles.css" />
-  <body>
+  <body onload="render_calender('calender-box', 0)">
       <div class="wrapper">
       <%- include('../partials/nav.ejs') %>
-        <div class="client-list">
-            <div class="list-header">
-              <h2>Calendar</h2>
-            </div>
-            <div class="content">
-                <div class="calendar">
-                  <div class="month">
-                  <i class="fas fa-angel-left prev"><</i>
-                <div class="date">
-                  <h2></h2>
-                  <p></p>
-                </div>
-                <i class="fas fa-angel-right next">></i>
+      <div class="content">
+          <div id="left">
+            <div id="calender-box" class="sub_content no_scroll"></div>
+            <div id="workout-box" class="workout-container" style="display: none;" onclick="this.style.display = 'none'"></div>
+          </div>
+          <div id="middle">
+            <div class="sub_content">
+              <div class="list-header">
+                <h2>Friends</h2>
               </div>
-              <div class="weekdays">
-                <div>Sun</div>
-                <div>Mon</div>
-                <div>Tue</div>
-                <div>Wed</div>
-                <div>Thu</div>
-                <div>Fri</div>
-                <div>Sat</div>
+              <div class="social-box">
+                <ul class="list">
+                  <% if (locals.friends) { %>
+                  <% friends.forEach(function(str){ %>
+                  <li onclick="location.href = '/createworkout/<%=JSON.parse(JSON.stringify(str)).id%>'">
+                    <%=JSON.parse(JSON.stringify(str)).firstname%>
+                    <%=JSON.parse(JSON.stringify(str)).lastname%>
+                    <%=JSON.parse(JSON.stringify(str)).email%>
+                  </li>
+                  <% }) %>
+                  <% } %>
+                </ul>
               </div>
-              <div class="days"></div>
             </div>
-            <p class="work-out">My workouts</p>
-            <ul class="list-work" id="sessions-list">
-              <% if (locals.workout_session_list) { %> <%
-              workout_session_list.forEach(function(str){ %>
-              <li>
-                <span id="dateMonth"
-                  ><%=JSON.parse(JSON.stringify(str)).session_time.slice(5,
-                  10)%></span
-                >
-              </li>
-              <li>
-                <span id="dateTime"
-                  ><%=" AT: " +
-                  JSON.parse(JSON.stringify(str)).session_time.slice(11, 13)+
-                  ":" + JSON.parse(JSON.stringify(str)).session_time.slice(14,
-                  16)%></span
-                >
-              </li>
-              <br />
-              <% }) %> <% } %>
-            </ul>
           </div>
-          <script>
-            const date = new Date();
-
-            const workout_sessions = document
-              .getElementById("sessions-list")
-              .getElementsByTagName("SPAN");
-
-            const renderCalendar = () => {
-              date.setDate(1);
-              const monthDays = document.querySelector(".days");
-              const lastDay = new Date(
-                date.getFullYear(),
-                date.getMonth() + 1,
-                0
-              ).getDate();
-              const prevLastDay = new Date(
-                date.getFullYear(),
-                date.getMonth(),
-                0
-              ).getDate();
-              const firstDayIndex = date.getDay();
-              const lastDayIndex = new Date(
-                date.getFullYear(),
-                date.getMonth() + 1,
-                0
-              ).getDay();
-              const nextDays = 7 - lastDayIndex - 1;
-              const months = [
-                "January",
-                "February",
-                "March",
-                "April",
-                "May",
-                "June",
-                "July",
-                "August",
-                "September",
-                "October",
-                "November",
-                "December",
-              ];
-              document.querySelector(".date h2").innerHTML =
-                months[date.getMonth()];
-              document.querySelector(".date p").innerHTML =
-                new Date().toDateString();
-              let days = "";
-
-              for (let x = firstDayIndex; x > 0; x--) {
-                days += `<div class="prev-date">${prevLastDay - x + 1}</div>`;
-              }
-              for (let i = 1; i <= lastDay; i++) {
-                for (
-                  let z = 0, y = 0;
-                  z, y < workout_sessions.length;
-                  y++, z++
-                ) {
-                  if (
-                    date.getMonth() === new Date().getMonth() &&
-                    i === parseInt(workout_sessions[z].innerHTML.slice(3)) &&
-                    date.getMonth() + 1 ===
-                      parseInt(workout_sessions[y].innerHTML.slice(0, 3))
-                  ) {
-                    //printing sessions in calendar
-                    days += `<div class="workout-session">${i}</div>`;
-                    i++;
-                    break;
-                  }
-                }
-                //printing current day
-                if (
-                  i === new Date().getDate() &&
-                  date.getMonth() === new Date().getMonth()
-                ) {
-                  days += `<div class="today">${i}</div>`;
-                }
-                // printing days of the month except (workout-sessions)
-                else days += `<div>${i}</div>`;
-              }
-
-              for (let j = 1; j <= nextDays; j++) {
-                days += `<div class="next-date">${j}</div>`;
-                monthDays.innerHTML = days;
-              }
-
-              // clikcable days showing workouts in overlay no need to routing!
-              const session = document.querySelectorAll(".workout-session");
-              for (let w = 0; w < session.length; w++) {
-                let workout_session = false;
-                session[w].addEventListener("click", () => {
-                  if (!workout_session) {
-                    session[w].classList.add("overlay");
-                    workout_session = true;
-                  } else {
-                    document
-                      .querySelector(".overlay")
-                      .classList.remove("overlay");
-                    workout_session = false;
-                  }
-                });
-              }
-            };
-            document.querySelector(".prev").addEventListener("click", () => {
-              date.setMonth(date.getMonth() - 1);
-              renderCalendar();
-            });
-            document.querySelector(".next").addEventListener("click", () => {
-              date.setMonth(date.getMonth() + 1);
-              renderCalendar();
-            });
-            renderCalendar();
-          </script>
-        </div>
-        <div class="info-list">
-          <div class="list-header">
-            <p><strong>Friends</strong></p>
-          </div>
-          <div class="social-box">
-            <ul class="list">
-              <% if (locals.friends) { %>
-                        <% friends.forEach(function(str){ %>
-                        <li onclick="location.href = '/friendPage/<%=JSON.parse(JSON.stringify(str)).id%>'">
-                            <strong>
-                                <%=JSON.parse(JSON.stringify(str)).firstname%>
-                                <%=JSON.parse(JSON.stringify(str)).lastname%>
-                                <%=JSON.parse(JSON.stringify(str)).email%>
-                            </strong>
-                        </li>
-                        <% }) %>
-                    <% } %>
-            </ul>
+          <div id="right">
+            <div class="sub_content">
+              <div class="list-header">
+                <h2>Up coming workouts</h2>
+              </div>
+              <div>
+                <ul class="list">
+                  <% if (locals.upcoming) { %> <% upcoming.forEach(function(str){ %>
+                  <li onclick="location.href = '/workoutPage/<%=JSON.parse(JSON.stringify(str)).id%>'">
+                  <%=JSON.parse(JSON.stringify(str)).session_time%>
+                  <%=JSON.parse(JSON.stringify(str)).name%>
+                  </li>
+                  <% }) %> <% } %>
+                </ul>
+              </div>
+              <div class="list-header">
+                <p><strong>Workout list</strong></p>
+              </div>
+              <ul class="list">
+                <% if (locals.workout_list) { %>
+                <% workout_list.forEach(function(str){ %>
+                <li onclick="location.href = '/createworkout/<%=JSON.parse(JSON.stringify(str)).id%>'">
+                  <%=JSON.parse(JSON.stringify(str)).name%>
+                </li>
+                <% }) %>
+                <% } %>
+              </ul>
+            </div>
           </div>
         </div>
-        <div class="info-list">
-          <div class="list-header">
-            <p><strong>Upcoming workouts</strong></p>
-          </div>
-          <ul class="list">
-            <% if (locals.upcoming) { %> <% upcoming.forEach(function(str){ %>
-            <li
-              onclick="location.href = '/workoutPage/<%=JSON.parse(JSON.stringify(str)).id%>'">
-              <%=JSON.parse(JSON.stringify(str)).session_time%>
-              <%=JSON.parse(JSON.stringify(str)).name%>
-            </li>
-            <% }) %> <% } %>
-          </ul>
-        </div>
-        <div class="separator"></div>
-
-        <div class="info-list">
-          <div class="list-header">
-            <p><strong>Workout list</strong></p>
-          </div>
-          <ul class="list">
-            <% if (locals.workout_list) { %>
-                        <% workout_list.forEach(function(str){ %>
-                        <li onclick="location.href = '/createworkout/<%=JSON.parse(JSON.stringify(str)).id%>'">
-                            <strong>
-                                <%=JSON.parse(JSON.stringify(str)).name%>
-                            </strong>
-                        </li>
-                        <% }) %>
-                    <% } %>
-          </ul>
-        </div>
-      </section>
-      <%- include('../partials/footer.ejs') %>
-    </div>
+        <%- include('../partials/footer.ejs') %>
+      </div>
   </body>
 </html>
