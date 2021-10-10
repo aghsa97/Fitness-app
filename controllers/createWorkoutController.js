@@ -3,6 +3,8 @@ var path = require('path');
 
 const create_workout = function(request, response){
 
+    var page_title = "CREATE WORKOUT"
+
     if (request.session.role === "trainer" | request.session.role === "client") {
 
         var sql_get_exercises = 
@@ -10,7 +12,7 @@ const create_workout = function(request, response){
         FROM exercise`;
 
         dbconnection.query(sql_get_exercises, function(error, results){
-            response.render(path.join(__dirname, "../views/trainerViews/createWorkout"), {exercise:results, role: request.session.role })
+            response.render(path.join(__dirname, "../views/trainerViews/createWorkout"), {create_title: page_title, exercise:results, role: request.session.role })
         })
 
     } else {
@@ -60,7 +62,6 @@ const save_workout = function(request, response){
                     }) 
 
                 } else if (request.session.role === "client"){
-                    console.log('test')
                     dbconnection.query(sql_assign_workout_user, [request.session.dbId, created_workout_id], function(error, results){
                         if(error) throw error;
 
@@ -74,6 +75,8 @@ const save_workout = function(request, response){
 }
 
 const edit_workout = function(request, response){
+
+    var page_title = "EDIT WORKOUT"
 
     if(request.session.role === "trainer" | request.session.role === "client"){
 
@@ -110,7 +113,7 @@ const edit_workout = function(request, response){
             dbconnection.query(sql_get_exercises, function(error, results){
                 var exercises = results;
                 if(error) throw error;
-                response.render(path.join(__dirname, "../views/trainerViews/createWorkout"), {exercise:exercises, workout: workout, role: request.session.role})
+                response.render(path.join(__dirname, "../views/trainerViews/createWorkout"), {edit_title: page_title, exercise:exercises, workout: workout, role: request.session.role})
             })
         })
     }

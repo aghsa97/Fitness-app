@@ -15,21 +15,26 @@ const user_login = (request, response) => {
 		dbconnection.query(sql, [email, hash], function(error, results, fields) {
 
 			if (results.length > 0) {
-				request.session.loggedin = true;
-				request.session.dbId = results[0].id;
-				request.session.email = email;
-				request.session.firstName = results[0].firstname;
-				request.session.lastName = results[0].lastname;
-				request.session.weight = results[0].weight; 
-				request.session.height = results[0].height; 
-				request.session.gender = results[0].gender; 
-                request.session.role = results[0].role;
-				response.redirect('/home');
+				if(results[0].verified != 1 && results[0].role !== "trainer" ){
+					message = 'Your account needs to be verfied by a trainer before you can access the page';
+					response.render(path.join(__dirname, "../views/sharedViews/login"), {message: message});
+					
+				} else {
+					request.session.loggedin = true;
+					request.session.dbId = results[0].id;
+					request.session.email = email;
+					request.session.firstName = results[0].firstname;
+					request.session.lastName = results[0].lastname;
+					request.session.weight = results[0].weight; 
+					request.session.height = results[0].height; 
+					request.session.gender = results[0].gender; 
+					request.session.role = results[0].role;
+					response.redirect('/home');
+				}				
 			} else {
 				message = 'Incorrect Email and/or Password!';
 				response.render(path.join(__dirname, "../views/sharedViews/login"), {message: message});
 			}			
-			
 		});
 	} else {
 		//Will this ever be reached? The html makes these fields required anyways, so they cant be empty.

@@ -6,7 +6,8 @@
     <link rel="stylesheet" href="clientHome.css">
     <link rel="stylesheet" href="nav-styles.css">
     <link rel="stylesheet" href="footer-style.css">
-
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	
     <script src="calender.js" type="text/javascript"></script>
   </head>
   <body onload="render_calender('calender-box', 0)">
@@ -40,19 +41,6 @@
           <div id="right">
             <div class="sub_content">
               <div class="list-header">
-                <h2>Up coming workouts</h2>
-              </div>
-              <div>
-                <ul class="list">
-                  <% if (locals.upcoming) { %> <% upcoming.forEach(function(str){ %>
-                  <li onclick="location.href = '/workoutPage/<%=JSON.parse(JSON.stringify(str)).id%>'">
-                  <%=JSON.parse(JSON.stringify(str)).session_time%>
-                  <%=JSON.parse(JSON.stringify(str)).name%>
-                  </li>
-                  <% }) %> <% } %>
-                </ul>
-              </div>
-              <div class="list-header">
                 <p><strong>Workout list</strong></p>
               </div>
               <ul class="list">
@@ -66,8 +54,124 @@
               </ul>
             </div>
           </div>
+plan_sessions
+          <ul class="list">
+            <% if (locals.workout_list) { %>
+                        <% workout_list.forEach(function(str){ %>
+                        <li>
+                            <strong id="workout_name<%=JSON.parse(JSON.stringify(str)).id%>">
+                                <%=JSON.parse(JSON.stringify(str)).name%>
+                            </strong>
+                            <button onclick="location.href = '/createworkout/<%=JSON.parse(JSON.stringify(str)).id%>'">Edit</button>
+
+                            <button onclick="openSessionForm('<%=JSON.parse(JSON.stringify(str)).id%>', '<%=JSON.parse(JSON.stringify(str)).name%>')">Plan session</button>
+                            <div id = "planSessionPopup" class = "planSessionPopup"></div>
+                        </li>
+                        <% }) %>
+                    <% } %>
+          </ul>
+        </div>
+      </section>
+      <%- include('../partials/footer.ejs') %>
+    </div>
+    <script>
+      function openSessionForm(id, name) {
+        var template = `
+        <div style="display:block" class = "sessionFormPopup" id = "sessionFormPopup${id}" >
+          <form action="/createsession" id="sessionForm${id}" action method="POST">
+
+            <h3>Create sessions for workout: ${name}</h3>
+            <input type="hidden" name="workout_id" value=${id}>
+
+            <label for="days">Days</label><br>
+
+            <input type="checkbox" id="mon${id}" name="days">
+            <label for="days">Monday</label>
+
+            <input type="checkbox" id="tue${id}" name="days">
+            <label for="days">Tuesday</label>
+
+            <input type="checkbox" id="wed${id}" name="days">
+            <label for="days">Wednesday</label>
+
+            <input type="checkbox" id="thu${id}" name="days">
+            <label for="days">Thursday</label>
+
+            <input type="checkbox" id="fri${id}" name="days">
+            <label for="days">Friday</label>
+
+            <input type="checkbox" id="sat${id}" name="days">
+            <label for="days">Saturday</label>
+
+            <input type="checkbox" id="sun${id}" name="days">
+            <label for="days">Sunday</label><br>
+
+            <input type="date" id = "deadline${id}" name = "deadline">
+            <label for="deadline">Deadline</label><br>
+
+            <button onclick="getDates(${id})" type = "submit" >Create session</button>
+            <button type="button" onclick="closeSessionForm(${id})">Close</button>
+          </form>
+        </div>`
+
+        var planSessionPopup = document.getElementById('planSessionPopup');
+        planSessionPopup.innerHTML = template;
+        document.getElementById(`deadline${id}`).value = new Date().toISOString().slice(0, 10);
+        document.getElementById(`workout_name${id}`).style = "color:green"
+      }
+
+      function closeSessionForm(id) {
+        document.getElementById("sessionFormPopup"+id).remove()
+        document.getElementById(`workout_name${id}`).style = "color:none"
+      }
+
+      function getDates(id){
+
+        var checked = document.querySelectorAll('input[name="days"]:checked');
+        var choosenDays = [];
+    
+        for(var i = 0; i < checked.length; i++){
+          if(checked[i].id.substr(0,3) === "mon") choosenDays.push(1);
+          if(checked[i].id.substr(0,3) === "tue") choosenDays.push(2);
+          if(checked[i].id.substr(0,3) === "wed") choosenDays.push(3);
+          if(checked[i].id.substr(0,3) === "thu") choosenDays.push(4);
+          if(checked[i].id.substr(0,3) === "fri") choosenDays.push(5);
+          if(checked[i].id.substr(0,3) === "sat") choosenDays.push(6);
+          if(checked[i].id.substr(0,3) === "sun") choosenDays.push(0);
+        }
+
+        var result = []
+        var deadline = new Date(document.getElementById('deadline'+id).value)
+        var deadline = new Date(deadline.getTime() + 86400000);
+        deadline.toLocaleDateString();
+        
+        choosenDays.forEach(day => {
+          var current = new Date();
+          current.setDate(current.getDate() + (day - current.getDay() + 7) % 7);
+          while (current < deadline) {
+          result.push(new Date(+current).toISOString().slice(0, 10));
+          current.setDate(current.getDate() + 7);
+        }
+      });
+
+      sessionForm = document.getElementById(`sessionForm${id}`);
+
+      for(var i = 0; i < result.length; i++){
+        var dateInput = document.createElement('INPUT');
+        dateInput.setAttribute('type', 'hidden');
+        dateInput.setAttribute('name', 'date');
+        dateInput.value = result[i];
+        sessionForm.appendChild(dateInput)
+      }
+    }
+      </script>
+
         </div>
         <%- include('../partials/footer.ejs') %>
       </div>
+      <div class="workout_session_popup" id="workout_session_popup">
+        Poppa mig!
+      </div> 
+
   </body>
 </html>

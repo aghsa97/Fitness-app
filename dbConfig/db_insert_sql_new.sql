@@ -90,7 +90,7 @@ INSERT INTO `workout_db`.`user_info` (`user_id`, `firstname`, `lastname`, `weigh
 
 INSERT INTO `workout_db`.`workout` (`name`, `creator_id`, `user_id`, `level`) VALUES ("Test Workout 1", 1, 1, 1);
 INSERT INTO `workout_db`.`workout` (`name`, `creator_id`, `user_id`, `level`) VALUES ("Test Workout 2", 1, 2, 1);
-INSERT INTO `workout_db`.`workout` (`name`, `creator_id`, `user_id`, `level`) VALUES ("DT", 1, 2, 10);
+INSERT INTO `workout_db`.`workout` (`name`, `creator_id`, `user_id`, `level`) VALUES ("DT", 1, 3, 10);
 
 INSERT INTO `workout_db`.`workout_exercise` (`workout_id`, `exercise_id`, `e_load`, `e_reps`, `e_order`) VALUES (1, 3, 0, 20, 1);
 INSERT INTO `workout_db`.`workout_exercise` (`workout_id`, `exercise_id`, `e_load`, `e_reps`, `e_order`) VALUES (1, 1, 0, 20, 2);
@@ -107,21 +107,21 @@ INSERT INTO `workout_db`.`workout_exercise` (`workout_id`, `exercise_id`, `e_loa
 INSERT INTO `workout_db`.`workout_exercise` (`workout_id`, `exercise_id`, `e_load`, `e_reps`, `e_order`) VALUES (3, 7, 70, 9, 3);
 INSERT INTO `workout_db`.`workout_exercise` (`workout_id`, `exercise_id`, `e_load`, `e_reps`, `e_order`) VALUES (3, 8, 70, 6, 4);
 
-INSERT INTO `workout_db`.`workout_session` (`workout_id`, `session_time`, `completed`) VALUES (3, '2021-08-31 08:00:00' , 0);
-INSERT INTO `workout_db`.`workout_session` (`workout_id`, `session_time`, `completed`) VALUES (3, '2021-09-02 08:00:00' , 0);
-INSERT INTO `workout_db`.`workout_session` (`workout_id`, `session_time`, `completed`) VALUES (3, '2021-09-05 08:00:00' , 0);
-INSERT INTO `workout_db`.`workout_session` (`workout_id`, `session_time`, `completed`) VALUES (3, '2021-09-07 08:00:00' , 0);
-INSERT INTO `workout_db`.`workout_session` (`workout_id`, `session_time`, `completed`) VALUES (3, '2021-09-09 08:00:00' , 0);
-INSERT INTO `workout_db`.`workout_session` (`workout_id`, `session_time`, `completed`) VALUES (3, '2021-09-12 08:00:00' , 0);
-INSERT INTO `workout_db`.`workout_session` (`workout_id`, `session_time`, `completed`) VALUES (3, '2021-09-14 08:00:00' , 0);
-INSERT INTO `workout_db`.`workout_session` (`workout_id`, `session_time`, `completed`) VALUES (3, '2021-09-16 08:00:00' , 0);
-INSERT INTO `workout_db`.`workout_session` (`workout_id`, `session_time`, `completed`) VALUES (3, '2021-09-19 08:00:00' , 0);
-INSERT INTO `workout_db`.`workout_session` (`workout_id`, `session_time`, `completed`) VALUES (3, '2021-09-21 08:00:00' , 0);
-INSERT INTO `workout_db`.`workout_session` (`workout_id`, `session_time`, `completed`) VALUES (3, '2021-09-23 08:00:00' , 0);
-INSERT INTO `workout_db`.`workout_session` (`workout_id`, `session_time`, `completed`) VALUES (3, '2021-09-26 08:00:00' , 0);
-INSERT INTO `workout_db`.`workout_session` (`workout_id`, `session_time`, `completed`) VALUES (3, '2021-09-28 08:00:00' , 0);
-INSERT INTO `workout_db`.`workout_session` (`workout_id`, `session_time`, `completed`) VALUES (3, '2021-09-30 08:00:00' , 0);
-INSERT INTO `workout_db`.`workout_session` (`workout_id`, `session_time`, `completed`) VALUES (3, '2021-10-01 08:00:00' , 0);
+INSERT INTO `workout_db`.`workout_session` (`workout_id`, `session_time`, `completed`) VALUES (3, '2021-09-31 08:00:00' , 0);
+INSERT INTO `workout_db`.`workout_session` (`workout_id`, `session_time`, `completed`) VALUES (3, '2021-10-02 08:00:00' , 0);
+INSERT INTO `workout_db`.`workout_session` (`workout_id`, `session_time`, `completed`) VALUES (3, '2021-10-05 08:00:00' , 0);
+INSERT INTO `workout_db`.`workout_session` (`workout_id`, `session_time`, `completed`) VALUES (3, '2021-10-07 08:00:00' , 0);
+INSERT INTO `workout_db`.`workout_session` (`workout_id`, `session_time`, `completed`) VALUES (3, '2021-10-09 08:00:00' , 0);
+INSERT INTO `workout_db`.`workout_session` (`workout_id`, `session_time`, `completed`) VALUES (3, '2021-10-12 08:00:00' , 0);
+INSERT INTO `workout_db`.`workout_session` (`workout_id`, `session_time`, `completed`) VALUES (3, '2021-10-14 08:00:00' , 0);
+INSERT INTO `workout_db`.`workout_session` (`workout_id`, `session_time`, `completed`) VALUES (3, '2021-10-16 08:00:00' , 0);
+INSERT INTO `workout_db`.`workout_session` (`workout_id`, `session_time`, `completed`) VALUES (3, '2021-10-19 08:00:00' , 0);
+INSERT INTO `workout_db`.`workout_session` (`workout_id`, `session_time`, `completed`) VALUES (3, '2021-10-21 08:00:00' , 0);
+INSERT INTO `workout_db`.`workout_session` (`workout_id`, `session_time`, `completed`) VALUES (3, '2021-10-23 08:00:00' , 0);
+INSERT INTO `workout_db`.`workout_session` (`workout_id`, `session_time`, `completed`) VALUES (3, '2021-10-26 08:00:00' , 0);
+INSERT INTO `workout_db`.`workout_session` (`workout_id`, `session_time`, `completed`) VALUES (3, '2021-10-28 08:00:00' , 0);
+INSERT INTO `workout_db`.`workout_session` (`workout_id`, `session_time`, `completed`) VALUES (3, '2021-10-30 08:00:00' , 0);
+INSERT INTO `workout_db`.`workout_session` (`workout_id`, `session_time`, `completed`) VALUES (3, '2021-11-01 08:00:00' , 0);
 
 INSERT INTO `workout_db`.`session_note` (`session_id`, `user_id`, `parent_id`, `text`) VALUES (1, 2, NULL, "Very jobbigt. I'm trött in my ländrygg!");
 INSERT INTO `workout_db`.`session_note` (`session_id`, `user_id`, `parent_id`, `text`) VALUES (1, 1, 1, "You are very klen. You pay double price!");

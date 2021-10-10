@@ -9,7 +9,7 @@ var mysql = require("mysql");
 var connection = {
 	host     : 'localhost',
 	user     : 'root',
-	password : '',
+	password : 'W@J&7VuE9he@aiP3#xg$',
 	database : 'workout_db',
   connectionLimit: 5 
 };

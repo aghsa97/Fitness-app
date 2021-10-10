@@ -14,7 +14,15 @@
         <div class="content">
             <div id="left">
                 <div class="workout-form">
-                    <h2>Create Workout</h2>
+
+                    <% if (locals.create_title) { %>
+                        <h2>CREATE WORKOUT</h2>
+                        <% } %>
+
+                    <% if (locals.edit_title) { %>
+                        <h2>EDIT WORKOUT</h2>
+                        <% } %>
+
                     <form id ="workout-form" action="createworkout" action method="POST">
                         <div id="workout-container">
                             <input type="text" name="workoutname" placeholder="Workout name" required/>
@@ -31,7 +39,15 @@
                                 <option value="9">9</option>
                                 <option value="10">10</option>
                             </select>
-                            <input id = "submit" type = "submit" value="submit" onclick="confirmAction(event);">
+
+                            <% if (locals.create_title) { %>
+                                <input id = "submit" type = "submit" value="Create" onclick="confirmAction(event);">
+                            <% } %>
+
+                            <% if (locals.edit_title) { %>
+                                <input id = "submit" type = "submit" value="Edit" onclick="confirmAction(event);">
+                            <% } %>
+                           
                             
                         </div>    
                     </form>

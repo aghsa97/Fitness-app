@@ -8,16 +8,16 @@
       <div><a href="/" class="nav_button">Home</a></div>
       <% if(!locals.personal_info) { %>
         <div><a href="/userinfo" class="nav_button">User info</a></div>
-        <div><a href="/createworkout" class="nav_button">Create workout</a></div>
+        <div><a href="/createworkout" class="nav_button">Workout</a></div>
       <% } %>
       <div><a href="/logout" class="nav_button">Log out</a></div>
 
       <% } else if (role == "trainer") { %>
       <div><a href="/" class="nav_button">Home</a></div>
       <div>
-        <a href="/createexercise" class="nav_button">Create exercise</a>
+        <a href="/createexercise" class="nav_button">Exercise</a>
       </div>
-      <div><a href="/createworkout" class="nav_button">Create workout</a></div>
+      <div><a href="/createworkout" class="nav_button">Workout</a></div>
       <div><a href="/userinfo" class="nav_button">User info</a></div>
       <div><a href="/logout" class="nav_button">Log out</a></div>
       <% } %> <% } else { %>
