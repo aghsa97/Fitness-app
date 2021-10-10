@@ -68,7 +68,7 @@
                                 <% if (locals.edit_title) { %>
                                     <% locals.req %>
                                     <input type = "submit" value="Edit" onclick="return confirm('Are you sure you want to edit this exercise?');">
-                                    <input type = "submit" value="Delete" onclick="return confirm('Are you sure you want to delete this exercise?');" formaction="deleteexercise/<%=parseInt(JSON.stringify(locals.requested_exercise).slice(7,9))%>" formmethod="post">
+                                    <input type = "submit" value="Delete" onclick="return confirm('Are you sure you want to delete this exercise?');" formaction="deleteexercise/<%=parseInt(JSON.stringify(locals.requested_exercise).slice(7,10))%>">
                                     <% } %>
     
                             </div>

@@ -56,7 +56,7 @@ const edit_exercise = function(request, response) {
         dbconnection.query(sql_exercise_list, function(error, results){
             if(error) throw error;
             response.render(path.join(__dirname, "../views/trainerViews/createExercise"), 
-            {role: request.session.role, edit_title: page_title, requested_exercise: requested_exercise, exercise: results});  
+            {role: request.session.role, edit_title: page_title, requested_exercise: requested_exercise, exercise: results});
         })
         
     })
@@ -72,6 +72,9 @@ const save_edited_exercise = function(request, response){
     SELECT * FROM exercise
     where id = ?` 
 
+    var sql_exercise_list = `
+    SELECT * FROM exercise;`
+
     var page_title = "EDIT EXERCISE"
 
     var message = "Your exercise has been edited!"
@@ -81,7 +84,11 @@ const save_edited_exercise = function(request, response){
             dbconnection.query(sql_get_exercise, [request.params.id], function(error, results){
                 if(error) throw error;
                 var requested_exercise = results;
-                response.render(path.join(__dirname, "../views/trainerViews/createExercise"), {role: request.session.role, edit_title: page_title, requested_exercise: requested_exercise, message:message});
+                dbconnection.query(sql_exercise_list, function(error, results){
+                    if(error) throw error;
+                    var exercise_list = results;
+                    response.render(path.join(__dirname, "../views/trainerViews/createExercise"), {role: request.session.role, edit_title: page_title, requested_exercise: requested_exercise, exercise: exercise_list, message:message});
+                })
             })
         })
 }
@@ -91,26 +98,17 @@ const delete_exercise = function(request, response) {
 
     var sql_delete_workout_ex = `DELETE FROM workout_exercise WHERE exercise_id = ?`
     var sql_delete_exercise = `DELETE FROM exercise WHERE id = ?`
-    var sql_get_exercise = `
-    SELECT * FROM exercise
-    where id = ?`
 
-    var page_title = "EDIT EXERCISE"
-
-    var message = "Your exercise has been deleted!"
 
     dbconnection.query(sql_delete_workout_ex, [request.params.id], function(error, results){
         if(error) throw error;
         dbconnection.query(sql_delete_exercise, [request.params.id], function(error, results){
             if(error) throw error;
-            dbconnection.query(sql_get_exercise, [request.params.id], function(error, results) {
-                if(error) throw error;
-                var requested_exercise = results;
-                response.render(path.join(__dirname, "../views/trainerViews/createExercise"), {role: request.session.role, edit_title: page_title, requested_exercise: requested_exercise, message:message});
-            })
-            
+            response.redirect('/createexercise');
         })
+            
     })
+    
 
 }
 
