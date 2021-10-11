@@ -7,20 +7,26 @@ const create_exercise = function(request, response){
     var sql_exercise_list = `
     SELECT * FROM exercise;`
 
+    var sql_target_muscles = `
+    SELECT DISTINCT target_muscle
+    FROM exercise;`
+
     var page_title = "CREATE EXERCISE"
 
     if(request.session.role === "trainer"){
-
         dbconnection.query(sql_exercise_list, function(error, results){
             if(error) throw error;
-            response.render(path.join(__dirname, "../views/trainerViews/createExercise"), {role: request.session.role, exercise: results, create_title: page_title})
+            var exercise = results;
+            dbconnection.query(sql_target_muscles, function(error, results){
+                if(error) throw error;
+                var target_muscle = results;
+                response.render(path.join(__dirname, "../views/trainerViews/createExercise"), {role: request.session.role, target_muscle: target_muscle, exercise: exercise, create_title: page_title})
+            }) 
         })
-
     } else{
         response.redirect('/');
     }
 }
-
 
 
 const save_exercise = function(request, response){
@@ -47,6 +53,10 @@ const edit_exercise = function(request, response) {
 
     var page_title = "EDIT EXERCISE"
 
+    var sql_target_muscles = `
+    SELECT DISTINCT target_muscle
+    FROM exercise;`
+
     var sql_exercise_list = `
     SELECT * FROM exercise;`
 
@@ -55,8 +65,13 @@ const edit_exercise = function(request, response) {
         var requested_exercise = results;
         dbconnection.query(sql_exercise_list, function(error, results){
             if(error) throw error;
-            response.render(path.join(__dirname, "../views/trainerViews/createExercise"), 
-            {role: request.session.role, edit_title: page_title, requested_exercise: requested_exercise, exercise: results});
+            var exercise = results;
+            dbconnection.query(sql_target_muscles, function(error, results){
+                if(error) throw error;
+                var target_muscle = results;
+                response.render(path.join(__dirname, "../views/trainerViews/createExercise"), 
+            {role: request.session.role, edit_title: page_title, requested_exercise: requested_exercise, exercise: exercise, target_muscle: target_muscle});
+            })
         })
         
     })
