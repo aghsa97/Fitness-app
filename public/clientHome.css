@@ -4,14 +4,15 @@
 
 
 
-#left, #middle, #right {
+.left, #middle, #right {
     float: left; 
     text-align: center;
 }
 
-#left {width: 45%; border:0px solid green;}
+.left {width: 40%; border:0px solid green;}
 #middle {width: 25%; border:0px solid green;}
 #right {width: 25%; border:0px solid green;}
+
 
 .list_item {
 
@@ -142,7 +143,7 @@ img {
 
   .workout_session_popup {
     border: 1px solid white;
-    background-image: url(ass.png);
+    background-color: black;
     width:400px;
     height:285px;
     position: absolute;
