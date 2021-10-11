@@ -14,10 +14,26 @@
       <div class="wrapper">
       <%- include('../partials/nav.ejs') %>
       <div class="content">
-          <div id="left">
+
+        <!---Vetefan vad jag gör-->
+        <div style="display:none" class="left" id="workout_session_popup">
+          <div class="sub_content">
+            <div class="list-header">
+          <h2 id="sessions_page_title">Todays sessions</h2> 
+
+          <ul id = "session_button_list" class="list"></ul>
+          <!--<form id = 'workout_session_popup_form' method="post" action=""></form>-->
+          <button id = "todays_sessions_div_close_btn">Close</button>  
+        </div> 
+        
+        </div>
+      </div>
+
+          <div id="left" class="left">
             <div id="calender-box" class="sub_content no_scroll"></div>
             <div id="workout-box" class="workout-container" style="display: none;" onclick="this.style.display = 'none'"></div>
           </div>
+
           <div id="middle">
             <div class="sub_content">
               <div class="list-header">
@@ -27,7 +43,7 @@
                 <ul class="list">
                   <% if (locals.friends) { %>
                   <% friends.forEach(function(str){ %>
-                  <li onclick="location.href = '/createworkout/<%=JSON.parse(JSON.stringify(str)).id%>'">
+                  <li onclick="location.href = '/friendpage/<%=JSON.parse(JSON.stringify(str)).id%>'">
                     <%=JSON.parse(JSON.stringify(str)).firstname%>
                     <%=JSON.parse(JSON.stringify(str)).lastname%>
                     <%=JSON.parse(JSON.stringify(str)).email%>
@@ -45,31 +61,24 @@
               </div>
               <ul class="list">
                 <% if (locals.workout_list) { %>
-                <% workout_list.forEach(function(str){ %>
-                <li onclick="location.href = '/createworkout/<%=JSON.parse(JSON.stringify(str)).id%>'">
-                  <%=JSON.parse(JSON.stringify(str)).name%>
-                </li>
+                  <% workout_list.forEach(function(str){ %>
+                  <li>
+                      <strong id="workout_name<%=JSON.parse(JSON.stringify(str)).id%>">
+                      <%=JSON.parse(JSON.stringify(str)).name%>
+                      </strong>
+                      <button id ="workout_edit_buttton<%=JSON.parse(JSON.stringify(str)).id%>" onclick="location.href = '/createworkout/<%=JSON.parse(JSON.stringify(str)).id%>'">Edit</button>
+                      <button id ="workout_session_planner_buttton<%=JSON.parse(JSON.stringify(str)).id%>" onclick="openSessionForm('<%=JSON.parse(JSON.stringify(str)).id%>', '<%=JSON.parse(JSON.stringify(str)).name%>')">Plan session</button>
+                      <div id = "planSessionPopup" class = "planSessionPopup"></div>
+                  </li>
                 <% }) %>
                 <% } %>
               </ul>
             </div>
           </div>
-plan_sessions
-          <ul class="list">
-            <% if (locals.workout_list) { %>
-                        <% workout_list.forEach(function(str){ %>
-                        <li>
-                            <strong id="workout_name<%=JSON.parse(JSON.stringify(str)).id%>">
-                                <%=JSON.parse(JSON.stringify(str)).name%>
-                            </strong>
-                            <button onclick="location.href = '/createworkout/<%=JSON.parse(JSON.stringify(str)).id%>'">Edit</button>
+        </div>
 
-                            <button onclick="openSessionForm('<%=JSON.parse(JSON.stringify(str)).id%>', '<%=JSON.parse(JSON.stringify(str)).name%>')">Plan session</button>
-                            <div id = "planSessionPopup" class = "planSessionPopup"></div>
-                        </li>
-                        <% }) %>
-                    <% } %>
-          </ul>
+        </div>
+ 
         </div>
       </section>
       <%- include('../partials/footer.ejs') %>
@@ -110,7 +119,7 @@ plan_sessions
             <label for="deadline">Deadline</label><br>
 
             <button onclick="getDates(${id})" type = "submit" >Create session</button>
-            <button type="button" onclick="closeSessionForm(${id})">Close</button>
+            <button type="button" onclick="closeSessionPlanner(${id})">Close</button>
           </form>
         </div>`
 
@@ -120,13 +129,7 @@ plan_sessions
         document.getElementById(`workout_name${id}`).style = "color:green"
       }
 
-      function closeSessionForm(id) {
-        document.getElementById("sessionFormPopup"+id).remove()
-        document.getElementById(`workout_name${id}`).style = "color:none"
-      }
-
       function getDates(id){
-
         var checked = document.querySelectorAll('input[name="days"]:checked');
         var choosenDays = [];
     
@@ -165,13 +168,5 @@ plan_sessions
       }
     }
       </script>
-
-        </div>
-        <%- include('../partials/footer.ejs') %>
-      </div>
-      <div class="workout_session_popup" id="workout_session_popup">
-        Poppa mig!
-      </div> 
-
   </body>
 </html>
