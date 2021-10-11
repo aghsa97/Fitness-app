@@ -4,7 +4,7 @@ Other files can access the database by importing this JS file.
 Might need to add this to a gitIgnore file, since everyone has different root-passwords.
 */
 
-var mysql = require("mysql");
+var mysql = require("mysql2");
 
 var connection = {
 	host     : 'localhost',

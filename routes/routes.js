@@ -32,6 +32,11 @@ router.get('/home', clientFriendsController.user_friends);
 
 router.get('/calendar/:year_month', calendarController.get_month_workout_sessions);
 router.get('/calendar/session/:session_id', calendarController.get_workout_session);
+router.post('/calendar/session/:session_id', calendarController.complete_workout_session);
+
+router.get('/calender/session/edit/:session_id', calendarController.get_latest_workout_note)
+router.post('/calender/session/edit/:session_id', calendarController.edit_workout_note);
+
 
 router.get('/logout', loginController.user_logout);
 
