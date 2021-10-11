@@ -171,12 +171,24 @@
         //Should be replaced with an actual DOM-create implementation
         function generate_workout_exercise_li(exercice_id, exercise_name) {
 
-            generated_html =  "<div class=\"exercise\"><div class=\"exercise_name normal_text\">"+exercise_name+"</div>";
-            generated_html += "<div class=\"small_input_header\">load</div>";
-            generated_html += "<div class=\"input_container\"><input type=\"number\" min=\"0\" id=\""+exercice_id+"_load\" class=\"small_input\" placeholder=\"0\"></div>";
-            generated_html += "<div class=\"small_input_header\">reps</div>";
-            generated_html += "<div class=\"input_container\"><input type=\"number\" min=\"0\" id=\""+exercice_id+"_reps\" class=\"small_input\" placeholder=\"0\"></div>";
-            generated_html += "<div class=\"icon_container\"><img src=\"icon_trash.png\" class=\"icon\" id=\"" + exercice_id + "_delete\" ></div></div>";
+            if( exercise_name.includes("Cardio") || exercise_name.includes("Stretch")){
+                generated_html =  "<div class=\"exercise\"><div class=\"exercise_name normal_text\">"+exercise_name+"</div>";
+                generated_html += "<div class=\"small_input_header\"></div>";
+                generated_html += "<div class=\"input_container\"><input type=\"hidden\" min=\"0\" id=\""+exercice_id+"_load\" class=\"small_input\" value=\"0\"></div>";
+                generated_html += "<div class=\"small_input_header\">Minutes</div>";
+                generated_html += "<div class=\"input_container\"><input type=\"number\" min=\"0\" id=\""+exercice_id+"_reps\" class=\"small_input\" value=\"0\"></div>";
+                generated_html += "<div class=\"icon_container\"><img src=\"icon_trash.png\" class=\"icon\" id=\"" + exercice_id + "_delete\" ></div></div>";
+            }
+            else {
+                generated_html =  "<div class=\"exercise\"><div class=\"exercise_name normal_text\">"+exercise_name+"</div>";
+                generated_html += "<div class=\"small_input_header\">load</div>";
+                generated_html += "<div class=\"input_container\"><input type=\"number\" min=\"0\" id=\""+exercice_id+"_load\" class=\"small_input\" value=\"0\"></div>";
+                generated_html += "<div class=\"small_input_header\">reps</div>";
+                generated_html += "<div class=\"input_container\"><input type=\"number\" min=\"0\" id=\""+exercice_id+"_reps\" class=\"small_input\" value=\"0\"></div>";
+                generated_html += "<div class=\"icon_container\"><img src=\"icon_trash.png\" class=\"icon\" id=\"" + exercice_id + "_delete\" ></div></div>";
+            }
+
+            
             return generated_html;
         }
 
