@@ -69,7 +69,8 @@ function generate_cal_month_header(show_date) {
 function closeSessionPlanner(workout_id){
     var form = document.getElementById('sessionForm'+workout_id);
     form.parentNode.removeChild(form);
-    document.getElementById("workout_name"+workout_id).style = "color:white"
+    var workout_ul = document.getElementById('workout_ul');
+    workout_ul.style.display = "block";
 }
 
 function show_workout(session_id) {

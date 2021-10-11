@@ -21,7 +21,7 @@
             <div class="list-header">
           <h2 id="sessions_page_title">Todays sessions</h2> 
 
-          <ul id = "session_button_list" class="list"></ul>
+          <ul id = "session_button_list" class="client_homepage_list"></ul>
           <!--<form id = 'workout_session_popup_form' method="post" action=""></form>-->
           <button id = "todays_sessions_div_close_btn">Close</button>  
         </div> 
@@ -37,13 +37,13 @@
           <div id="middle">
             <div class="sub_content">
               <div class="list-header">
-                <h2>Friends</h2>
+                <h2>My friends</h2>
               </div>
               <div class="social-box">
-                <ul class="list">
+                <ul class="client_homepage_list">
                   <% if (locals.friends) { %>
                   <% friends.forEach(function(str){ %>
-                  <li onclick="location.href = '/friendpage/<%=JSON.parse(JSON.stringify(str)).id%>'">
+                  <li class="list_item" onclick="location.href = '/friendpage/<%=JSON.parse(JSON.stringify(str)).id%>'">
                     <%=JSON.parse(JSON.stringify(str)).firstname%>
                     <%=JSON.parse(JSON.stringify(str)).lastname%>
                     <%=JSON.parse(JSON.stringify(str)).email%>
@@ -57,22 +57,28 @@
           <div id="right">
             <div class="sub_content">
               <div class="list-header">
-                <p><strong>Workout list</strong></p>
+                <h2>My workouts</h2>
               </div>
-              <ul class="list">
+              <ul id="workout_ul" class="client_homepage_list">
                 <% if (locals.workout_list) { %>
                   <% workout_list.forEach(function(str){ %>
-                  <li>
+                  <li class = "list_item">
+                    <div class = "edit_planSession">
+                      <div class ="text-box">
                       <strong id="workout_name<%=JSON.parse(JSON.stringify(str)).id%>">
                       <%=JSON.parse(JSON.stringify(str)).name%>
                       </strong>
+                    </div>
+                    <div class ="text-box">
                       <button id ="workout_edit_buttton<%=JSON.parse(JSON.stringify(str)).id%>" onclick="location.href = '/createworkout/<%=JSON.parse(JSON.stringify(str)).id%>'">Edit</button>
                       <button id ="workout_session_planner_buttton<%=JSON.parse(JSON.stringify(str)).id%>" onclick="openSessionForm('<%=JSON.parse(JSON.stringify(str)).id%>', '<%=JSON.parse(JSON.stringify(str)).name%>')">Plan session</button>
-                      <div id = "planSessionPopup" class = "planSessionPopup"></div>
+                    </div>
+                      </div>
                   </li>
                 <% }) %>
                 <% } %>
               </ul>
+              <div id = "planSessionPopup" class = "planSessionPopup"></div>
             </div>
           </div>
         </div>
@@ -89,44 +95,59 @@
         <div style="display:block" class = "sessionFormPopup" id = "sessionFormPopup${id}" >
           <form action="/createsession" id="sessionForm${id}" action method="POST">
 
+            <div class ="test">
             <h3>Create sessions for workout: ${name}</h3>
             <input type="hidden" name="workout_id" value=${id}>
+            </div>
 
-            <label for="days">Days</label><br>
+            <div class = "test">
 
+            <div>
             <input type="checkbox" id="mon${id}" name="days">
             <label for="days">Monday</label>
-
             <input type="checkbox" id="tue${id}" name="days">
             <label for="days">Tuesday</label>
+            </div>
 
+            <div>
             <input type="checkbox" id="wed${id}" name="days">
             <label for="days">Wednesday</label>
-
             <input type="checkbox" id="thu${id}" name="days">
             <label for="days">Thursday</label>
+            </div>
 
+            <div>
             <input type="checkbox" id="fri${id}" name="days">
             <label for="days">Friday</label>
-
             <input type="checkbox" id="sat${id}" name="days">
             <label for="days">Saturday</label>
+            </div>
 
+            <div>
             <input type="checkbox" id="sun${id}" name="days">
             <label for="days">Sunday</label><br>
+            </div>
 
-            <input type="date" id = "deadline${id}" name = "deadline">
+            <br>
+
             <label for="deadline">Deadline</label><br>
+            <input type="date" id = "deadline${id}" name = "deadline">
 
+        
+            </div>
+
+            <div class ="test">
             <button onclick="getDates(${id})" type = "submit" >Create session</button>
             <button type="button" onclick="closeSessionPlanner(${id})">Close</button>
+            </div>
           </form>
         </div>`
 
         var planSessionPopup = document.getElementById('planSessionPopup');
         planSessionPopup.innerHTML = template;
         document.getElementById(`deadline${id}`).value = new Date().toISOString().slice(0, 10);
-        document.getElementById(`workout_name${id}`).style = "color:green"
+        var workout_ul = document.getElementById('workout_ul');
+        workout_ul.style.display = "none";
       }
 
       function getDates(id){
