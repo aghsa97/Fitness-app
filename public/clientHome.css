@@ -3,7 +3,6 @@
 }
 
 
-
 .left, #middle, #right {
     float: left; 
     text-align: center;
@@ -12,6 +11,15 @@
 .left {width: 40%; border:0px solid green;}
 #middle {width: 25%; border:0px solid green;}
 #right {width: 25%; border:0px solid green;}
+
+
+.client_homepage_list {
+    width:100%;
+    list-style-type: none;
+    padding:0px;
+    margin-top: 20px;
+    border: 0px solid white;
+  }
 
 
 .list_item {
