@@ -31,20 +31,12 @@
                 
                                     <label class="exercise_form_label" for="target_muscle">Target muscle</label><br>
                                     <select id = "target-muscle" name="target_muscle">
-                                        <option value="Pecs">Pecs</option>
-                                        <option value="Lats">Lats</option>
-                                        <option value="Low Back">Low Back</option>
-                                        <option value="Traps">Traps</option>
-                                        <option value="Delts">Delts</option>
-                                        <option value="Triceps">Triceps</option>
-                                        <option value="Biceps">Biceps</option>                        
-                                        <option value="Glutes">Glutes</option>
-                                        <option value="Hamstring">Hamstring</option>
-                                        <option value="Quads">Quads</option>
-                                        <option value="Calves">Calves</option>
-                                        <option value="Abs">Abs</option>
-                                        <option value="Cardio">Cardio</option>
-                                        <option value="Stretch">Stretch</option>
+
+                                        <% if (locals.target_muscle) { %>
+                                            <% target_muscle.forEach(function(str) { %>
+                                                <option value = "<%= JSON.parse(JSON.stringify(str)).target_muscle %>"><%= JSON.parse(JSON.stringify(str)).target_muscle %></option>
+                                            <% }) %>
+                                        <% } %>
                                     </select><br>
 
                                 <label class="exercise_form_label" for="level">Level</label><br>
