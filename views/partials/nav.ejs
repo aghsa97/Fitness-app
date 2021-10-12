@@ -2,12 +2,14 @@
   <h1 class="nav-box">
     <% if (locals.personal_info) { %>
       <%=JSON.parse(JSON.stringify(locals.personal_info[0])).firstname%> <%=JSON.parse(JSON.stringify(locals.personal_info[0])).lastname%>
+      <% let client_id = JSON.parse(JSON.stringify(locals.personal_info[0])).id %>
     <% } else if (locals.role) { %> <%=role%> Homepage <% } else { %> Workout app <% } %>
     <div class="flex-container">
       <% if (locals.role) { %> <% if (role == "client") { %>
       <div><a href="/" class="nav_button">Home</a></div>
       <% if(!locals.personal_info) { %>
         <div><a href="/userinfo" class="nav_button">User info</a></div>
+        <div><a href="/createexercise" class="nav_button">Exercise</a></div>
         <div><a href="/createworkout" class="nav_button">Workout</a></div>
       <% } %>
       <div><a href="/logout" class="nav_button">Log out</a></div>
