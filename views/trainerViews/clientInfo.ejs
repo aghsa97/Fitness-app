@@ -77,13 +77,18 @@
                         <ul id="completed_session_ul_list" class = "trainer_homepage_list">
                             <% if (locals.completed_sessions) { %>
                                 <% completed_sessions.forEach(function(str){ %>     
-                                    <li onclick="showCompletedSessionInfo('<%=JSON.parse(JSON.stringify(str)).id%>')" id="completed_workout_session<%=JSON.parse(JSON.stringify(str)).id%>" class="list_item">
-                                        <div class=""><a><%=JSON.parse(JSON.stringify(str)).session_time.substr(0,10)%><%=JSON.parse(JSON.stringify(str)).name%></a></div>
+                                    <li onclick="getCompletedSessionNote('<%=JSON.parse(JSON.stringify(str)).id%>')" id="completed_workout_session<%=JSON.parse(JSON.stringify(str)).id%>" class="list_item">
+                                        <div id = "session-entry">
+                                            <div class = "text-box">
+                                                <div class="text-box"><a><%=JSON.parse(JSON.stringify(str)).session_time.substr(0,10)%></a></div>
+                                                <div class="text-box"><a><%=JSON.parse(JSON.stringify(str)).name%></a></div>
+                                            </div>
+                                        </div>
                                     </li>
                                 <% }) %>
                             <% } %>
                         </ul>
-                    </div>
+                    </div
                 </div>
             </div>
         </div>
