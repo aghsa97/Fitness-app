@@ -32,16 +32,6 @@ const client_info = function(request, response) {
         WHERE workout.user_id = ?
         AND workout_session.completed = 1`
 
-        /*
-        var sql_client_upcoming_workouts =
-        `SELECT session_time, name, user_info.firstname, user_info.lastname, level, workout_session.id
-        FROM WORKOUT_SESSION
-        JOIN WORKOUT ON workout_session.WORKOUT_ID = WORKOUT.ID
-        JOIN USER_INFO ON WORKOUT.CREATOR_ID = USER_INFO.USER_ID
-        WHERE WORKOUT.USER_ID = ?
-        AND SESSION_TIME >= SYSDATE();`
-        */
-
         dbconnection.query(sql_user_info, [request.params.id], function(error, results){
             if(error) throw error;
             var user_info = results;
@@ -98,12 +88,68 @@ const completed_sessions_info = function(request, response){
             if(error) throw error;
             response.json(results);
         })
+    }
+}
 
+const get_latest_workout_note = function(request, response){
+
+    if(request.session.role === "trainer"){
+
+        var sql_get_latest_note = 
+        `SELECT * FROM session_note
+        where id = 
+        (select max(id) from session_note where session_id = ?)`
+
+        dbconnection.query(sql_get_latest_note, [request.params.session_id], function(error, results){
+            if(error) throw error;
+            response.json(results)
+        })
+    }
+}
+
+const get_session_workout = function(request, response){
+
+    if(request.session.role === "trainer"){
+
+        var sql_get_latest_note = 
+        `select  
+        ws.id as session_id, ws.session_time as session_time, w.id as w_id, w.name as w_name  
+        from workout_session as ws
+        join workout as w on w.id  = ws.workout_id
+        where ws.id = ?;`
+
+        dbconnection.query(sql_get_latest_note, [request.params.session_id], function(error, results){
+            if(error) throw error;
+            response.json(results)
+        })
+    }
+}
+
+const get_workout_session_exercise = function(request, response){
+
+    if(request.session.role === "trainer"){
+
+        var sql_get_latest_note = 
+        `select 
+        e.target_muscle as target_muscle, w.name as wname, e.name as ename, e.description as edescription, we.e_load as eload, we.e_reps as ereps, we.e_order as eorder
+        from workout as w
+        join workout_exercise as we on w.id  = we.workout_id
+        join exercise as e on e.id = we.exercise_id
+        where w.id = ?
+        order by eorder;`
+
+        dbconnection.query(sql_get_latest_note, [request.params.workout_id], function(error, results){
+            if(error) throw error;
+            response.json(results)
+        })
     }
 }
 
 module.exports = {
     client_info,
     assign_workout,
-    completed_sessions_info
+    completed_sessions_info,
+    get_latest_workout_note,
+    get_workout_session_exercise,
+    get_session_workout
 }

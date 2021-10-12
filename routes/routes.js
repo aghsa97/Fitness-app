@@ -37,9 +37,9 @@ router.post('/calendar/session/:session_id', calendarController.complete_workout
 router.get('/calender/session/edit/:session_id', calendarController.get_latest_workout_note)
 router.post('/calender/session/edit/:session_id', calendarController.edit_workout_note);
 
-//Här är den
-router.get('/completedsessioninfo/:session_id', trainerClientController.completed_sessions_info);
-
+router.get('/completedsessionlatestnote/:session_id', trainerClientController.get_latest_workout_note);
+router.get('/completedsessionworkout/:session_id', trainerClientController.get_session_workout);
+router.get('/completedsessionworkoutexercise/:workout_id', trainerClientController.get_workout_session_exercise);
 
 router.get('/logout', loginController.user_logout);
 
