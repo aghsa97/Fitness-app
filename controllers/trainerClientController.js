@@ -21,8 +21,18 @@ const client_info = function(request, response) {
         var sql_client_workouts = 
         `SELECT *
         FROM workout
-        WHERE user_id = ?`
+        WHERE user_id = ?
+        AND creator_id = ?`
 
+        var sql_client_completed_session = `
+        SELECT session_time, name, user_info.firstname, user_info.lastname, level, workout_session.id
+        FROM workout_session
+        JOIN workout ON workout_session.workout_id = workout.id
+        JOIN user_info ON workout.creator_id = user_info.user_id
+        WHERE workout.user_id = ?
+        AND workout_session.completed = 1`
+
+        /*
         var sql_client_upcoming_workouts =
         `SELECT session_time, name, user_info.firstname, user_info.lastname, level, workout_session.id
         FROM WORKOUT_SESSION
@@ -30,6 +40,7 @@ const client_info = function(request, response) {
         JOIN USER_INFO ON WORKOUT.CREATOR_ID = USER_INFO.USER_ID
         WHERE WORKOUT.USER_ID = ?
         AND SESSION_TIME >= SYSDATE();`
+        */
 
         dbconnection.query(sql_user_info, [request.params.id], function(error, results){
             if(error) throw error;
@@ -37,13 +48,13 @@ const client_info = function(request, response) {
             dbconnection.query(sql_trainer_workouts, [request.session.dbId], function(error, results){
                 if(error) throw error;
                 var trainer_workouts = results;
-                dbconnection.query(sql_client_workouts, [request.params.id],function(error, results){
+                dbconnection.query(sql_client_workouts, [request.params.id, request.session.dbId],function(error, results){
                     if(error) throw error;
                     var client_workouts = results;
-                    dbconnection.query(sql_client_upcoming_workouts, [request.params.id],function(error, results){
-                        var upcoming_workouts = results;
+                    dbconnection.query(sql_client_completed_session, [request.params.id],function(error, results){
+                        var completed_sessions = results;
                         response.render(path.join(__dirname, "../views/trainerViews/clientInfo"), 
-                        {info: user_info, trainer_workouts: trainer_workouts, client_workouts: client_workouts, client_id: request.params.id, role: request.session.role, upcoming: upcoming_workouts })
+                        {info: user_info, trainer_workouts: trainer_workouts, client_workouts: client_workouts, client_id: request.params.id, role: request.session.role, completed_sessions: completed_sessions })
                     })
                 })
             })
@@ -68,7 +79,31 @@ const assign_workout = function(request, response){
     }
 }
 
+const completed_sessions_info = function(request, response){
+    
+    if(request.session.role === "trainer"){
+
+        var session_id = request.params.session_id
+
+        var sql_get_completed_session_info = `
+        SELECT e.target_muscle as target_muscle, ws.id as session_id, ws.session_time as session_time, w.name as wname, e.name as ename, e.description as edescription, we.e_load as eload, we.e_reps as ereps, we.e_order as eorder
+        FROM workout_session as ws
+        JOIN workout_exercise as we ON ws.workout_id = we.workout_id
+        JOIN workout as w ON ws.workout_id = w.id
+        JOIN exercise as e ON we.exercise_id = e.id
+        WHERE ws.id = ?
+        order by e_order ASC;` 
+
+        dbconnection.query(sql_get_completed_session_info, [session_id], function(error, results){
+            if(error) throw error;
+            response.json(results);
+        })
+
+    }
+}
+
 module.exports = {
     client_info,
-    assign_workout
+    assign_workout,
+    completed_sessions_info
 }

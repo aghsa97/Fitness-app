@@ -74,7 +74,7 @@
   }
 
   
-  #left, #middle, #right {
+  #left, #middle, .right {
     float: left; 
     text-align: center;
     vertical-align: top;
@@ -82,7 +82,7 @@
 
   #left {width: 45%; border:0px solid green;}
   #middle {width: 25%; border:0px solid green;}
-  #right {width: 25%; border:0px solid green;}
+  .right {width: 25%; border:0px solid green;}
 
   
 
