@@ -184,6 +184,10 @@ function openSessionFeedbackEditForm(session_id, workout_name, session_date){
                 {
                     e.stopImmediatePropagation(); //This stops the page from performing other requests which can interfere with the ajax call.
                     var note_text = document.getElementById('note_edit__text'+session_id).value
+                    if(note_text === ""){
+                        alert('You cannot leave the note empty')
+                        return;
+                    } 
                         $.ajax({
                             url: '/calender/session/edit/'+session_id,
                             type: "post",
@@ -247,7 +251,10 @@ function openSessionFeedbackForm(session_id, workout_name, session_date){
     $('#workout_session_popup_form'+session_id).on('click', '#todays_sessions_form__submit_btn'+session_id, function(e){
         //e.stopImmediatePropagation(); //This stops the page from performing other requests which can interfere with the ajax call.
         var note_text = document.getElementById('note_text'+session_id).value
-
+        if(note_text === ""){
+            alert('You need to write a note to complete the session')
+            return;
+        } 
         $.ajax({
             url:'/calendar/session/'+session_id,
             type: 'post',
