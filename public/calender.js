@@ -7,7 +7,6 @@ function render_calender(target_div_name, set_date) {
     var date;
     if(set_date == 0) {
         date = new Date();
-       
     } else {
         date = set_date;
         
