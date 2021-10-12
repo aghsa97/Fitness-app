@@ -47,9 +47,13 @@ body h2 {
   display: flex;
   flex-direction: column;
 }
+
 .content {
-  flex: 1;
+    width: 90%;
+    height:80vh;
+    box-sizing: border-box;
 }
+
 .friend-list{
   color:white;
   
@@ -101,7 +105,7 @@ nav {
     vertical-align: top;
     width: 90%;
     padding: 10px;
-    height: 550px;
+    height: 70vh;
     background: #00000075;
     text-transform: uppercase;
     border-radius: 10px;

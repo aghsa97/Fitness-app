@@ -4,12 +4,16 @@ Other files can access the database by importing this JS file.
 Might need to add this to a gitIgnore file, since everyone has different root-passwords.
 */
 
-var mysql = require("mysql2");
+var mysql = require("mysql");
 
 var connection = {
 	host     : 'localhost',
 	user     : 'root',
-	password : 'W@J&7VuE9he@aiP3#xg$',
+<<<<<<< Updated upstream
+	password : '1234',
+=======
+	password : '',
+>>>>>>> Stashed changes
 	database : 'workout_db',
   connectionLimit: 5 
 };

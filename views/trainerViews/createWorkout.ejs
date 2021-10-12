@@ -13,7 +13,7 @@
     <%- include('../partials/nav.ejs') %>
         <div class="content">
             <div id="left">
-                <div class="workout-form">
+                <div class="sub_content">
 
                     <% if (locals.create_title) { %>
                         <h2>CREATE WORKOUT</h2>
@@ -57,7 +57,7 @@
                 </div>
             </div>
             <div id="right">
-                <div class="workout-form" >
+                <div class="sub_content" >
                     <h2>Exercises</h2>
                     <input class="normal" type="text" id="filter_input" onkeyup="filter_list()" placeholder="Filter results">
                     <ul id="the_list" class="workout_exercise_list">
