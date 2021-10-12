@@ -1,11 +1,11 @@
 CREATE TABLE `exercise` (
   `id` INT unsigned NOT NULL AUTO_INCREMENT,
-  `create_user_id` INT unsigned DEFAULT NULL, 
   `name` varchar(45) DEFAULT NULL,
   `target_muscle` varchar(45) DEFAULT NULL,
   `level` INT DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name_UNIQUE` (`name`)
 ) engine=InnoDB default charset=latin1;
 
 CREATE TABLE `user` (
@@ -79,7 +79,6 @@ CREATE TABLE `session_note` (
   `user_id` INT unsigned NOT NULL,
   `parent_id` INT unsigned DEFAULT NULL,
   `text` varchar(255) DEFAULT NULL,
-  `viewed` tinyint DEFAULT '0',
   PRIMARY KEY (`id`),
   CONSTRAINT `session_note_session_id` FOREIGN KEY (`session_id`) REFERENCES workout_session(`id`),
   CONSTRAINT `session_note_user_id` FOREIGN KEY (`user_id`) REFERENCES user(`id`),
