@@ -149,12 +149,19 @@ function openSessionFeedbackEditForm(session_id, workout_name, session_date){
                     container.appendChild(form);
                     document.getElementById('sessions_page_title').innerHTML = "Workout " + workout_name + " "  + session_date;
                     document.getElementById('session_button_list').style.display = 'none';
-                    var input = document.createElement('INPUT');
-                    input.setAttribute('type', 'text');
-                    input.setAttribute('name', 'note_edit__text');
-                    input.setAttribute('id', 'note_edit__text' + session_id);
-                    input.setAttribute('value', data[0].text);
+
+                    var input = document.createElement('textarea');
+                    input.setAttribute('name', 'note_text');
+                    input.setAttribute('id', 'note_edit_text'+session_id);
                     input.setAttribute('required', '');
+                    input.setAttribute('rows', '10');
+                    input.setAttribute('cols', '50');
+                    input.innerHTML = data[0].text;
+
+                    var inputLabel = document.createElement('LABEL');
+                    inputLabel.setAttribute('for', 'note_text' + session_id);
+                    inputLabel.innerHTML = "Edit the workout session note";
+
                     var linebreak = document.createElement("br");
                     var closeButton = document.createElement('button')
                     closeButton.setAttribute('id', 'todays_sessions_form__close_btn' +session_id);
@@ -167,6 +174,8 @@ function openSessionFeedbackEditForm(session_id, workout_name, session_date){
                     secret.setAttribute('name', 'session_id');
                     secret.value = session_id;
                     form.appendChild(secret);
+                    form.appendChild(inputLabel);
+                    form.appendChild(document.createElement('br'));
                     form.appendChild(input);
                     form.appendChild(linebreak);
                     form.appendChild(submitButton)
@@ -183,11 +192,16 @@ function openSessionFeedbackEditForm(session_id, workout_name, session_date){
                 $('#workout_session_popup_form'+session_id).on('click', '#todays_sessions_form__submit_btn'+session_id, function(e)
                 {
                     e.stopImmediatePropagation(); //This stops the page from performing other requests which can interfere with the ajax call.
-                    var note_text = document.getElementById('note_edit__text'+session_id).value
+                    var note_text = document.getElementById('note_edit_text'+session_id).value
                     if(note_text === ""){
                         alert('You cannot leave the note empty')
                         return;
                     } 
+
+                    if(note_text.length > 255){
+                        alert('Session notes cannot be longer than 255 characters')
+                        return;
+                    }
                         $.ajax({
                             url: '/calender/session/edit/'+session_id,
                             type: "post",
@@ -221,11 +235,18 @@ function openSessionFeedbackForm(session_id, workout_name, session_date){
     container.appendChild(form);
     document.getElementById('sessions_page_title').innerHTML = "Workout " + workout_name + " "  + session_date;
     document.getElementById('session_button_list').style.display = 'none';
-    var input = document.createElement('INPUT');
-    input.setAttribute('type', 'text');
+
+    var input = document.createElement('textarea');
     input.setAttribute('name', 'note_text');
     input.setAttribute('id', 'note_text' + session_id);
     input.setAttribute('required', '');
+    input.setAttribute('rows', '10');
+    input.setAttribute('cols', '50');
+
+    var inputLabel = document.createElement('LABEL');
+    inputLabel.setAttribute('for', 'note_text' + session_id);
+    inputLabel.innerHTML = "Write a short summary of the workout session";
+
     var linebreak = document.createElement("br");
     var closeButton = document.createElement('button')
     closeButton.setAttribute('id', 'todays_sessions_form__close_btn'+session_id);
@@ -238,6 +259,8 @@ function openSessionFeedbackForm(session_id, workout_name, session_date){
     secret.setAttribute('name', 'session_id');
     secret.value = session_id;
     form.appendChild(secret);
+    form.appendChild(inputLabel);
+    form.appendChild(document.createElement('br'));
     form.appendChild(input);
     form.appendChild(linebreak);
     form.appendChild(submitButton)
@@ -255,6 +278,14 @@ function openSessionFeedbackForm(session_id, workout_name, session_date){
             alert('You need to write a note to complete the session')
             return;
         } 
+
+        console.log(typeof note_text)
+
+        if(note_text.length > 255){
+            alert('Session notes cannot be longer than 255 characters')
+            return;
+        }
+
         $.ajax({
             url:'/calendar/session/'+session_id,
             type: 'post',
