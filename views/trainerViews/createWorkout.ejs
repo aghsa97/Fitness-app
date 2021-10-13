@@ -68,22 +68,11 @@
                                 <% let instr=JSON.parse(JSON.stringify(str)).description %>
                                 <% let level=JSON.parse(JSON.stringify(str)).level %>
                                 <% let id = JSON.parse(JSON.stringify(str)).id %>
-                                <li id="list_exercixe_<%=id%>"><div class="exercise normal_text"><a><%= name %>  <%= category %></a></div></li>
+                                <li id="list_exercixe_<%=id%>"><div class="exercise tooltip normal_text"><a><%= name %>  <%= category %><span id="tooltips" class="tooltiptext">Instructions:<br><%= instr %></span></a></div></li>
                             <% }) %>
                         <% } %>
                     </ul>
                 </div>
-            </div>
-
-            <div class="input-form" id="specifics" style="display: none;">
-                <input type="hidden" id="ex-id">
-                <input type="range" id="ex-sets" placeholder="Enter amount of sets" min="1" max="30" name="sets" required>
-                <br>
-                <input type="range" id="ex-reps" placeholder="Enter amount of reps" min="1" max="30" required>
-                <br>
-                <input type="range" id="ex-weight" placeholder="Enter weight" min="1" max="100" required>
-                <br>
-                <button type="submit" class="btn" onclick="closeForm()">Accept</button>
             </div>
         
   
@@ -125,11 +114,15 @@
         var exercise_obj_id = 1;
 
         function add_excersice_to_workout(evt) {
+
             var id = evt.currentTarget.id;
             let new_exercise = document.getElementById(id).cloneNode(false)
             
-            let tmp_text = document.getElementById(id);
-            let exercise_name = tmp_text.textContent || tmp_text.innerText;
+            let tmp_text = document.getElementById(id)
+            
+            //Removing tooltip before adding to workout
+            let remove_index = tmp_text.textContent.indexOf('Instructions');
+            let exercise_name = tmp_text.textContent.slice(0, remove_index);
            
             new_exercise.id = "workoutexercise_" + exercise_obj_id++ + "_"+id.replace('list_exercixe_','');
             new_exercise.innerHTML = generate_workout_exercise_li(new_exercise.id, exercise_name);
