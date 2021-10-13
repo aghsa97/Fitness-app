@@ -15,30 +15,26 @@ const create_exercise = function(request, response){
 
     var page_title = "CREATE EXERCISE"
 
-    if(request.session.role === "trainer"){
-        dbconnection.query(sql_exercise_list, function(error, results){
-            if(error) throw error;
-            var exercise = results;
-            dbconnection.query(sql_target_muscles, function(error, results){
-                if(error) throw error;
-                var target_muscle = results;
-                response.render(path.join(__dirname, "../views/trainerViews/createExercise"), {role: request.session.role, target_muscle: target_muscle, exercise: exercise, create_title: page_title})
-            }) 
-        })
-    } else if(request.session.role === "client"){
+        
+    dbconnection.query(sql_target_muscles, function(error, results){
+        if(error) throw error;
+        var target_muscle = results;
+        if(request.session.role === "client"){
             dbconnection.query(sql_client_ex, [request.session.dbId] ,function(error, results){
             if(error) throw error;
             var exercise = results;
-            dbconnection.query(sql_target_muscles, function(error, results){
-                if(error) throw error;
-                var target_muscle = results;
-                response.render(path.join(__dirname, "../views/trainerViews/createExercise"), {role: request.session.role, target_muscle: target_muscle, exercise: exercise, create_title: page_title})
+            response.render(path.join(__dirname, "../views/trainerViews/createExercise"), {role: request.session.role, target_muscle: target_muscle, exercise: exercise, create_title: page_title})
             }) 
-        })
-    }
-    else {
-        response.redirect('/');
-    }
+        }
+        else {
+            dbconnection.query(sql_exercise_list, function(error, results){
+            if(error) throw error;
+            var exercise = results;
+            response.render(path.join(__dirname, "../views/trainerViews/createExercise"), {role: request.session.role, target_muscle: target_muscle, exercise: exercise, create_title: page_title})
+            })
+        }
+    })
+
 }
 
 
@@ -84,40 +80,29 @@ const edit_exercise = function(request, response) {
     var sql_client_ex = `SELECT * FROM exercise WHERE create_user_id = ?;`
 
 
-    if(request.session.role === "client") {
-        dbconnection.query(sql_get_exercise,[request.params.id], function(error, results){
-            if(error) throw error; 
-            var requested_exercise = results;
-            dbconnection.query(sql_client_ex, [request.session.dbId] ,function(error, results){
-                if(error) throw error;
-                var exercise = results;
-                dbconnection.query(sql_target_muscles, function(error, results){
+    dbconnection.query(sql_get_exercise,[request.params.id], function(error, results){
+        if(error) throw error; 
+        var requested_exercise = results;
+        dbconnection.query(sql_target_muscles, function(error, results){
+            if(error) throw error;
+            var target_muscle = results;
+            if(request.session.role === "client") {
+                dbconnection.query(sql_client_ex, [request.session.dbId] ,function(error, results){
                     if(error) throw error;
-                    var target_muscle = results;
-                    response.render(path.join(__dirname, "../views/trainerViews/createExercise"), {role: request.session.role, edit_title: page_title,target_muscle: target_muscle, requested_exercise: requested_exercise, exercise: exercise})
-                }) 
-            })
-        })
-    }
-
-    else{
-
-        dbconnection.query(sql_get_exercise,[request.params.id], function(error, results){
-            if(error) throw error; 
-            var requested_exercise = results;
-            dbconnection.query(sql_exercise_list, function(error, results){
-                if(error) throw error;
-                var exercise = results;
-                dbconnection.query(sql_target_muscles, function(error, results){
+                    var exercise = results;
+                    response.render(path.join(__dirname, "../views/trainerViews/createExercise"), {role: request.session.role, edit_title: page_title,target_muscle: target_muscle, requested_exercise: requested_exercise, exercise: exercise})      
+                 })
+            }
+            else{
+                dbconnection.query(sql_exercise_list, function(error, results){
                     if(error) throw error;
-                    var target_muscle = results;
-                    response.render(path.join(__dirname, "../views/trainerViews/createExercise"), 
-                {role: request.session.role, edit_title: page_title, requested_exercise: requested_exercise, exercise: exercise, target_muscle: target_muscle});
+                    var exercise = results;
+                    response.render(path.join(__dirname, "../views/trainerViews/createExercise"), {role: request.session.role, edit_title: page_title, requested_exercise: requested_exercise, exercise: exercise, target_muscle: target_muscle});
                 })
-            })
-            
+            }
+              
         })
-    }
+    })
 }
 
 const save_edited_exercise = function(request, response){
