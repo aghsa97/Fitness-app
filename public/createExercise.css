@@ -1,133 +1,105 @@
 .content {
-  width: 100%;
+    width:100%;
 }
 
 .sub_container {
-  color: white;
-  vertical-align: top;
-  width: 90%;
-  padding: 10px;
-  height: 550px;
-  background: #00000075;
-  text-transform: uppercase;
-  border-radius: 10px;
-  border: 1px solid #e5ff00;
-  overflow-y: auto;
-  margin-left: 20px;
-  margin-right: 20px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
+    color:white;
+    vertical-align: top;
+    width: 90%;
+    padding: 10px;
+    height: 550px;
+    background: #00000075;
+    text-transform: uppercase;
+    border-radius: 10px;
+    border: 1px solid #e5ff00;
+    overflow-y:auto;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
 
-.exercise_list {
-  width: 100%;
-  list-style-type: none;
-  padding: 0px;
-  margin-top: 20px;
-  border: 0px solid white;
-}
+  .exercise_list {
+    width:100%;
+    list-style-type: none;
+    padding:0px;
+    margin-top: 20px;
+    border: 0px solid white;
+  }
 
-.exercise_list_item {
-  border: 1px solid white;
-  width: 100%;
-  padding: 2px;
-  margin: 2px;
-  position: relative;
-}
-.exercise_list_item::before,
-.exercise_list_item::after {
-  --scale: 0;
-  --arrow-size: 10px;
+  .exercise_list_item {
+    border: 1px solid white;
+    width:100%;
+    padding:2px;
+    margin: 2px;
+  }
 
-  position: absolute;
-  top: -0.25rem;
-  left: 50%;
-  transition: 150ms transform;
-  transform-origin: bottom center;
-  transform: translateX(-50%) translateY(-100%) scale(var(--scale));
-}
-.exercise_list_item::before {
-  padding: 0.5rem;
-  background: #333;
-  border-radius: 0.3rem;
-  text-align: center;
-  width: max-content;
-  color: white;
-  content: attr(data-tooltip);
-  max-width: 50%;
-}
-.exercise_list_item:hover::before,
-.exercise_list_item:hover::after {
-  --scale: 1;
-}
+  .exercise_name {
+    width: 300px;
+    margin-left: 20px;
+    float:left;
+    vertical-align: middle;
+    height: 100%;
+  }
 
-.exercise_name {
-  width: 300px;
-  margin-left: 20px;
-  float: left;
-  vertical-align: middle;
-  height: 100%;
-}
+  .small_input {
+    width:50px;
+    float:left;
+  }
 
-.small_input {
-  width: 50px;
-  float: left;
-}
+  .small_input_header {
+    width:70px;
+    height:100%;
+    text-align: right;
+    font-size: small;
+    vertical-align: bottom;
+    border: 0px solid white;
+    float:left;
+    margin-right: 3px;
+  }
 
-.small_input_header {
-  width: 70px;
-  height: 100%;
-  text-align: right;
-  font-size: small;
-  vertical-align: bottom;
-  border: 0px solid white;
-  float: left;
-  margin-right: 3px;
-}
+  .icon {
+    width:25px;
+    height:25px;
+    border: 0px solid red;
+    padding:0px;
+    margin:0px;
+  }
 
-.icon {
-  width: 25px;
-  height: 25px;
-  border: 0px solid red;
-  padding: 0px;
-  margin: 0px;
-}
+  .icon_container {
+    vertical-align: bottom;
+    border:0px solid blue;
+    height:100%;
+  }
 
-.icon_container {
-  vertical-align: bottom;
-  border: 0px solid blue;
-  height: 100%;
-}
+  .workout_list_table {
+    border:0px solid green;
+  }
 
-.workout_list_table {
-  border: 0px solid green;
-}
+  .input_container {
+    border:0px solid green;
+  }
 
-.input_container {
-  border: 0px solid green;
-}
+  #right, #left {
+    float: left; 
+    width: 50%; 
+    text-align: center;
+    vertical-align: top;
+  }
 
-#right,
-#left {
-  float: left;
-  width: 50%;
-  text-align: center;
-  vertical-align: top;
-}
+  .exercise {
+    border:1px solid white;
+    margin: 2px;
+    width:99%;
+    display:flex;
+    padding:5px;
+  }
 
-.exercise {
-  border: 1px solid white;
-  margin: 2px;
-  width: 99%;
-  display: flex;
-  padding: 5px;
-}
+  p {
+    padding:5px;
+    margin:0px;
+  }
 
-p {
-  padding: 5px;
-  margin: 0px;
-}
-
-.exercise_form_label {
-  vertical-align: right;
-}
+  .exercise_form_label {
+    vertical-align: right;
+  }

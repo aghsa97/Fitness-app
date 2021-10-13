@@ -1,183 +1,151 @@
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <base href="/" />
-    <link rel="stylesheet" href="base-styles.css" />
-    <link rel="stylesheet" href="createExercise.css" />
-    <link rel="stylesheet" href="nav-styles.css" />
-    <link rel="stylesheet" href="footer-style.css" />
-  </head>
-  <body>
+    <head>
+        <meta charset="utf-8" />
+        <base href="/">
+        <link rel="stylesheet" href="base-styles.css">
+        <link rel="stylesheet" href="createExercise.css">
+        <link rel="stylesheet" href="nav-styles.css">
+        <link rel="stylesheet" href="footer-style.css">
+    </head>
+<body>
     <div class="wrapper">
-      <%- include('../partials/nav.ejs') %>
-      <div class="content">
-        <div id="left">
-          <div class="sub_container">
-            <% if (locals.create_title) { %>
-            <h2>CREATE EXERCISE</h2>
-            <% } %> <% if (locals.edit_title) { %>
-            <h2>EDIT EXERCISE</h2>
-            <% } %>
+        <%- include('../partials/nav.ejs') %>
+        <div class="content">
+            <div id="left">
+                <div class="sub_container">
 
-            <form
-              id="exercise-form"
-              onSubmit="return updateAction()"
-              action
-              method="POST"
-            >
-              <div id="exercise-container">
-                <!--Satte labels som röda temportärt så det är lite enklare att dema.-->
-                <label class="exercise_form_label" for="exercise_name"
-                  >Exercise name</label
-                ><br />
-                <input
-                  type="text"
-                  id="exercise_name"
-                  name="exercise_name"
-                  placeholder="Exercise name"
-                  required
-                /><br />
+                    <% if (locals.create_title) { %>
+                        <h2>CREATE EXERCISE</h2>
+                        <% } %>
 
-                <label class="exercise_form_label" for="target_muscle"
-                  >Target muscle</label
-                ><br />
-                <select id="target-muscle" name="target_muscle">
-                  <% if (locals.target_muscle) { %> <%
-                  target_muscle.forEach(function(str) { %>
-                  <option
-                    value="<%= JSON.parse(JSON.stringify(str)).target_muscle %>"
-                  >
-                    <%= JSON.parse(JSON.stringify(str)).target_muscle %>
-                  </option>
-                  <% }) %> <% } %></select
-                ><br />
+                    <% if (locals.edit_title) { %>
+                        <h2>EDIT EXERCISE</h2>
+                        <% } %>
 
-                <label class="exercise_form_label" for="level">Level</label
-                ><br />
-                <select id="level" name="level">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
-                  <option value="9">9</option>
-                  <option value="10">10</option></select
-                ><br />
+                        <form id ="exercise-form" onSubmit="return updateAction()" action method="POST">
+                            <div id = "exercise-container">
+                                
+                                <!--Satte labels som röda temportärt så det är lite enklare att dema.-->
+                                <label class="exercise_form_label" for="exercise_name">Exercise name</label><br>
+                                <input type="text" id="exercise_name" name="exercise_name" placeholder="Exercise name" required/><br>
+                
+                                    <label class="exercise_form_label" for="target_muscle">Target muscle</label><br>
+                                    <select id = "target-muscle" name="target_muscle">
 
-                <label class="exercise_form_label" for="description"
-                  >Description</label
-                ><br />
-                <textarea
-                  id="description"
-                  name="description"
-                  placeholder="A description"
-                  required
-                ></textarea
-                ><br />
+                                        <% if (locals.target_muscle) { %>
+                                            <% target_muscle.forEach(function(str) { %>
+                                                <option value = "<%= JSON.parse(JSON.stringify(str)).target_muscle %>"><%= JSON.parse(JSON.stringify(str)).target_muscle %></option>
+                                            <% }) %>
+                                        <% } %>
+                                    </select><br>
 
-                <% if (locals.create_title) { %>
-                <input
-                  type="submit"
-                  value="Create"
-                  onclick="return confirm('Are you sure you want to create this exercise?')"
-                />
-                <% } %> <% if (locals.edit_title) { %> <% locals.req %>
-                <input
-                  type="submit"
-                  value="Edit"
-                  onclick="return confirm('Are you sure you want to edit this exercise?');"
-                />
-                <input
-                  type="submit"
-                  value="Delete"
-                  onclick="return confirm('Are you sure you want to delete this exercise?');"
-                  formaction="deleteexercise/<%=parseInt(JSON.stringify(locals.requested_exercise).slice(7,10))%>"
-                />
-                <% } %>
-              </div>
-            </form>
-            <% if (locals.message) { %><%=message%> <% } %>
-          </div>
+                                <label class="exercise_form_label" for="level">Level</label><br>
+                                        <select id="level" name="level">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                    </select><br>
+
+                                <label class="exercise_form_label" for="description">Description</label><br>
+                                <textarea id="description" name="description" placeholder="A description" required></textarea><br>
+
+                                <% if (locals.create_title) { %>
+                                    <input type = "submit" value="Create" onclick="return confirm('Are you sure you want to create this exercise?')">
+                                    <% } %>
+
+                                <% if (locals.edit_title) { %>
+                                    <% locals.req %>
+                                    <input type = "submit" value="Edit" onclick="return confirm('Are you sure you want to edit this exercise?');">
+                                    <input type = "submit" value="Delete" onclick="return confirm('Are you sure you want to delete this exercise?');" formaction="deleteexercise/<%=parseInt(JSON.stringify(locals.requested_exercise).slice(7,10))%>">
+                                    <% } %>
+    
+                            </div>
+                        </form>
+                  <% if (locals.message) { %><%=message%> <% } %>
+                </div>
+            </div>
+            <div id="right">
+                <div class="sub_container">
+                    <input class="normal" type="text" id="filter_input" onkeyup="filter_list()" placeholder="Filter results">
+                    <ul id="exercise_list" class="exercise_list">
+                    <% if (locals.exercise) { %>
+                    <% exercise.forEach(function(str){ %>
+                    <li class="exercise_list_item normal_text" onclick="location.href = '/createexercise/<%=JSON.parse(JSON.stringify(str)).id%>'">
+                        <a><%=JSON.parse(JSON.stringify(str)).name%></a>
+                    </li>
+                    <% }) %>
+                    <% } %>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div id="right">
-          <div class="sub_container">
-            <input
-              class="normal"
-              type="text"
-              id="filter_input"
-              onkeyup="filter_list()"
-              placeholder="Filter results"
-            />
-            <ul id="exercise_list" class="exercise_list">
-              <% if (locals.exercise) { %> <% exercise.forEach(function(str){ %>
-              <li
-                class="exercise_list_item normal_text"
-                data-tooltip="<%=JSON.parse(JSON.stringify(str)).description%>"
-                onclick="location.href = '/createexercise/<%=JSON.parse(JSON.stringify(str)).id%>'"
-              >
-                <a><%=JSON.parse(JSON.stringify(str)).name%></a>
-              </li>
-              <% }) %> <% } %>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <%- include('../partials/footer.ejs') %>
+        <%- include('../partials/footer.ejs') %>
     </div>
-    <script>
-      function filter_list() {
-        var filter_input = document.getElementById("filter_input").value;
-        var filter = filter_input.toUpperCase();
-        var the_list = document.getElementById("exercise_list");
-        var list_items = the_list.getElementsByTagName("li");
+<script>
 
-        for (i = 0; i < list_items.length; i++) {
-          a = list_items[i].getElementsByTagName("a")[0];
-          txtValue = a.textContent || a.innerText;
-          if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            list_items[i].style.display = "";
-          } else {
-            list_items[i].style.display = "none";
-          }
+function filter_list() {
+           var filter_input = document.getElementById('filter_input').value;
+            var filter = filter_input.toUpperCase();
+            var the_list = document.getElementById('exercise_list');
+            var list_items = the_list.getElementsByTagName('li');
+            
+            for (i = 0; i < list_items.length; i++) {
+                a = list_items[i].getElementsByTagName("a")[0];
+                txtValue = a.textContent || a.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    list_items[i].style.display = "";
+                } else {
+                    list_items[i].style.display = "none";
+                }
+            }
         }
-      }
 
-      document.addEventListener("DOMContentLoaded", function () {
-        parseExercise();
-      });
+    document.addEventListener('DOMContentLoaded', function(){
+            parseExercise();
+        })
 
-      function parseExercise() {
-        if ("<%=locals.requested_exercise%>") {
-          var test = "<%-JSON.stringify(locals.requested_exercise)%>";
+        function parseExercise(){
+            if ('<%=locals.requested_exercise%>') {
 
-          var parsed_exercise = {
-            exercise: JSON.parse(test),
-          };
+               var test = '<%-JSON.stringify(locals.requested_exercise)%>'
+                
+               var parsed_exercise = {
+                   exercise: JSON.parse(test)
+               }
 
-          console.log(parsed_exercise);
+               console.log(parsed_exercise)
 
-          document.getElementById("exercise_name").value =
-            parsed_exercise.exercise[0].name;
-          document.getElementById("target-muscle").value =
-            parsed_exercise.exercise[0].target_muscle;
-          document.getElementById("level").value =
-            parsed_exercise.exercise[0].level;
-          document.getElementById("description").value =
-            parsed_exercise.exercise[0].description;
+               document.getElementById('exercise_name').value = parsed_exercise.exercise[0].name
+               document.getElementById('target-muscle').value = parsed_exercise.exercise[0].target_muscle
+               document.getElementById('level').value = parsed_exercise.exercise[0].level
+               document.getElementById('description').value = parsed_exercise.exercise[0].description
+
+            }
         }
-      }
 
-      function updateAction() {
-        if ("<%=locals.requested_exercise%>") {
-          document.form.action =
-            "createexercise/" + parsed_exercise.exercise[0].id;
-        } else {
-          document.form.action = "createexercise";
+        function updateAction(){
+
+            if ('<%=locals.requested_exercise%>') {
+                
+    
+                document.form.action = "createexercise/"+parsed_exercise.exercise[0].id
+   
+                
+            } else{
+                document.form.action = "createexercise"
+            }
+    
         }
-      }
-    </script>
-  </body>
+
+
+</script>
+
+</body>
 </html>
