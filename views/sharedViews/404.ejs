@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html>
-    <%- include('../partials/head.ejs') %>
+    <head>
+        <link rel="stylesheet" href="base-styles.css">
+        <link rel="stylesheet" href="footer-style.css">
+        <title>Error 404: Page not found</title>
+    </head>
     <body>
         <div class="wrapper">
             <%- include('../partials/nav.ejs') %>
             <div class="content">
-                <h1>Page not found</h1>
+                <p style="text-align: center; font-weight: bold; padding-top: 100px; font-size: xx-large;">
+                    Page not found!
+                </p>
             </div>
             <%- include('../partials/footer.ejs') %>
         </div>
