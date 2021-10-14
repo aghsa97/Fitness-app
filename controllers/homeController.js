@@ -33,26 +33,29 @@ const user_home = function(request, response) {
         WHERE WORKOUT.USER_ID = ?
         AND SESSION_TIME >= SYSDATE();`
 
-		dbconnection.query(sql_client_upcoming_workouts, [db_id], function(error, upcoming_results){
-            if(error) throw error;
-			dbconnection.query(sql_workout_session_list, [db_id], function(error, workouts_session_results){
-				if(error) throw error;
-				var workout_session_list = workouts_session_results;
-				dbconnection.query(sql_friends, [db_id, db_id ], function(error, results){
-					if(error) throw error;
-					var friends = results;
-					dbconnection.query(sql_workout_list, [db_id, db_id], function(error, results){
-						if(error) throw error;
-						var workout_list = results;
-						response.render(path.join(__dirname, "../views/clientViews/clientHome"), 
-						{firstName: firstName, workout_list: workout_list, upcoming: upcoming_results, friends: friends, workout_session_list: workout_session_list, role: request.session.role})
+       
+          dbconnection.query(sql_client_upcoming_workouts, [db_id], function(error, upcoming_results){
+                if(error) throw error;
+                dbconnection.query(sql_workout_session_list, [db_id], function(error, workouts_session_results){
+                    if(error) throw error;
+                    var workout_session_list = workouts_session_results;
+                    dbconnection.query(sql_friends, [db_id, db_id ], function(error, results){
+                        if(error) throw error;
+                        var friends = results;
+                        dbconnection.query(sql_workout_list, [db_id, db_id], function(error, results){
+                            if(error) throw error;
+                            var workout_list = results;
+                            response.render(path.join(__dirname, "../views/clientViews/clientHome"), 
+                            {firstName: firstName, workout_list: workout_list, upcoming: upcoming_results, friends: friends, workout_session_list: workout_session_list, role: request.session.role})
 
-					})
+                        })
 
-				})
-			})
-		});	
+                    })
+                })
+           
+		});
 
+        
 	} else if (request.session.role === "trainer") {
 		var sql_client_list = 
 		`select * from user

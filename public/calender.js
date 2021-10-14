@@ -25,7 +25,6 @@ function render_calender(target_div_name, set_date) {
     
     for(let weekday = firstDay.getDay(); weekday <= 7; weekday++) {
         current_day.setDate(current_day.getDate() + 1);
-        let this_date = current_day.toISOString().split('T')[0];
         generated_html += "<div class='normal-day day" + (break_counter % 7 == 0 ? " new_line" : "") + "' id='cal_" + current_day.toISOString().split('T')[0] + "' onclick=''>" + ++day_counter + "</div>";
 
         break_counter++;
@@ -52,6 +51,7 @@ function render_calender(target_div_name, set_date) {
     document.getElementById(target_div_name).innerHTML = generated_html;
     get_month_workout_sessions(date.getFullYear()+"-"+("0" + (date.getMonth() + 1)).slice(-2));
     setup_calender_listeners(target_div_name, date);
+    set_today();
 }
 
 function generate_cal_month_header(show_date) {
@@ -356,7 +356,7 @@ function setup_calender_listeners(target_div_name, current_date) {
 
 //Gunnar function
 function get_month_workout_sessions(year_month) {
-     $(document).ready(function () {
+    $(document).ready(function () {
         $.ajax('/calendar/'+year_month,   // request url
 			{            
 				success: function (data, status, xhr) {    // success callback function
@@ -375,10 +375,19 @@ function get_month_workout_sessions(year_month) {
                 error: function() {
                     alert('fel');
                 }
-			});
-   });
+			});       
+    });
 }
 
-function update_calendar(data) {
-    
+
+function set_today() {
+    var today = new Date();
+    var checkExist = setInterval(function() {
+        if (document.getElementById('cal_'+today.toISOString().split('T')[0]).length) {
+            alert(document.getElementById('cal_'+today.toISOString().split('T')[0]).length);
+            document.getElementById('cal_'+today.toISOString().split('T')[0]).className = "today day";
+            alert(document.getElementById('cal_'+today.toISOString().split('T')[0]).className);
+           clearInterval(checkExist);
+        }
+     }, 100);
 }

@@ -12,7 +12,7 @@ const userInfoController = require('../controllers/userInfoController');
 const workoutPageController = require('../controllers/workoutPageController');
 const friendPageController = require('../controllers/friendPageController');
 const sessionController = require('../controllers/sessionController');
-
+const workoutController = require('../controllers/workoutController');
 
 const router = express.Router();
 
@@ -29,6 +29,8 @@ router.get('/home', homeController.user_home);
 router.post('/home', approveController.verify_or_delete_user);
 
 router.get('/home', clientFriendsController.user_friends);
+
+router.get('/workout/:workout_date', workoutController.get_user_day_workout);
 
 router.get('/calendar/:year_month', calendarController.get_month_workout_sessions);
 router.get('/calendar/session/:session_id', calendarController.get_workout_session);
