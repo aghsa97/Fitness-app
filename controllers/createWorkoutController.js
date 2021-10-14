@@ -5,17 +5,26 @@ const create_workout = function(request, response){
 
     var page_title = "CREATE WORKOUT"
 
-    if (request.session.role === "trainer" | request.session.role === "client") {
+    if (request.session.role === "trainer") {
 
         var sql_get_exercises = 
         `SELECT * 
-        FROM exercise`;
+        FROM exercise WHERE create_user_id is NULL;`;
 
         dbconnection.query(sql_get_exercises, function(error, results){
             response.render(path.join(__dirname, "../views/trainerViews/createWorkout"), {create_title: page_title, exercise:results, role: request.session.role })
         })
 
-    } else {
+    } else if (request.session.role === "client") {
+
+        var sql_get_exercises = `SELECT * FROM exercise WHERE create_user_id IS NULL OR create_user_id = ?;`;
+
+        dbconnection.query(sql_get_exercises, [request.session.dbId], function(error, results){
+            response.render(path.join(__dirname, "../views/trainerViews/createWorkout"), {create_title: page_title, exercise:results, role: request.session.role })
+        })
+
+    }
+    else {
         response.redirect('/')
     }
     
@@ -78,16 +87,7 @@ const edit_workout = function(request, response){
 
     var page_title = "EDIT WORKOUT"
 
-    if(request.session.role === "trainer" | request.session.role === "client"){
-
-        var workout_id = request.params.id;
-
-        var sql_get_exercises = 
-        `SELECT * 
-        FROM exercise`;
-
-        var sql_workout_to_edit = 
-        `SELECT 
+    var sql_workout_to_edit = `SELECT 
         workout_exercise.id as workout_exercise_id,
         workout_exercise.e_load,
         workout_exercise.e_reps,
@@ -107,6 +107,14 @@ const edit_workout = function(request, response){
         join exercise on exercise.id = workout_exercise.exercise_id
         where workout_id = ?`
 
+    if(request.session.role === "trainer"){
+
+        var workout_id = request.params.id;
+
+        var sql_get_exercises = 
+        `SELECT * 
+        FROM exercise WHERE create_user_id is NULL`;
+
         dbconnection.query(sql_workout_to_edit, [workout_id], function(error, results){
             if(error) throw error;
             var workout = results;
@@ -116,6 +124,26 @@ const edit_workout = function(request, response){
                 response.render(path.join(__dirname, "../views/trainerViews/createWorkout"), {edit_title: page_title, exercise:exercises, workout: workout, role: request.session.role})
             })
         })
+    }
+    else if(request.session.role === "client"){
+
+        var workout_id = request.params.id;
+
+        var sql_get_exercises = 
+        `SELECT * FROM exercise WHERE create_user_id = ? OR create_user_id is NULL`;
+
+        dbconnection.query(sql_workout_to_edit, [workout_id], function(error, results){
+            if(error) throw error;
+            var workout = results;
+            dbconnection.query(sql_get_exercises, [request.session.dbId], function(error, results){
+                var exercises = results;
+                if(error) throw error;
+                response.render(path.join(__dirname, "../views/trainerViews/createWorkout"), {edit_title: page_title, exercise:exercises, workout: workout, role: request.session.role})
+            })
+        })
+    }
+    else {
+        response.redirect('/createworkout');
     }
 }
 

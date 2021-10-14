@@ -112,7 +112,7 @@
     text-align: center;
     padding: 5px 0;
     border-radius: 6px;
-    border: 1px solid black;
+    border: 2px solid black;
     bottom: 100%;
   
     position: absolute;
@@ -121,8 +121,4 @@
 
   .tooltip:hover .tooltiptext {
     visibility: visible;
-  }
-
-  .tooltip:visited .tooltiptext {
-    visibility: hidden;
   }
