@@ -42,11 +42,16 @@
                             </select>
 
                             <% if (locals.create_title) { %>
-                                <input id = "submit" type = "submit" value="Create" onclick="confirmAction(event);">
+                                <input id = "submitCreate" type = "submit" value="Create" onclick="confirmAction(event);">
                             <% } %>
 
                             <% if (locals.edit_title) { %>
-                                <input id = "submit" type = "submit" value="Edit" onclick="confirmAction(event);">
+                                <input id = "submitEdit" type = "submit" value="Edit" onclick="confirmAction(event);">
+                                <input id = "submitEdit" type = "submit" value="Delete" onclick="confirmAction(event);" formaction="deleteworkout/<%=parseInt(JSON.stringify(locals.workoutId).slice(1,3))%>">
+                            <% } %>
+
+                            <% if (locals.message) { %>
+                                <p><%= JSON.parse(JSON.stringify(locals.message)) %></p>
                             <% } %>
                              
                         </div>    

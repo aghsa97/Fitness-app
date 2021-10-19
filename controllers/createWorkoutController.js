@@ -53,6 +53,12 @@ const save_workout = function(request, response){
     SET user_id = ?
     WHERE workout.id = ?` 
 
+
+    if(request.body.exercise === undefined){
+        response.redirect('/createworkout');
+        return;
+    }
+
     if(request.session.role === "trainer" | request.session.role === "client"){
         dbconnection.query(sql_create_workout, [request.body.workoutname, request.session.dbId, request.body.level], function(error, results){
             if(error) throw error;
@@ -121,7 +127,7 @@ const edit_workout = function(request, response){
             dbconnection.query(sql_get_exercises, function(error, results){
                 var exercises = results;
                 if(error) throw error;
-                response.render(path.join(__dirname, "../views/trainerViews/createWorkout"), {edit_title: page_title, exercise:exercises, workout: workout, role: request.session.role})
+                response.render(path.join(__dirname, "../views/trainerViews/createWorkout"), {edit_title: page_title, workoutId: workout_id, exercise:exercises, workout: workout, role: request.session.role})
             })
         })
     }
@@ -138,7 +144,7 @@ const edit_workout = function(request, response){
             dbconnection.query(sql_get_exercises, [request.session.dbId], function(error, results){
                 var exercises = results;
                 if(error) throw error;
-                response.render(path.join(__dirname, "../views/trainerViews/createWorkout"), {edit_title: page_title, exercise:exercises, workout: workout, role: request.session.role})
+                response.render(path.join(__dirname, "../views/trainerViews/createWorkout"), {edit_title: page_title, workoutId: workout_id, exercise:exercises, workout: workout, role: request.session.role})
             })
         })
     }
@@ -148,10 +154,34 @@ const edit_workout = function(request, response){
 }
 
 
+const delete_workout = function(request, response){
+
+
+    var sql_delete_workout_session = `DELETE FROM workout_session WHERE workout_id = ?`
+    var sql_delete_workout_ex = `DELETE FROM workout_exercise WHERE workout_id = ?`
+    var sql_delete_workout = `DELETE FROM workout where id = ?`
+
+        dbconnection.query(sql_delete_workout_session, [request.params.id], function(error, results){
+            if(error){
+                response.redirect('/createworkout');
+                return;
+            } 
+            dbconnection.query(sql_delete_workout_ex, [request.params.id], function(error, results){
+                if(error) throw error;
+                dbconnection.query(sql_delete_workout, [request.params.id], function(error, results){
+                    if(error) throw error;
+                    response.redirect('/home');
+                })
+            })     
+        })
+}
+
+
 module.exports = {
     create_workout,
     save_workout,
-    edit_workout
+    edit_workout,
+    delete_workout
 }
 
 
