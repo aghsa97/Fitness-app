@@ -5,12 +5,9 @@ const signUpController = require('../controllers/signUpController');
 const trainerClientController = require('../controllers/trainerClientController');
 const createWorkoutController = require('../controllers/createWorkoutController');
 const createExerciseController = require('../controllers/createExerciseController');
-const clientFriendsController = require('../controllers/clientFriendsController');
 const approveController = require('../controllers/approveController');
 const calendarController = require('../controllers/calendarController');
 const userInfoController = require('../controllers/userInfoController');
-const workoutPageController = require('../controllers/workoutPageController');
-const friendPageController = require('../controllers/friendPageController');
 const sessionController = require('../controllers/sessionController');
 const workoutController = require('../controllers/workoutController');
 
@@ -27,8 +24,6 @@ router.post('/signup', signUpController.registerUser);
 router.get('/home', homeController.user_home);
 
 router.post('/home', approveController.verify_or_delete_user);
-
-router.get('/home', clientFriendsController.user_friends);
 
 router.get('/workout/:workout_date', workoutController.get_user_day_workout);
 
@@ -70,10 +65,6 @@ router.post('/home', approveController.verify_or_delete_user);
 router.get('/userinfo', userInfoController.get_user_info);
 
 router.post('/userinfo', userInfoController.save_user_info);
-
-router.get('/workoutpage/:id', workoutPageController.show_workout);
-
-router.get('/friendPage/:id', friendPageController.friend_home);
 
 router.post('/createsession', sessionController.create_session);
  
