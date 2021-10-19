@@ -143,7 +143,8 @@ function openSessionFeedbackEditForm(session_id, workout_name, session_date){
             success: function (data, status){
                     //Creates the form. This shares much code with the original form where the user completes the session. 
                     //If we have time, refactor most of this code into a function.
-                    var container = document.getElementsByClassName('sub_content')[0]; //This line will cause problems if we ever move the div containing the calender, give it an id instead
+                    var container = document.getElementById('wokout_session_sub_content');
+                    //var container = document.getElementsByClassName('sub_content')[0]; //This line will cause problems if we ever move the div containing the calender, give it an id instead
                     var form = document.createElement('FORM');
                     form.setAttribute('id', "workout_session_popup_form"+session_id)
                     container.appendChild(form);
@@ -229,7 +230,10 @@ function openSessionFeedbackForm(session_id, workout_name, session_date){
     TODO:
     The form is 90% identical to the edits_session_note form. If we have time, refactor most of this code into a function.
     */ 
-    var container = document.getElementsByClassName('sub_content')[0];
+    var container = document.getElementById('wokout_session_sub_content');
+    //var container = document.getElementsByClassName('sub_content')[1];
+    console.log(container)
+
     var form = document.createElement('FORM');
     form.setAttribute('id', "workout_session_popup_form"+session_id)
     container.appendChild(form);
