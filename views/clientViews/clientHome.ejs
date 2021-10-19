@@ -15,21 +15,22 @@
         <div class="wrapper">
             <%- include('../partials/nav.ejs') %>
             <div class="content">
-                <!---Vetefan vad jag gör-->
-                <div style="display:none" class="left" id="workout_session_popup">
-                    <div class="sub_content">
-                        <div class="list-header">
-                            <h2 id="sessions_page_title">Todays sessions</h2> 
-                            <ul id = "session_button_list" class="client_homepage_list"></ul>
-                            <!--<form id = 'workout_session_popup_form' method="post" action=""></form>-->
-                            <button id = "todays_sessions_div_close_btn">Close</button>  
-                        </div> 
+                
+                <div id="left" class="left">
+                    <div id="calender-box" class="sub_content"></div>
+                    <div id="workout-box" class="workout-container" style="display: none;" onclick="this.style.display = 'none'"></div>
+                    <div style="display:none" id="workout_session_popup">
+                        <div id ="wokout_session_sub_content" class="sub_content">
+                            <div class="list-header">
+                                <h2 id="sessions_page_title">Todays sessions</h2> 
+                                <ul id = "session_button_list" class="client_homepage_list"></ul>
+                                <button id = "todays_sessions_div_close_btn">Close</button>  
+                            </div> 
+                        </div>
                     </div>
                 </div>
-                <div id="left" class="left">
-                    <div id="calender-box" class="sub_content no_scroll"></div>
-                    <div id="workout-box" class="workout-container" style="display: none;" onclick="this.style.display = 'none'"></div>
-                </div>
+
+                <!-- This code is not finished
                 <div id="middle" class="middle">
                     <div id="current_workout" class="sub_content no_scroll">
                         <h2>Todays workout</h2>
@@ -37,10 +38,11 @@
                         <div id="temp_div"></div>
                     </div>
                 </div>
+                -->
                 <div id="right" class="right">
                     <div class="sub_content">
                         <div class="list-header">
-                           
+                            <h2>My workouts</h2>
                         </div>
                         <ul id="workout_ul" class="client_homepage_list">
                             <% if (locals.workout_list) { %>

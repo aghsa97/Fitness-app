@@ -1,3 +1,5 @@
+//Part of the code which is never used
+
 var dbconnection = require('../dbConfig/dbConfig');
 var path = require('path');
 const { json } = require('express');
