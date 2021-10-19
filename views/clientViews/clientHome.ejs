@@ -103,7 +103,7 @@
                                 </div>
                                 <br>
                                 <label for="deadline">Deadline</label><br>
-                                <input type="date" id = "deadline${id}" name = "deadline">
+                                <input type="date" id = "deadline${id}" name = "deadline" min = ${new Date().toISOString().slice(0, 10)}>
                             </div>
                             <div class ="test">
                                 <button onclick="getDates(${id})" type = "submit" >Create session</button>
