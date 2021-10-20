@@ -184,3 +184,9 @@ p {
 #workout-container input[type="submit"]:hover {
   background: #2ecc71;
 }
+#workout-container input[value="Delete"] {
+  border: 2px solid#f25f5c;
+}
+#workout-container input[value="Delete"]:hover {
+  background: #f25f5c;
+}
