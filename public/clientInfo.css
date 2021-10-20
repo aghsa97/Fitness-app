@@ -1,104 +1,181 @@
 .content {
-    width:100%;
+  width: 100%;
 }
 
 .sub_content {
-    color:white;
-    vertical-align: top;
-    width: 90%;
-    padding: 10px;
-    height: 550px;
-    background: #00000075;
-    text-transform: uppercase;
-    border-radius: 10px;
-    border: 1px solid #e5ff00;
-    overflow-y:auto;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    float:left;
-  }
+  color: white;
+  vertical-align: top;
+  width: 90%;
+  padding: 10px;
+  height: 550px;
+  background: #00000075;
+  text-transform: uppercase;
+  border-radius: 10px;
+  overflow-y: auto;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  float: left;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.55);
+  font-size: 20px;
+}
 
-  .trainer_homepage_list {
-    width:100%;
-    list-style-type: none;
-    padding:0px;
-    margin-top: 20px;
-    border: 0px solid white;
-  }
+.trainer_homepage_list {
+  width: 100%;
+  list-style-type: none;
+  padding: 0px;
+  margin-top: 20px;
+  border: 0px solid white;
+}
 
-  .workout_exercise {
-    border: 1px solid white;
-    width:100%;
-    padding:2px;
-    margin: 2px;
-  }
+.workout_exercise {
+  border: 1px solid white;
+  width: 100%;
+  padding: 2px;
+  margin: 2px;
+}
 
-  .exercise_name {
-    width: 300px;
-    margin-left: 20px;
-    float:left;
-    vertical-align: middle;
-    height: 100%;
-  }
+.exercise_name {
+  width: 300px;
+  margin-left: 20px;
+  float: left;
+  vertical-align: middle;
+  height: 100%;
+}
 
-  .small_input {
-    width:50px;
-    float:left;
-  }
+.small_input {
+  width: 50px;
+  float: left;
+}
 
-  .small_input_header {
-    width:70px;
-    height:100%;
-    text-align: right;
-    font-size: small;
-    vertical-align: bottom;
-    border: 0px solid white;
-    float:left;
-    margin-right: 3px;
-  }
+.small_input_header {
+  width: 70px;
+  height: 100%;
+  text-align: right;
+  font-size: small;
+  vertical-align: bottom;
+  border: 0px solid white;
+  float: left;
+  margin-right: 3px;
+}
 
-  .icon {
-    width:25px;
-    height:25px;
-    border: 0px solid red;
-    padding:0px;
-    margin:0px;
-  }
+.icon {
+  width: 25px;
+  height: 25px;
+  border: 0px solid red;
+  padding: 0px;
+  margin: 0px;
+}
 
-  .icon_container {
-    vertical-align: bottom;
-    border:0px solid blue;
-    height:100%;
-  }
+.icon_container {
+  vertical-align: bottom;
+  border: 0px solid blue;
+  height: 100%;
+}
 
-  
-  #left, #middle, .right {
-    float: left; 
-    text-align: center;
-    vertical-align: top;
-  }
+#left,
+#middle,
+.right {
+  float: left;
+  text-align: center;
+  vertical-align: top;
+}
 
-  #left {width: 45%; border:0px solid green;}
-  #middle {width: 25%; border:0px solid green;}
-  .right {width: 25%; border:0px solid green;}
+#left {
+  width: 45%;
+  border: 0px solid green;
+}
+#middle {
+  width: 25%;
+  border: 0px solid green;
+}
+.right {
+  width: 25%;
+  border: 0px solid green;
+}
 
-  
+.list_item {
+  font-weight: bold;
+  margin: 2px;
+  width: 250px;
+  display: flex;
+  padding: 10px;
+}
 
-  .list_item {
-    border:1px solid white;
-    margin: 2px;
-    width:95%;
-    display:flex;
-    padding:5px;
-  }
-
-  p {
-    padding:5px;
-    margin:0px;
-  }
+p {
+  padding: 5px;
+  margin: 0px;
+}
 
 .text-box {
-    text-align: left;      
+  text-align: left;
+}
+
+/*added styles*/
+
+#middle .list_item:hover,
+#left .list_item:hover,
+#right .list_item:hover {
+  color: black;
+  background: #ede574;
+  border-radius: 10px;
+}
+#right .list_item:hover {
+  cursor: pointer;
+}
+#left .list_item:hover .normal_text,
+#middle .list_item:hover .normal_text {
+  color: black;
+}
+#middle input[type="submit"],
+#completedSessionsPageCloseButton {
+  width: 100px;
+  border: 0;
+  background: none;
+  display: block;
+  margin: 10px auto;
+  text-align: center;
+  border: 2px solid#2ecc71;
+  padding: 10px 10px;
+  outline: none;
+  color: white;
+  border-radius: 30px;
+  transition: 0.25s;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+#completedSessionsPageCloseButton {
+  border: 2px solid#f25f5c;
+}
+#completedSessionsPageCloseButton:hover {
+  background: #f25f5c;
+}
+#middle input[type="submit"]:hover {
+  background: #2ecc71;
+}
+#filter_input,
+#filter_input1 {
+  width: 25%;
+  border: 0;
+  background: none;
+  display: block;
+  margin: 5px auto;
+  text-align: center;
+  border: 2px solid#e5ff00;
+  padding: 10px 10px;
+  outline: none;
+  color: white;
+  border-radius: 30px;
+  transition: 0.25s;
+  margin-top: 10px;
+}
+#filter_input:focus,
+#filter_input1 {
+  width: 30%;
+  border-color: #eaee10;
+}
+.right label,
+.right .text-box {
+  font-weight: bold;
 }

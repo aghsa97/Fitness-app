@@ -1,104 +1,128 @@
 .content {
-    width:100%;
+  width: 100%;
 }
 
 .sub_content {
-    color:white;
-    vertical-align: top;
-    width: 90%;
-    padding: 10px;
-    height: 550px;
-    background: #00000075;
-    text-transform: uppercase;
-    border-radius: 10px;
-    border: 1px solid #e5ff00;
-    overflow-y:auto;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    float:left;
-  }
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  vertical-align: top;
+  width: 90%;
+  padding: 10px;
+  height: 550px;
+  background: #00000075;
+  text-transform: uppercase;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.55);
+  overflow-y: auto;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  float: left;
+}
 
-  .trainer_homepage_list {
-    width:100%;
-    list-style-type: none;
-    padding:0px;
-    margin-top: 20px;
-    border: 0px solid white;
-  }
+.trainer_homepage_list {
+  width: 100%;
+  list-style-type: none;
+  padding: 15px 0 0;
+  margin-top: 20px;
+  border: none;
+}
 
-  .workout_exercise {
-    border: 1px solid white;
-    width:100%;
-    padding:2px;
-    margin: 2px;
-  }
+.workout_exercise {
+  border: 1px solid white;
+  width: 100%;
+  padding: 2px;
+  margin: 2px;
+}
 
-  .exercise_name {
-    width: 300px;
-    margin-left: 20px;
-    float:left;
-    vertical-align: middle;
-    height: 100%;
-  }
+.exercise_name {
+  width: 300px;
+  margin-left: 20px;
+  float: left;
+  vertical-align: middle;
+  height: 100%;
+}
 
-  .small_input {
-    width:50px;
-    float:left;
-  }
+.small_input {
+  width: 50px;
+  float: left;
+}
 
-  .small_input_header {
-    width:70px;
-    height:100%;
-    text-align: right;
-    font-size: small;
-    vertical-align: bottom;
-    border: 0px solid white;
-    float:left;
-    margin-right: 3px;
-  }
+.small_input_header {
+  width: 70px;
+  height: 100%;
+  text-align: right;
+  font-size: small;
+  vertical-align: bottom;
+  border: 0px solid white;
+  float: left;
+  margin-right: 3px;
+}
 
-  .icon {
-    width:25px;
-    height:25px;
-    border: 0px solid red;
-    padding:0px;
-    margin:0px;
-  }
+.icon {
+  width: 25px;
+  height: 25px;
+  border: 0px solid red;
+  padding: 0px;
+  margin: 0px;
+}
 
-  .icon_container {
-    vertical-align: bottom;
-    border:0px solid blue;
-    height:100%;
-  }
+.icon_container {
+  vertical-align: bottom;
+  border: 0px solid blue;
+  height: 100%;
+}
 
-  
-  #left, #middle, #right {
-    float: left; 
-    text-align: center;
-    vertical-align: top;
-  }
+#left,
+#middle,
+#right {
+  float: left;
+  text-align: center;
+  vertical-align: top;
+}
 
-  #left {width: 45%; border:0px solid green;}
-  #middle {width: 25%; border:0px solid green;}
-  #right {width: 25%; border:0px solid green;}
+#left {
+  width: 45%;
+}
+#middle {
+  width: 25%;
+}
+#right {
+  width: 25%;
+}
 
-  
+.list_item {
+  border: none;
+  margin: 2px;
+  width: 60%;
+  display: flex;
+  padding: 15px;
+  cursor: pointer; /* added this */
+}
+#middle .list_item:hover,
+#left .list_item:hover {
+  /* added this */
+  color: black;
+  background: #ede574;
+  border-radius: 10px;
+}
+#left .list_item:hover .normal_text,
+#middle .list_item:hover .normal_text {
+  /* added this */
+  color: black;
+}
 
-  .list_item {
-    border:1px solid white;
-    margin: 2px;
-    width:95%;
-    display:flex;
-    padding:5px;
-  }
-
-  p {
-    padding:5px;
-    margin:0px;
-  }
+p {
+  padding: 5px;
+  margin: 0px;
+}
 
 .text-box {
-    text-align: left;      
+  text-align: left;
+  margin: 2px; /* added this */
+  width: 100%; /* added this */
+  cursor: pointer; /* added this */
 }

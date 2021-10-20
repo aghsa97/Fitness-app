@@ -3,11 +3,10 @@
 body {
   margin: 0;
   font-family: "Poppins", sans-serif;
-  background: #34495e;
-  background-image: url();
+  background: linear-gradient(to right, #348f50, #56b4d3);
   display: flex;
   flex-direction: column;
-  color:white;
+  color: white;
 }
 body h1 {
   margin: 0;
@@ -16,7 +15,8 @@ body h1 {
   padding: 15px 25px;
   color: white;
   position: relative;
-  background-color: rgba(0, 0, 0, 0.35);
+  background-color: rgba(0, 0, 0, 0.55);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.55);
   letter-spacing: 4px;
 }
 body h1 a {
@@ -49,14 +49,13 @@ body h2 {
 }
 
 .content {
-    width: 100%;
-    height:80vh;
-    box-sizing: border-box;
+  width: 100%;
+  height: 80vh;
+  box-sizing: border-box;
 }
 
-.friend-list{
-  color:white;
-  
+.friend-list {
+  color: white;
 }
 
 .flex-container {
@@ -67,57 +66,141 @@ body h2 {
   text-transform: uppercase;
   color: white;
   padding-top: 20px;
-} 
+}
 
 nav {
   height: fit-content;
 }
 .nav_button {
-    text-decoration: none;
-    font-size: 22px;
-    color: white;
-    text-transform: uppercase;
-    padding: 10px;
-    border-radius: 20px;
-  }
-  
-  .nav-box {
-    text-transform: uppercase;
-    padding: 20px;
-    color: white;
-    position: relative;
-  }
-  .nav_button:hover {
-    background-color: rgba(0, 0, 0, 0.55);
-  }
+  text-decoration: none;
+  font-size: 22px;
+  color: white;
+  text-transform: uppercase;
+  padding: 10px;
+  border-radius: 20px;
+}
 
-  input {
-    font-family:"Poppins", sans-serif;
-    font-weight: bold;
-  }
+.nav-box {
+  text-transform: uppercase;
+  padding: 20px;
+  color: white;
+  position: relative;
+}
+.nav_button:hover {
+  background-color: rgba(0, 0, 0, 0.55);
+}
 
-  input.normal {
-    height:20px;
-  }
+input {
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+}
+#user_info-form label {
+  font-weight: bold;
+}
 
-  .sub_content {
-    color:white;
-    vertical-align: top;
-    width: 90%;
-    padding: 10px;
-    height: 70vh;
-    background: #00000075;
-    text-transform: uppercase;
-    border-radius: 10px;
-    border: 1px solid #e5ff00;
-    overflow-y:auto;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    float:left;
+input.normal {
+  height: 20px;
+}
+
+.sub_content {
+  color: white;
+  vertical-align: top;
+  width: 90%;
+  padding: 10px;
+  height: 70vh;
+  background: #00000075;
+  text-transform: uppercase;
+  border-radius: 10px;
+  border: none;
+  overflow-y: auto;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  float: left;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.55);
 }
 
 .no_scroll {
   overflow: hidden;
+}
+/* added styles */
+#user_info-form input {
+  width: 30%;
+  border: 0;
+  background: none;
+  display: block;
+  margin: 5px auto;
+  text-align: center;
+  border: 2px solid#e5ff00;
+  padding: 10px 10px;
+  outline: none;
+  color: white;
+  border-radius: 30px;
+  transition: 0.25s;
+}
+#user_info-form input:focus {
+  width: 40%;
+  border-color: #eaee10;
+}
+#user_info-form input[type="submit"] {
+  width: 100px;
+  border: 0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid#2ecc71;
+  padding: 14px 10px;
+  outline: none;
+  color: white;
+  border-radius: 30px;
+  transition: 0.25s;
+  cursor: pointer;
+  text-transform: uppercase;
+  float: none;
+}
+#user_info-form input[type="submit"]:hover {
+  background: #2ecc71;
+}
+#right input[type="submit" i] {
+  width: 100px;
+  border: 0;
+  background: none;
+  display: block;
+  float: left;
+  margin: 15px 5px;
+  text-align: center;
+  border: 2px solid#2ecc71;
+  padding: 10px 10px;
+  outline: none;
+  color: white;
+  border-radius: 30px;
+  transition: 0.25s;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+#right input[type="submit" i]:hover {
+  background: #2ecc71;
+}
+#right input[value="delete" i] {
+  border: 2px solid#f25f5c;
+}
+#right input[value="delete" i]:hover {
+  background: #f25f5c;
+}
+/* custom scroll bar */
+::-webkit-scrollbar {
+  width: 15px;
+}
+::-webkit-scrollbar-track {
+  background: #56d37b;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to top, #ede574, #e1f5c4);
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: yellow;
+  transition: all 0.5s ease-in-out;
 }

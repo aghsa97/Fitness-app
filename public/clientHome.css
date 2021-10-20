@@ -1,150 +1,252 @@
-
-.left, .middle, .right {
-    float: left; 
-    text-align: center;
+.left,
+.middle,
+.right {
+  float: left;
+  text-align: center;
 }
 
-#left {width: 40%; min-width:400px;max-width:700px;border:0px solid green;}
-#middle {width: 25%; border:0px solid green;}
-#right {width: 25%; border:0px solid green;}
-
+#left {
+  width: 40%;
+  min-width: 400px;
+  max-width: 700px;
+  border: 0px solid green;
+}
+#middle {
+  width: 25%;
+  border: 0px solid green;
+}
+#right {
+  width: 25%;
+  border: 0px solid green;
+}
 
 .client_homepage_list {
-    width:100%;
-    list-style-type: none;
-    padding:0px;
-    margin-top: 20px;
-    border: 0px solid white;
-  }
-
+  width: 100%;
+  list-style-type: none;
+  padding: 0px;
+  margin-top: 20px;
+  border: 0px solid white;
+}
 
 .list_item {
-    border:1px solid white;
-    margin: 2px;
-    width:95%;
-    display:flex;
-    padding:5px;
-    font-weight:bold;
-    cursor: pointer;
+  margin: 2px;
+  width: 95%;
+  display: flex;
+  padding: 5px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 p {
-    padding:5px;
-    margin:0px;
+  padding: 5px;
+  margin: 0px;
 }
 
 .text-box {
-    text-align: left;      
+  text-align: left;
 }
 
 .day {
-    position: relative;
-    width: 12%;
-    height: 0;
-    padding-bottom: 12%;
-    border-radius: 3px;
-    margin: 2px;
-    float: left;
-    text-align: center;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: bold;
+  position: relative;
+  width: 12%;
+  height: 0;
+  padding-bottom: 12%;
+  border-radius: 3px;
+  margin: 2px;
+  float: left;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
 }
 
 .filler {
-    border: 1px solid gray;
-    background-color: #1c283336;
+  border: 1px solid gray;
+  background-color: #1c283336;
 }
 
 .normal-day {
-    color:#e5ff00;
-    border: 1px solid #e5ff00;
-    background-color: #34495e;
+  color: #e5ff00;
+  border: 1px solid #e5ff00;
+  background-color: #34495e;
 }
 
 .today {
-    color:#5552fc;
-    border: 1px solid #e5ff00;
-    background-color: #0011ad;
+  color: #5552fc;
+  border: 1px solid #e5ff00;
+  background-color: #0011ad;
 }
 
 .normal-day:hover {
-    border: 1px solid rgb(2, 120, 255);
-    background-color: #1c2833;
+  border: 1px solid rgb(2, 120, 255);
+  background-color: #1c2833;
 }
 
-
 .session-day {
-    border: 1px solid rgb(2, 175, 255);
-    background-color: rgb(221, 57, 57);
+  border: 1px solid rgb(2, 175, 255);
+  background-color: rgb(221, 57, 57);
 }
 
 .session-day:hover {
-    border: 1px solid rgb(2, 120, 255);
-    background-color: rgb(160, 125, 255);
+  border: 1px solid rgb(2, 120, 255);
+  background-color: rgb(160, 125, 255);
 }
 
 .completed-session {
-    border: 1px solid rgb(0, 141, 12);
-    background-color: rgb(24, 102, 0);
+  border: 1px solid rgb(0, 141, 12);
+  background-color: rgb(24, 102, 0);
 }
 
 .new_line {
-    clear: both; 
-    float: left; 
-    display: block; 
-    position: relative;
+  clear: both;
+  float: left;
+  display: block;
+  position: relative;
 }
 
 .cal_header {
-    color:#e5ff00;
-    border-radius: 3px;
-    margin: 2px;
-    height: 40px;
-    text-align: center;
-    vertical-align: text-bottom;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: bold;
-    float:left;
-    border: 1px solid #e5ff00;
-    background-color: #1c2833;
+  color: #e5ff00;
+  border-radius: 3px;
+  margin: 2px;
+  height: 40px;
+  text-align: center;
+  vertical-align: text-bottom;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  float: left;
+  border: 1px solid #e5ff00;
+  background-color: #1c2833;
 }
 
 .cal_header.arrow {
-    width: 12%;
+  width: 12%;
 }
 
 .cal_header.month {
-    width: 64.5%;
+  width: 64.5%;
 }
 
-
 .day-header {
-    font-size: small;
-    color:#e5ff00;
-    border: 1px solid #e5ff00;
-    background-color: #1c2833;
+  font-size: small;
+  color: #e5ff00;
+  border: 1px solid #e5ff00;
+  background-color: #1c2833;
 }
 
 .calendar-container {
-    width: 380px;
-    height: 380px;
-    border: 2px solid rgb(243, 97, 0);
-    background-color: rgb(49, 49, 49);
-    padding: 2px;
+  width: 380px;
+  height: 380px;
+  border: 2px solid rgb(243, 97, 0);
+  background-color: rgb(49, 49, 49);
+  padding: 2px;
 }
 
 .workout-container {
-    width: 240px;
-    height: 240px;
-    border: 2px solid rgb(243, 97, 0);
-    background-color: rgb(187, 171, 171);
-    padding: 2px;
+  width: 240px;
+  height: 240px;
+  border: 2px solid rgb(243, 97, 0);
+  background-color: rgb(187, 171, 171);
+  padding: 2px;
 }
 
 img {
-    margin-left: auto;
-    margin-right: auto;
-    padding-bottom: 10px;
-    border-radius: 5px;
-    width: 5%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 10px;
+  border-radius: 5px;
+  width: 5%;
+}
+
+/* Added styles */
+#workout_ul button {
+  width: 100px;
+  border: 0;
+  background: none;
+  display: block;
+  margin: 10px auto;
+  text-align: center;
+  border: 2px solid#2ecc71;
+  padding: 10px 10px;
+  outline: none;
+  color: white;
+  border-radius: 30px;
+  transition: 0.25s;
+  cursor: pointer;
+  text-transform: uppercase;
+  float: left;
+  margin-left: 10px;
+}
+.sessionFormPopup .create_session_btnClose,
+#workout_ul .workout_session_planner_buttton,
+#todays_sessions_div_close_btn {
+  width: 150px;
+  border: 2px solid#f25f5c;
+}
+.sessionFormPopup .create_session_btnClose:hover,
+#workout_ul .workout_session_planner_buttton:hover,
+#todays_sessions_div_close_btn:hover {
+  background: #f25f5c;
+}
+.sessionFormPopup .create_session_btn:hover,
+#workout_ul button:hover,
+#session_button1:hover,
+#session_button_list button:hover,
+#current_workout button:hover {
+  background: #2ecc71;
+}
+.sessionFormPopup button,
+#todays_sessions_div_close_btn,
+#session_button1,
+#current_workout button,
+#session_button_list button {
+  width: 150px;
+  border: 0;
+  background: none;
+  display: block;
+  margin: 10px auto;
+  text-align: center;
+  border: 2px solid#2ecc71;
+  padding: 10px 10px;
+  outline: none;
+  color: white;
+  border-radius: 30px;
+  transition: 0.25s;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+.sessionFormPopup button {
+  margin-left: 5px;
+  display: inline;
+}
+#todays_sessions_div_close_btn {
+  width: 100px;
+  border: 2px solid#f25f5c;
+}
+.sub_content label,
+.sessionFormPopup label {
+  font-weight: bold;
+}
+.sub_content textarea {
+  width: 200px;
+  border: 0;
+  background: none;
+  display: block;
+  margin: 5px auto;
+  margin-top: 10px;
+  text-align: center;
+  border: 2px solid#e5ff00;
+  padding: 10px 10px;
+  outline: none;
+  color: white;
+  border-radius: 30px;
+  transition: 0.25s;
+  font-size: 16px;
+  height: 100px;
+}
+.sub_content textarea:focus {
+  width: 250px;
+  height: 150px;
+  border-color: #eaee10;
+}
+#todays_sessions_form__submit_btn {
+  color: red;
 }
