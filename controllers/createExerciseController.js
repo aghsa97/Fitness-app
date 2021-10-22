@@ -26,7 +26,7 @@ const create_exercise = function(request, response){
             response.render(path.join(__dirname, "../views/trainerViews/createExercise"), {role: request.session.role, target_muscle: target_muscle, exercise: exercise, create_title: page_title})
             }) 
         }
-        else {
+        else if(request.session.role === "trainer"){
             dbconnection.query(sql_exercise_list, function(error, results){
             if(error) throw error;
             var exercise = results;

@@ -161,19 +161,19 @@ const delete_workout = function(request, response){
     var sql_delete_workout_ex = `DELETE FROM workout_exercise WHERE workout_id = ?`
     var sql_delete_workout = `DELETE FROM workout where id = ?`
 
-        dbconnection.query(sql_delete_workout_session, [request.params.id], function(error, results){
-            if(error){
-                response.redirect('/createworkout');
-                return;
-            } 
-            dbconnection.query(sql_delete_workout_ex, [request.params.id], function(error, results){
+    dbconnection.query(sql_delete_workout_session, [request.params.id], function(error, results){
+        if(error){
+            response.redirect('/createworkout');
+            return;
+        } 
+        dbconnection.query(sql_delete_workout_ex, [request.params.id], function(error, results){
+            if(error) throw error;
+            dbconnection.query(sql_delete_workout, [request.params.id], function(error, results){
                 if(error) throw error;
-                dbconnection.query(sql_delete_workout, [request.params.id], function(error, results){
-                    if(error) throw error;
-                    response.redirect('/home');
-                })
-            })     
-        })
+                response.redirect('/home');
+            })
+        })     
+    })
 }
 
 
