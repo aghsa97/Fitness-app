@@ -1,13 +1,41 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="base-styles.css">
-    <link rel="stylesheet" href="footer-style.css">
+    <link rel="stylesheet" href="base-styles.css" />
+    <link rel="stylesheet" href="footer-style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.11/typed.min.js"></script>
+
     <title>Start page</title>
   </head>
   <body>
     <div class="wrapper">
       <%- include('../partials/nav.ejs') %>
+      <!-- Home section start-->
+      <section class="home" id="home">
+        <div class="max-width">
+          <div class="home-content" id="home-content">
+            <div class="text-3"><span class="typing"></span></div>
+          </div>
+
+          <div class="text-1" id="text-1">Welcome!</div>
+          <div class="text-2" id="text-2">
+            to register an account, go to the Sign up page
+          </div>
+          <div class="text-2" id="text-2">
+            to log into an account, go to the Log in page
+          </div>
+        </div>
+      </section>
+      <script>
+        // typing text animation script
+        var typed = new Typed(".typing", {
+          strings: ["to Jennifer's workout application"],
+          typeSpeed: 70,
+          backSpeed: 30,
+
+          loop: true,
+        });
+      </script>
       <div class="content"></div>
       <%- include('../partials/footer.ejs') %>
     </div>

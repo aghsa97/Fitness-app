@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rampart+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap");
 
 body {
   margin: 0;
@@ -203,4 +205,50 @@ input.normal {
 ::-webkit-scrollbar-thumb:hover {
   background: yellow;
   transition: all 0.5s ease-in-out;
+}
+
+/* start page styling*/
+#home {
+  position: relative;
+  margin-top: 30px;
+  top: 100px;
+}
+#text-2,
+#text-1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 150px;
+  font-weight: bold;
+}
+#text-1 {
+  font-family: "Rampart One", cursive;
+  color: #00120b;
+}
+#text-2 {
+  font-size: 28px;
+  letter-spacing: 2px;
+  font-family: "Indie Flower", cursive;
+  margin-top: 20px;
+  color: #fefae0;
+}
+.wrapper .home .max-width {
+  width: 100%;
+  display: inline;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper .home .home-content .text-3 {
+  font-size: 45px;
+  letter-spacing: 5px;
+  font-weight: bold;
+  font-family: "Indie Flower", cursive;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#home-content .text-3 span {
+  color: #fefae0;
+  font-weight: bold;
 }
