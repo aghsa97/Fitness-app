@@ -13,10 +13,10 @@ const client_info = function(request, response) {
         WHERE user_info.id = ?` 
 
         var sql_trainer_workouts =  
-        `SELECT DISTINCT * 
+        `SELECT * 
         FROM workout 
         WHERE creator_id = ?
-        group by name;` 
+        AND user_id is null` 
 
         var sql_client_workouts = 
         `SELECT *

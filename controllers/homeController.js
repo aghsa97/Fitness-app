@@ -65,7 +65,8 @@ const user_home = function(request, response) {
 
 		var sql_workout_list = 
 		`select * from workout
-		where creator_id = ?` 
+		where creator_id = ?
+		and user_id is null`
 
 		var sql_pending_list =
 		`SELECT u.id, i.firstname, i.lastname, u.email

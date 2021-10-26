@@ -23,7 +23,6 @@ const create_session = function(request, response){
         })
     } else {
         request.body.date.forEach(session_time => {
-            console.log('kommer man hit?')
             session_time = session_time + ' 08:00:00'
             dbconnection.query(sql_insert_session, [workout_id, session_time, completed], function(error, results){
                 if(error) throw error;
